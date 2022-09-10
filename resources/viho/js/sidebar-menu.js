@@ -207,6 +207,7 @@ $("#left-arrow").click(function () {
 
     var current = window.location.pathname
     $(".main-navbar ul>li a").filter(function() {
+
         var link = $(this).attr("href");
         if(link){
             if (current.indexOf(link) != -1) {
@@ -220,5 +221,5 @@ $("#left-arrow").click(function () {
         }
     });
     $('.custom-scrollbar').animate({
-        scrollTop: $('a.nav-link.menu-title.active').offset().top - 500,
+        scrollTop: $('a.nav-link.menu-title.active').offset().top - 500
     }, 1000);

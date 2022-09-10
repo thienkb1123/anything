@@ -1,0 +1,17 @@
+<p>{{ title }}</p>
+<p>{{ desciption }}</p>
+<p>
+    @each(tag in tags)
+    <a href="https://www.youtube.com/hashtag/{{tag}}">#{{tag}}</a> 
+    @endeach
+</p>
+
+@each(res in commentsFirst)
+    <p>{{res}}</p>
+@endeach
+
+{{embed}}
+
+@each(res in commentsSecond)
+    <p>{{res}}</p>
+@endeach

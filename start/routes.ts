@@ -25,4 +25,6 @@ import Route from '@ioc:Adonis/Core/Route'
 // })
 
 Route.get('/home', 'HomeController.index')
-Route.get('make-youtube-content', 'MakeYtbContentsController.index')
+Route.get('/make-youtube-content', 'MakeYtbContentsController.index')
+Route.post('/make-youtube-content', 'MakeYtbContentsController.makeContent')
+
