@@ -20,13 +20,18 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-// Route.get('/', async ({ view }) => {
-//   return view.render('welcome')
-// })
 
 Route.get('/', 'Frontend/HomeController.index')
 
-Route.get('/any-admin', 'Backend/HomeController.index')
+
+// Admin
+Route.any('/any-admin/login', 'Backend/AuthController.login').as('backend.auth.login')
+Route.any('/any-admin/logout', 'Backend/AuthController.logout').as('backend.auth.logout')
+Route.group(() => {
+    Route.get('', 'Backend/HomeController.index')
+    // Route.get('', 'Backend/HomeController.index')
+
+}).prefix('/any-admin').middleware('auth')
 
 
 Route.get('/make-youtube-content', 'MakeYtbContentsController.index')

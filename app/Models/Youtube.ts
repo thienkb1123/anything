@@ -30,3 +30,37 @@ export default class Youtube {
     return req.data
   }
 }
+
+// class Videos {
+//   public kind: string
+//   public items: CommentsThreadItem[]
+// }
+
+// class VideosItem {
+//   public snippet: CommentsThreadItemTopLevelComment
+// }
+
+// class VideosItemSnippet{
+//   public snippet: CommentsThreadItemTopLevelCommentSnippet
+// }
+
+// class CommentsThreadItemTopLevelCommentSnippet {
+//   public textOriginal: string
+// }
+
+// class CommentsThread {
+//   public kind: string
+//   public items: CommentsThreadItem[]
+// }
+
+// class CommentsThreadItem {
+//   public snippet: CommentsThreadItemTopLevelComment
+// }
+
+// class CommentsThreadItemTopLevelComment {
+//   public snippet: CommentsThreadItemTopLevelCommentSnippet
+// }
+
+// class CommentsThreadItemTopLevelCommentSnippet {
+//   public textOriginal: string
+// }
