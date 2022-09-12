@@ -76,7 +76,7 @@ const databaseConfig: DatabaseConfig = {
         naturalSort: true,
       },
       healthCheck: false,
-      debug: false,
+      debug:  Env.get('MYSQL_DEBUG'),
     },
 
   }

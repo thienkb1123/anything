@@ -27,13 +27,16 @@ Route.get('/', 'Frontend/HomeController.index')
 // Admin
 Route.any('/any-admin/login', 'Backend/AuthController.login').as('backend.auth.login')
 Route.any('/any-admin/logout', 'Backend/AuthController.logout').as('backend.auth.logout')
+
 Route.group(() => {
-    Route.get('', 'Backend/HomeController.index')
-    // Route.get('', 'Backend/HomeController.index')
+    Route.get('', 'Backend/HomeController.index').as('backend.home')
+
+    Route.get('/profile/index', 'Backend/ProfileController.index').as('backend.profile.index')
+
+    Route.group(() => {
+        Route.get('/setting', 'Backend/MakeContentSettingsController.index').as('backend.makecontent.setting.index')
+        Route.post('/setting', 'Backend/MakeContentSettingsController.create').as('backend.makecontent.setting.create')
+        Route.get('/youtube', 'Backend/MakeContentFromYoutubeController.index').as('backend.makecontent.youtube.create')
+    }).prefix('/tools-make-content')
 
 }).prefix('/any-admin').middleware('auth')
-
-
-Route.get('/make-youtube-content', 'MakeYtbContentsController.index')
-Route.post('/make-youtube-content', 'MakeYtbContentsController.makeContent')
-

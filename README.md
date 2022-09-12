@@ -17,4 +17,11 @@ $ npm i
 
 # Run app
 $ node ace serve --watch
+
+# Run seeders
+$ node ace db:seed
+
+# Run & rollback migrations
+$ node ace migration:run
+
 ```
