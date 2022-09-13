@@ -23,9 +23,7 @@ export default class AuthController {
 
                 // Create session
                 await auth.use('web').login(admin)
-
                 return response.redirect('/any-admin')
-
             } catch (error) {
                 session.flash('errorMessage', 'Your email or password is incorrect')
                 return response.redirect().back()

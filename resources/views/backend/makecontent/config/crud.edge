@@ -1,0 +1,88 @@
+@layout('backend/layout') 
+@set('title', 'Backend') 
+@section('content')
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Create</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Create Setting For Tool Make Content From Youtube</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <form class="form theme-form" action="" method="POST">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">WP Site</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.wpSite') ? 'is-invalid' : '' }}" name="wpSite" type="text" placeholder="https://wordpress.site" value="{{ flashMessages.get('wpSite', toolConfig && toolConfig.wpSite ? toolConfig.wpSite : '') }}" required>
+                                            @if (flashMessages.has('errors.wpSite'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.wpSite') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">WP Username</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.wpUsername') ? 'is-invalid' : '' }}" name="wpUsername" type="text" placeholder="username"  value="{{ flashMessages.get('wpUsername', toolConfig && toolConfig.wpUsername ? toolConfig.wpUsername : '') }}" required>
+                                            @if (flashMessages.has('errors.wpUsername'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.wpUsername') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">WP Password</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.wpPassword') ? 'is-invalid' : '' }}" name="wpPassword" type="text" placeholder="*********"  value="{{ flashMessages.get('wpPassword', toolConfig && toolConfig.wpPassword ? toolConfig.wpPassword : '') }}" required>
+                                            @if (flashMessages.has('errors.wpPassword'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.wpPassword') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Youtube API Key</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.youtubeAPIKey') ? 'is-invalid' : '' }}" name="youtubeAPIKey" type="text" placeholder="*********"  value="{{ flashMessages.get('youtubeAPIKey', toolConfig && toolConfig.youtubeAPIKey ? toolConfig.youtubeAPIKey : '') }}" required>
+                                            @if (flashMessages.has('errors.youtubeAPIKey'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.youtubeAPIKey') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row not-validate">
+                                        <label class="col-sm-3 col-form-label">Status</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-select" name="status">
+                                                <option {{ flashMessages.get('status', toolConfig && toolConfig.status ? toolConfig.status : '') == 1 ? 'selected' : '' }} value="1">Enable</option>
+                                                <option {{ flashMessages.get('status', toolConfig && toolConfig.status ? toolConfig.status : '') == 0 ? 'selected' : ''}} value="0">Disable</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <div class="col-sm-9 offset-sm-3">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <a href="{{ route('backend.tools.makecontent.config.index') }}" class="btn btn-light" type="reset">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+@end

@@ -28,15 +28,23 @@ Route.get('/', 'Frontend/HomeController.index')
 Route.any('/any-admin/login', 'Backend/AuthController.login').as('backend.auth.login')
 Route.any('/any-admin/logout', 'Backend/AuthController.logout').as('backend.auth.logout')
 
+Route.resource('/tess','Backend/AuthController')
+
 Route.group(() => {
     Route.get('', 'Backend/HomeController.index').as('backend.home')
 
     Route.get('/profile/index', 'Backend/ProfileController.index').as('backend.profile.index')
 
     Route.group(() => {
-        Route.get('/setting', 'Backend/MakeContentSettingsController.index').as('backend.makecontent.setting.index')
-        Route.post('/setting', 'Backend/MakeContentSettingsController.create').as('backend.makecontent.setting.create')
+        Route.get('/config', 'Backend/MakeContentToolConfigController.index').as('backend.tools.makecontent.config.index')
+        Route.get('/config/create', 'Backend/MakeContentToolConfigController.create').as('backend.tools.makecontent.config.create')
+        Route.post('/config', 'Backend/MakeContentToolConfigController.updateOrCreate').as('backend.tools.makecontent.config.store')
+        Route.get('/config/:id', 'Backend/MakeContentToolConfigController.show').as('backend.tools.makecontent.config.show')
+        Route.put('/config/:id', 'Backend/MakeContentToolConfigController.updateOrCreate').as('backend.tools.makecontent.config.update')
+
+        // Route.any('/config/create', 'Backend/MakeContentToolConfigController.updateOrCreate').as('backend.makecontent.config.create')
+        // Route.any('/config/update/:id', 'Backend/MakeContentToolConfigController.updateOrCreate').as('backend.makecontent.config.update')
         Route.get('/youtube', 'Backend/MakeContentFromYoutubeController.index').as('backend.makecontent.youtube.create')
-    }).prefix('/tools-make-content')
+    }).prefix('/tools/make-content')
 
 }).prefix('/any-admin').middleware('auth')

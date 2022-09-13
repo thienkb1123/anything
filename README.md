@@ -21,7 +21,10 @@ $ node ace serve --watch
 # Run seeders
 $ node ace db:seed
 
-# Run & rollback migrations
+# Run and rollback migrations
 $ node ace migration:run
+
+# Drop tables and migrate
+$ node ace migration:fresh
 
 ```

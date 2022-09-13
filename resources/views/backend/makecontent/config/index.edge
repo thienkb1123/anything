@@ -1,0 +1,79 @@
+@layout('backend/layout')
+@set('title', 'Backend')
+
+@section('content')
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>List</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">List settings</li>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
+                    <!-- Bookmark Start-->
+                    <div class="social-tab custom-bookmark">
+                        <ul>
+                            <li>
+                                <a class="nav-link active" href="{{ route('backend.tools.makecontent.config.create') }}">
+                                    <i data-feather="plus-circle"></i>New
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Bookmark Ends-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="table-primary">
+                                <tr class="dashed">
+                                    <th scope="col">WP Site</th>
+                                    <th class="w-25" scope="col-1">Status</th>
+                                    <th class="w-25" scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(toolConfigs.length)
+                                @each(row in toolConfigs)
+                                <tr class="dashed">
+                                    <td>{{ row.wpSite }}</td>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger btn-xs" type="button">Delete</a>
+                                        <a href="{{ route('backend.tools.makecontent.config.update', {id: row.id}) }}" class="btn btn-primary btn-xs" type="button">Edit</a>
+                                    </td>
+                                </tr>
+                                @endeach
+                                @else
+                                    
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer">
+                        @!component('backend/common/pagination', {
+                            pagination: toolConfigs.getUrlsForRange(toolConfigs.firstPage, toolConfigs.lastPage),
+                            meta: toolConfigs.getMeta()
+                        })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+@end

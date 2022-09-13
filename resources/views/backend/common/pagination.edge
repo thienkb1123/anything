@@ -1,0 +1,17 @@
+<nav class="m-b-30" aria-label="Page navigation example">
+    <ul class="pagination justify-content-center pagination-primary">
+        <li class="page-item {{ meta.current_page ==  meta.first_page ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ request.url() }}?page={{ meta.first_page }}">Previous</a>
+        </li>
+        
+        @each(anchor in pagination)
+            <li class="page-item {{ anchor.isActive ? 'active' : '' }}">
+                <a class="page-link" href="{{ request.url() }}?page={{ anchor.page }}">{{ anchor.page }}</a>
+            </li>
+        @endeach
+
+        <li class="page-item {{ meta.current_page ==  meta.last_page ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ request.url() }}?page={{ meta.last_page }}">Next</a>
+        </li>
+    </ul>
+</nav>

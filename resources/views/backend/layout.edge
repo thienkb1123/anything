@@ -43,6 +43,12 @@
             .custom-bookmark ul li{
                 display: inline-block;
             }
+            
+            .is-not-valid{
+                border-color: #e6edef !important;
+                background-image: inherit !important;
+                box-shadow: inherit !important;
+            }
 
         </style>
     </head>
@@ -129,7 +135,7 @@
                                 <a class="nav-link menu-title" href="javascript:void(0)">
                                 <i data-feather="home"></i><span>Tools Make Content</span></a>
                                 <ul class="nav-submenu menu-content">
-                                    <li><a href="{{ route('backend.makecontent.setting.index') }}">Setting</a></li>
+                                    <li><a href="{{ route('backend.tools.makecontent.config.index') }}">Setting</a></li>
                                     <li><a href="{{ route('backend.makecontent.youtube.create') }}">From Youtube</a></li>                        
                                 </ul>
                             </li>
