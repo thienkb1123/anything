@@ -32,5 +32,8 @@ export default class ToolConfig extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  static statusDisable: number = 0
+  static statusEnable: number = 1
   static statusDelete: number = -1
+  
 }

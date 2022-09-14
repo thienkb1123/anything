@@ -44,6 +44,9 @@ Route.group(() => {
         Route.delete('/config/:id', 'Backend/MakeContentToolConfigController.destroy').as('backend.tools.makecontent.config.destroy')
 
         Route.get('/youtube', 'Backend/MakeContentFromYoutubeController.create').as('backend.tools.makecontent.youtube.create')
+        Route.post('/youtube', 'Backend/MakeContentFromYoutubeController.store').as('backend.tools.makecontent.youtube.store')
+        Route.get('/youtube/info-create-post', 'Backend/MakeContentFromYoutubeController.infoCreatePost').as('backend.tools.makecontent.youtube.infoCreatePost')
+
     }).prefix('/tools/make-content')
 
 }).prefix('/any-admin').middleware('auth')

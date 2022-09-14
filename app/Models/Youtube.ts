@@ -1,13 +1,13 @@
 import axios from 'axios'
 export default class Youtube {
 
-  private urlVideo = 'https://youtube.googleapis.com/youtube/v3/videos'
-  private urlCommentThread = "https://youtube.googleapis.com/youtube/v3/commentThreads"
-  private apiKey = 'AIzaSyAAnrsiYK5yIa4xs9vTDx-jYLktRmhGTD4'
-  private part = 'snippet'
-  private orderRelevance = 'relevance';
+  static urlVideo = 'https://youtube.googleapis.com/youtube/v3/videos'
+  static urlCommentThread = "https://youtube.googleapis.com/youtube/v3/commentThreads"
+  static apiKey = 'AIzaSyAAnrsiYK5yIa4xs9vTDx-jYLktRmhGTD4'
+  static part = 'snippet'
+  static orderRelevance = 'relevance';
 
-  public async getVideo(videoID: string): Promise<object> {
+  static async getVideos(videoID: string): Promise<videos> {
     const req = await axios.get(this.urlVideo, {
       params: {
         part: this.part,
@@ -15,10 +15,10 @@ export default class Youtube {
         key: this.apiKey
       }
     })
-    return req.data
+    return req.data as videos
   }
 
-  public async getCommentsThread(videoID: string): Promise<object> {
+  static async getCommentsThread(videoID: string): Promise<commentThreads> {
     const req = await axios.get(this.urlCommentThread, {
       params: {
         part: this.part,
@@ -27,40 +27,72 @@ export default class Youtube {
         order: this.orderRelevance
       }
     })
-    return req.data
+    return req.data as commentThreads
   }
+
+  static getThumbnail(thumbnails: videosItemSnippetThumbnail, defaultThumbnail: string): string {
+    if (!thumbnails) {
+        return defaultThumbnail
+    }
+
+    const valuePass = 1
+    if (thumbnails.maxres && thumbnails.maxres.width > valuePass) return thumbnails.maxres.url
+    if (thumbnails.standard && thumbnails.standard.width > valuePass) return thumbnails.standard.url
+    if (thumbnails.high && thumbnails.high.width > valuePass) return thumbnails.high.url
+    if (thumbnails.medium && thumbnails.medium.width > valuePass) return thumbnails.medium.url
+    if (thumbnails.default && thumbnails.default.width > valuePass) return thumbnails.default.url
+
+    return defaultThumbnail
+}
 }
 
-// class Videos {
-//   public kind: string
-//   public items: CommentsThreadItem[]
-// }
+interface videos {
+  kind: string
+  items: videosItem[]
+}
 
-// class VideosItem {
-//   public snippet: CommentsThreadItemTopLevelComment
-// }
+interface videosItem {
+  snippet: videosItemSnippet
+}
 
-// class VideosItemSnippet{
-//   public snippet: CommentsThreadItemTopLevelCommentSnippet
-// }
+interface videosItemSnippet {
+  title: string
+  description: string
+  tags: string[]
+  thumbnails: videosItemSnippetThumbnail
+}
 
-// class CommentsThreadItemTopLevelCommentSnippet {
-//   public textOriginal: string
-// }
+interface videosItemSnippetThumbnail {
+  default: videosItemSnippetThumbnailAttibute
+  medium: videosItemSnippetThumbnailAttibute
+  high: videosItemSnippetThumbnailAttibute
+  standard: videosItemSnippetThumbnailAttibute
+  maxres: videosItemSnippetThumbnailAttibute
+}
 
-// class CommentsThread {
-//   public kind: string
-//   public items: CommentsThreadItem[]
-// }
+interface videosItemSnippetThumbnailAttibute {
+  url: string
+  width: number
+  height: number
+}
 
-// class CommentsThreadItem {
-//   public snippet: CommentsThreadItemTopLevelComment
-// }
+interface commentThreads {
+  items: commentThreadItem[]
+}
 
-// class CommentsThreadItemTopLevelComment {
-//   public snippet: CommentsThreadItemTopLevelCommentSnippet
-// }
+interface commentThreadItem {
+  snippet: commentThreadItemSnippet
+}
 
-// class CommentsThreadItemTopLevelCommentSnippet {
-//   public textOriginal: string
-// }
+interface commentThreadItemSnippet {
+  topLevelComment: commentThreadItemSnippetTopLevelComment
+}
+
+
+interface commentThreadItemSnippetTopLevelComment {
+  snippet: commentThreadItemSnippetTopLevelCommentSnippet
+}
+
+interface commentThreadItemSnippetTopLevelCommentSnippet {
+  textOriginal: string
+}

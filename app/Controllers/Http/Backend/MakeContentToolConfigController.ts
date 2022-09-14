@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Route from '@ioc:Adonis/Core/Route'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import { DateTime } from 'luxon'
 import ToolConfig from 'App/Models/ToolConfig'
 import Alert from 'App/Pkg/Alert'
-import { DateTime } from 'luxon'
 
 export default class MakeContentToolConfigController {
 
