@@ -1,5 +1,5 @@
 @layout('backend/layout') 
-@set('title', 'Backend') 
+@set('title', title) 
 @section('content')
 <div class="page-body">
     <div class="container-fluid">
@@ -9,7 +9,7 @@
                     <h3>Create</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Create Setting For Tool Make Content From Youtube</li>
+                        <li class="breadcrumb-item active">{{ title }}</li>
                     </ol>
                 </div>
             </div>
@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <form class="form theme-form" action="" method="POST">
+                    <form class="form theme-form" action="{{ formActionURL }}" method="POST">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
@@ -64,8 +64,8 @@
                                         <label class="col-sm-3 col-form-label">Status</label>
                                         <div class="col-sm-9">
                                             <select class="form-select" name="status">
-                                                <option {{ flashMessages.get('status', toolConfig && toolConfig.status ? toolConfig.status : '') == 1 ? 'selected' : '' }} value="1">Enable</option>
-                                                <option {{ flashMessages.get('status', toolConfig && toolConfig.status ? toolConfig.status : '') == 0 ? 'selected' : ''}} value="0">Disable</option>
+                                                <option {{ flashMessages.get('status', toolConfig && toolConfig.status) == 1 ? 'selected' : '' }} value="1">Enable</option>
+                                                <option {{ flashMessages.get('status', toolConfig && toolConfig.status) == 0 ? 'selected' : ''}} value="0">Disable</option>
                                             </select>
                                         </div>
                                     </div>

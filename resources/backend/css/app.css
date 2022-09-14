@@ -1,0 +1,98 @@
+.custom-bookmark {
+    text-align: right;
+    display: block;
+}
+
+.custom-bookmark ul li {
+    display: inline-block;
+}
+
+.is-not-valid {
+    border-color: #e6edef !important;
+    background-image: inherit !important;
+    box-shadow: inherit !important;
+}
+
+.any-checkbox-styled:not(ie8),
+.any-radio-styled:not(ie8) {
+    position: relative;
+    margin-top: 0;
+}
+
+.any-checkbox-styled:not(ie8) label,
+.any-radio-styled:not(ie8) label {
+    padding-left: 0;
+}
+
+.any-checkbox-styled:not(ie8) input[type="radio"],
+.any-radio-styled:not(ie8) input[type="radio"],
+.any-checkbox-styled:not(ie8) input[type="checkbox"],
+.any-radio-styled:not(ie8) input[type="checkbox"] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.any-checkbox-styled:not(ie8) input~span:before,
+.any-radio-styled:not(ie8) input~span:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #585453;
+    cursor: pointer;
+}
+
+
+.any-checkbox-styled:not(ie8) input~span:before {
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.any-checkbox-styled:not(ie8) input:checked~span:before {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    height: 10px;
+    border-color: #39860d;
+    border-top-style: none;
+    border-right-style: none;
+}
+
+.any-w-5 {
+    width: 5% !important;
+}
+
+.any-w-10 {
+    width: 10% !important;
+}
+
+.any-w-15 {
+    width: 15% !important;
+}
+
+.any-w-20 {
+    width: 20% !important;
+}
+
+.swal-footer {
+    text-align: center !important;
+}
+
+.swal-button {
+    background-color: #24695c !important;
+}
+
+.swal-button--cancel {
+    color: #fff !important;
+}
+
+.any-table td {
+    vertical-align: middle;
+}

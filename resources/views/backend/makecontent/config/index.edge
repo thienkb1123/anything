@@ -34,42 +34,55 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="table-primary">
-                                <tr class="dashed">
-                                    <th scope="col">WP Site</th>
-                                    <th class="w-25" scope="col-1">Status</th>
-                                    <th class="w-25" scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(toolConfigs.length)
-                                @each(row in toolConfigs)
-                                <tr class="dashed">
-                                    <td>{{ row.wpSite }}</td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-danger btn-xs" type="button">Delete</a>
-                                        <a href="{{ route('backend.tools.makecontent.config.update', {id: row.id}) }}" class="btn btn-primary btn-xs" type="button">Edit</a>
-                                    </td>
-                                </tr>
-                                @endeach
-                                @else
-                                    
-                                @endif
-                            </tbody>
-                        </table>
+                    <div class="card-body">
+                        <div class="table-responsive any-table">
+                            <table class="table">
+                                <thead class="table-primary">
+                                    <tr class="dashed">
+                                        <th scope="col">WP Site</th>
+                                        <th class="any-w-15" scope="col-1">CreatedAt</th>
+                                        <th class="any-w-15" scope="col-1">Status</th>
+                                        <th class="any-w-15" scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if(toolConfigs.length)
+                                        @each(row in toolConfigs)
+                                            <tr class="dashed" id="row-{{ row.id }}">
+                                                <td>{{ row.wpSite }}</td>
+                                                <td>{{ row.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</td>
+                                                <td>
+                                                    <div class="any-checkbox any-checkbox-styled">
+                                                        <label>
+                                                            <input type="checkbox" {{ row.status == 1 ? 'checked' : '' }} class="any-checkbox-switch" disabled>
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button href="javascript:void(0)" onclick="confirmDelete('{{ route('backend.tools.makecontent.config.destroy', {id: row.id}, {qs: {_method: 'DELETE'}}) }}')" class="btn btn-danger btn-xs" type="button">Delete</button>
+                                                    <a href="{{ route('backend.tools.makecontent.config.update', {id: row.id}) }}" class="btn btn-primary btn-xs" type="button">Edit</a>
+                                                </td>
+                                            </tr>
+                                        @endeach
+                                    @else
+                                        <td colspan="4">
+                                            <p class="text-center">No data</p>
+                                        </td>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <div class="card-footer">
-                        @!component('backend/common/pagination', {
-                            pagination: toolConfigs.getUrlsForRange(toolConfigs.firstPage, toolConfigs.lastPage),
-                            meta: toolConfigs.getMeta()
-                        })
-                    </div>
+                    @if(toolConfigs.length)
+                        <div class="card-footer">
+                            @!component('backend/common/pagination', {
+                                pagination: toolConfigs.getUrlsForRange(toolConfigs.firstPage, toolConfigs.lastPage),
+                                meta: toolConfigs.getMeta()
+                            })
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

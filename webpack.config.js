@@ -45,7 +45,9 @@ Encore.setPublicPath('/assets')
 | entrypoints.
 |
 */
-Encore.addEntry('app', './resources/js/app.js')
+
+// Encore.addEntry('app', './resources/js/app.js')
+
 /*
 |--------------------------------------------------------------------------
 | Copy assets
@@ -56,10 +58,21 @@ Encore.addEntry('app', './resources/js/app.js')
 | we must copy them manually.
 |
 */
-Encore.copyFiles({
-  from: './resources/viho',
-  to: '[path][name].[ext]',
-})
+
+Encore.copyFiles([
+  {
+    from: './resources/backend/viho',
+    to: 'backend/viho/[path][name].[ext]',
+  },
+  {
+    from: './resources/backend/js',
+    to: 'backend/any/[path][name].[ext]'
+  },
+  {
+    from: './resources/backend/css',
+    to: 'backend/any/[path][name].[ext]'
+  }
+])
 
 /*
 |--------------------------------------------------------------------------

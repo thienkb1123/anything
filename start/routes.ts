@@ -38,12 +38,11 @@ Route.group(() => {
     Route.group(() => {
         Route.get('/config', 'Backend/MakeContentToolConfigController.index').as('backend.tools.makecontent.config.index')
         Route.get('/config/create', 'Backend/MakeContentToolConfigController.create').as('backend.tools.makecontent.config.create')
-        Route.post('/config', 'Backend/MakeContentToolConfigController.updateOrCreate').as('backend.tools.makecontent.config.store')
+        Route.post('/config', 'Backend/MakeContentToolConfigController.store').as('backend.tools.makecontent.config.store')
         Route.get('/config/:id', 'Backend/MakeContentToolConfigController.show').as('backend.tools.makecontent.config.show')
-        Route.put('/config/:id', 'Backend/MakeContentToolConfigController.updateOrCreate').as('backend.tools.makecontent.config.update')
+        Route.put('/config/:id', 'Backend/MakeContentToolConfigController.update').as('backend.tools.makecontent.config.update')
+        Route.delete('/config/:id', 'Backend/MakeContentToolConfigController.destroy').as('backend.tools.makecontent.config.destroy')
 
-        // Route.any('/config/create', 'Backend/MakeContentToolConfigController.updateOrCreate').as('backend.makecontent.config.create')
-        // Route.any('/config/update/:id', 'Backend/MakeContentToolConfigController.updateOrCreate').as('backend.makecontent.config.update')
         Route.get('/youtube', 'Backend/MakeContentFromYoutubeController.index').as('backend.makecontent.youtube.create')
     }).prefix('/tools/make-content')
 
