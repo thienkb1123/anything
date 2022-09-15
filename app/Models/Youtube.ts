@@ -1,40 +1,39 @@
 import axios from 'axios'
 export default class Youtube {
 
-  static urlVideo = 'https://youtube.googleapis.com/youtube/v3/videos'
-  static urlCommentThread = "https://youtube.googleapis.com/youtube/v3/commentThreads"
-  static apiKey = 'AIzaSyAAnrsiYK5yIa4xs9vTDx-jYLktRmhGTD4'
+  static urlVideo = 'https://youtube.googleapis.com/youtube/v3/Videos'
+  static urlCommentThread = "https://youtube.googleapis.com/youtube/v3/CommentThreads"
   static part = 'snippet'
   static orderRelevance = 'relevance';
 
-  static async getVideos(videoID: string): Promise<videos> {
+  static async getVideos(APIKey: string, videoID: string): Promise<Videos> {
     const req = await axios.get(this.urlVideo, {
       params: {
         part: this.part,
         id: videoID,
-        key: this.apiKey
+        key: APIKey
       }
     })
-    return req.data as videos
+    return req.data as Videos
   }
 
-  static async getCommentsThread(videoID: string): Promise<commentThreads> {
+  static async getCommentsThread(APIKey: string, videoID: string): Promise<CommentThreads> {
     const req = await axios.get(this.urlCommentThread, {
       params: {
         part: this.part,
         videoId: videoID,
-        key: this.apiKey,
+        key: APIKey,
         order: this.orderRelevance
       }
     })
-    return req.data as commentThreads
+    return req.data as CommentThreads
   }
 
-  static getThumbnail(thumbnails: videosItemSnippetThumbnail, defaultThumbnail: string): string {
+  static getThumbnail(thumbnails: VideosItemSnippetThumbnail, defaultThumbnail: string): string {
     if (!thumbnails) {
-        return defaultThumbnail
+      return defaultThumbnail
     }
-
+    
     const valuePass = 1
     if (thumbnails.maxres && thumbnails.maxres.width > valuePass) return thumbnails.maxres.url
     if (thumbnails.standard && thumbnails.standard.width > valuePass) return thumbnails.standard.url
@@ -43,56 +42,56 @@ export default class Youtube {
     if (thumbnails.default && thumbnails.default.width > valuePass) return thumbnails.default.url
 
     return defaultThumbnail
-}
+  }
 }
 
-interface videos {
+interface Videos {
   kind: string
-  items: videosItem[]
+  items: VideosItem[]
 }
 
-interface videosItem {
-  snippet: videosItemSnippet
+interface VideosItem {
+  snippet: VideosItemSnippet
 }
 
-interface videosItemSnippet {
+interface VideosItemSnippet {
   title: string
   description: string
   tags: string[]
-  thumbnails: videosItemSnippetThumbnail
+  thumbnails: VideosItemSnippetThumbnail
 }
 
-interface videosItemSnippetThumbnail {
-  default: videosItemSnippetThumbnailAttibute
-  medium: videosItemSnippetThumbnailAttibute
-  high: videosItemSnippetThumbnailAttibute
-  standard: videosItemSnippetThumbnailAttibute
-  maxres: videosItemSnippetThumbnailAttibute
+interface VideosItemSnippetThumbnail {
+  default: VideosItemSnippetThumbnailAttibute
+  medium: VideosItemSnippetThumbnailAttibute
+  high: VideosItemSnippetThumbnailAttibute
+  standard: VideosItemSnippetThumbnailAttibute
+  maxres: VideosItemSnippetThumbnailAttibute
 }
 
-interface videosItemSnippetThumbnailAttibute {
+interface VideosItemSnippetThumbnailAttibute {
   url: string
   width: number
   height: number
 }
 
-interface commentThreads {
-  items: commentThreadItem[]
+interface CommentThreads {
+  items: CommentThreadItem[]
 }
 
-interface commentThreadItem {
-  snippet: commentThreadItemSnippet
+interface CommentThreadItem {
+  snippet: CommentThreadItemSnippet
 }
 
-interface commentThreadItemSnippet {
-  topLevelComment: commentThreadItemSnippetTopLevelComment
+interface CommentThreadItemSnippet {
+  topLevelComment: CommentThreadItemSnippetTopLevelComment
 }
 
 
-interface commentThreadItemSnippetTopLevelComment {
-  snippet: commentThreadItemSnippetTopLevelCommentSnippet
+interface CommentThreadItemSnippetTopLevelComment {
+  snippet: CommentThreadItemSnippetTopLevelCommentSnippet
 }
 
-interface commentThreadItemSnippetTopLevelCommentSnippet {
+interface CommentThreadItemSnippetTopLevelCommentSnippet {
   textOriginal: string
 }

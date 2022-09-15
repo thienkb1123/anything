@@ -27,4 +27,8 @@ $ node ace migration:run
 # Drop tables and migrate
 $ node ace migration:fresh
 
+# List routes
+$ node ace list:routes
+
+
 ```

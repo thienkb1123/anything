@@ -1,0 +1,128 @@
+@layout('backend/layout') 
+@set('title', 'Create a post from youtube') 
+
+@section('content')
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Create</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Create a post from youtube</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid dashboard-default-sec">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <form action="{{ route('backend.post-tool.wordpress.store') }}" class="theme-form mega-form" method="POST">
+                        <div class="card-body">
+                            <h6>Datasource</h6>
+                            <div class="mb-3">
+                                <label class="col-form-label">Link video youtube</label>
+                                <input class="form-control {{ flashMessages.has('errors.linkVideoYoutube') ? 'is-invalid' : '' }}" name="linkVideoYoutube" type="text" value="{{ flashMessages.get('linkVideoYoutube', params && params.linkVideoYoutube || '') }}">
+                                @if (flashMessages.has('errors.linkVideoYoutube'))
+                                    <div class="invalid-feedback">{{ flashMessages.get('errors.linkVideoYoutube') }}</div>
+                                @endif
+                            </div>
+
+                            <hr class="mt-4 mb-4">
+                            <h6 class="pb-3 mb-0">Information create a post</h6>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleFormControlSelect9">Select site</label>
+                                <select id="any-select2-site" class="col-sm-12 {{ flashMessages.has('errors.site') ? 'is-invalid' : '' }}" name="site">
+                                    <option value="">Select site a create post</option>
+                                    @if(listConfigs.length)
+                                        @each(config in listConfigs)
+                                            <option {{  params && params.site == config.site ? 'selected' : '' }} value="{{ config.site }}">{{ config.site }}</option>
+                                        @endeach
+                                    @endif
+                                </select>
+                                @if (flashMessages.has('errors.site'))
+                                    <div class="invalid-feedback">{{ flashMessages.get('errors.site') }}</div>
+                                @endif
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="col-form-label">Categories</label>
+                                <select id="categories-create-post-wp" class="col-sm-12" name="categories[]" multiple="multiple"></select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="col-form-label">Tags</label>
+                                <select id="tags-create-post-wp" class="col-sm-12" name="tags[]" multiple="multiple">
+                                    @if(tags.length)
+                                        @each(tag in tags)
+                                            <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                        @endeach
+                                    @endif
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="col-form-label">Status</label>
+                                <select class="any-select2-basic col-sm-12" name="status">
+                                    <option {{ flashMessages.get('status', params && params.status || '') == 'publish' ? 'selected' : '' }} value="publish">Publish</option>
+                                    <option {{ flashMessages.get('status', params && params.status || '') == 'future' ? 'selected' : '' }} value="future">Future</option>
+                                    <option {{ flashMessages.get('status', params && params.status || '') == 'draft' ? 'selected' : '' }} value="draft">Draft</option>
+                                    <option {{ flashMessages.get('status', params && params.status || '') == 'pending' ? 'selected' : '' }} value="pending">Pending</option>
+                                    <option {{ flashMessages.get('status', params && params.status || '') == 'private' ? 'selected' : '' }} value="private">Private</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+@end
+
+@section('js')
+    <script>
+
+        let data = [];
+        const categorySelection = '{{ params && params.categories || '' }}'
+        @if(categories.length)
+            @each(category in categories)
+
+
+                console.log()
+                data.push({
+                    id: {{ category.id }},
+                    text: '{{ category.name }}',
+                    selected: false,
+                })
+            @endeach
+        @endif
+        
+        let placeholder = 'First your need select site create a post'
+        if (data.length) {
+            placeholder = 'Choose categories'
+        }
+
+        const _c = $('#categories-create-post-wp')
+        _c.select2({
+            placeholder: placeholder,
+            data: data
+        })
+        _c.val(categorySelection.split(",")).trigger('change')
+
+        const tagsSelection = '{{ params && params.tags || '' }}'
+
+        const _tag = $('#tags-create-post-wp')
+        _tag.val(tagsSelection.split(",")).trigger('change')
+    </script>
+@end

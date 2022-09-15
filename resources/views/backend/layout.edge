@@ -135,6 +135,33 @@
                                             </li>
                                         </ul>
                                     </li>
+
+                                    <li class="dropdown">
+                                        <a class="nav-link menu-title" href="javascript:void(0)">
+                                            <i data-feather="home"></i><span>Post Tool</span></a>
+                                        <ul class="nav-submenu menu-content">
+                                            <li>
+                                                <a class="submenu-title" href="javascript:void(0)">
+                                                    Config
+                                                    <span class="sub-arrow"><i class="fa fa-chevron-right"></i></span>
+                                                </a>
+                                                <ul class="nav-sub-childmenu submenu-content">
+                                                    <li><a href="{{ route('backend.post-tool.config.index') }}">List</a></li>
+                                                    <li><a href="{{ route('backend.post-tool.config.create') }}">Create</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a class="submenu-title" href="javascript:void(0)">
+                                                    WordPress
+                                                    <span class="sub-arrow"><i class="fa fa-chevron-right"></i></span>
+                                                </a>
+                                                <ul class="nav-sub-childmenu submenu-content">
+                                                    <li><a href="{{ route('backend.post-tool.wordpress.create') }}">Create a post from video youtube</a></li>
+                                                    <li><a href="#">Create a post from channel youtube</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
@@ -179,11 +206,13 @@
         <!-- Load js from page -->
         @!section('js')
         <!-- Alert from action -->
-        @if (flashMessages.has('alert'))
+        {{alert}}
+        @if (flashMessages.has('alert') || alert)
             @!component('backend/common/alert', {
-                alertTitle: flashMessages.get('alert.title'),
-                alertMessage: flashMessages.get('alert.message'),
-                alertType: flashMessages.get('alert.type'),
+                alertTitle: flashMessages.get('alert.title', alert && alert.title ? alert.title : ''),
+                alertMessage: flashMessages.get('alert.message', alert && alert.message ? alert.message : ''),
+                alertType: flashMessages.get('alert.type', alert && alert.type ? alert.type : ''),
+                alertRedirectURL: flashMessages.get('alert.redirectURL', alert && alert.redirectURL ? alert.redirectURL : ''),
             })
         @endif
     </body>

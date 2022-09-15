@@ -1,21 +1,44 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
-import ToolConfig from 'App/Models/ToolConfig'
+import Route from '@ioc:Adonis/Core/Route'
+import { schema } from '@ioc:Adonis/Core/Validator'
+import PostToolConfig from 'App/Models/PostToolConfig'
 import Youtube from 'App/Models/Youtube'
-import WordPress from 'App/Models/WordPress'
-import Alert from 'App/Pkg/Alert'
+import WordPress, { Category, Tag } from 'App/Models/WordPress'
+import Alert, { Option } from 'App/Pkg/Alert'
 import Common from 'App/Pkg/Common'
 
-export default class MakeContentFromYoutubeController {
 
-  public async create({ view, auth }: HttpContextContract) {
-    const listSites = await ToolConfig.query()
-      .where('status', ToolConfig.statusEnable)
+export default class WordPressController {
+
+  public async create({ request, view, auth }: HttpContextContract) {
+    const listConfigs = await PostToolConfig.query()
+      .where('status', PostToolConfig.statusEnable)
       .where('admin_id', auth.user?.id)
       .finally()
 
-    return view.render('backend.makecontent.youtube.create', {
-      listSites: listSites,
+    let alert: Option | null = null
+    if (listConfigs.length === 0) {
+      alert = new Option(
+        'You have not set up config yet. Click button OK for adding new config',
+        Alert.warn,
+        Route.makeUrl('backend.post-tool.config.index')
+      )
+    }
+
+    let listCategories: object[] = []
+    let listTags: object[] = []
+    const siteAddr = request.input('site')
+    if (siteAddr) {
+      listCategories = await WordPress.listCategories(siteAddr)
+      listTags = await WordPress.listTags(siteAddr)
+    }
+
+    return view.render('backend.post-tool.wordpress.create-post', {
+      listConfigs: listConfigs,
+      alert: alert,
+      params: request.qs(),
+      categories: listCategories,
+      tags: listTags
     })
   }
 
@@ -27,15 +50,21 @@ export default class MakeContentFromYoutubeController {
 
     const data = await request.validate({ schema: newCreatePostSchema })
     const videoID = Common.getVideoIDYoutubeFromLink(data.linkVideoYoutube)
-    console.log(videoID)
     if (!videoID) {
-      return
+      session.flash('alert', Alert.create("The link video is invalid", Alert.error))
+      return response.redirect().withQs(request.all()).toRoute('backend.post-tool.wordpress.create')
     }
 
     try {
-      const videos = await Youtube.getVideos(videoID)
+      const config = await PostToolConfig.findBy('site', data.site)
+      if (!config?.site || !config?.siteAPIKey || !config?.sourceAPIKey) {
+        session.flash('alert', Alert.create("Config is invalid", Alert.error))
+        return response.redirect().withQs(request.all()).toRoute('backend.post-tool.wordpress.create')
+      }
+
+      const videos = await Youtube.getVideos(config.sourceAPIKey, videoID)
       const videosItem = videos.items[0]
-      const commentThreads = await Youtube.getCommentsThread(videoID)
+      const commentThreads = await Youtube.getCommentsThread(config.sourceAPIKey, videoID)
       const commentThreadsItems = commentThreads.items
 
       let first: number = 0
@@ -71,8 +100,8 @@ export default class MakeContentFromYoutubeController {
         commentsSecond: commentsSecond,
       })
 
-      const respCreateMedia = await WordPress.createMedia(imageAddr, Common.makeFileName(videosItem.snippet.title))
-      const respCreatePost = await WordPress.createPost({
+      const respCreateMedia = await WordPress.createMedia(config.siteAPIKey, imageAddr, Common.makeFileName(videosItem.snippet.title))
+      await WordPress.createPost(config.siteAPIKey, {
         title: videosItem.snippet.title,
         slug: Common.makeSlug(videosItem.snippet.title),
         content: content,
@@ -83,26 +112,29 @@ export default class MakeContentFromYoutubeController {
         tags: request.input('tags') as number[],
       })
 
-      session.flash('alert', {
-        type: Alert.getSuccessType(),
-        title: 'Successfully',
-        message: "Create a post successfully.You can check data in manage your site"
-      })
-
+      session.flash('alert', Alert.create('Create a post successfully.You can check data in manage your site', Alert.success))
     } catch (error) {
-      session.flash('alert', {
-        type: Alert.getErrorType(),
-        title: 'Failure',
-        message: error
-      })
+      session.flash('alert', Alert.create("Create failure. Let is trye", Alert.error))
     }
 
-    return response.redirect().toRoute('backend.tools.makecontent.youtube.create')
+    return response.redirect().withQs(request.all()).toRoute('backend.post-tool.wordpress.create')
   }
 
   public async infoCreatePost({ request, response }: HttpContextContract) {
     const siteAddr = request.input('siteAddr')
-    const listCategories = await WordPress.listCategories(siteAddr)
+
+    let listCategories: Category[] = []
+    let listTags: Tag[] = []
+    try {
+      listCategories = await WordPress.listCategories(siteAddr)
+      listTags = await WordPress.listTags(siteAddr)
+    } catch (error) {
+      return response.json({
+        code: 400,
+        message: error
+      })
+    }
+
     let categories: object[] = []
     for (let category of listCategories) {
       categories.push({
@@ -111,7 +143,6 @@ export default class MakeContentFromYoutubeController {
       })
     }
 
-    const listTags = await WordPress.listTags(siteAddr)
     let tags: object[] = []
     for (let tag of listTags) {
       tags.push({

@@ -1,0 +1,92 @@
+@layout('backend/layout') 
+@set('title', title) 
+@section('content')
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Create</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">{{ title }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <form class="form theme-form" action="{{ formActionURL }}" method="POST">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Site address</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.site') ? 'is-invalid' : '' }}" name="site" type="text" value="{{ flashMessages.get('site', config && config.site || '') }}" required>
+                                            @if (flashMessages.has('errors.site'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.site') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Site API Key</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.siteAPIKey') ? 'is-invalid' : '' }}" name="siteAPIKey" type="text" value="{{ flashMessages.get('siteAPIKey', config && config.siteAPIKey || '') }}" required>
+                                            @if (flashMessages.has('errors.siteAPIKey'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.siteAPIKey') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Youtube API Key</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.sourceAPIKey') ? 'is-invalid' : '' }}" name="sourceAPIKey" type="text" value="{{ flashMessages.get('sourceAPIKey', config && config.sourceAPIKey || '') }}" required>
+                                            @if (flashMessages.has('errors.sourceAPIKey'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.sourceAPIKey') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Source</label>
+                                        <div class="col-sm-9">
+                                            <select class="any-select2-basic col-sm-12" name="source">
+                                                <option value="youtube">Youtube</option>
+                                            </select>
+                                            @if (flashMessages.has('errors.source'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.source') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row not-validate">
+                                        <label class="col-sm-3 col-form-label">Status</label>
+                                        <div class="col-sm-9">
+                                            <select class="any-select2-basic col-sm-12" name="status">
+                                                <option {{ flashMessages.get('status', config && config.status) == 1 ? 'selected' : '' }} value="1">Enable</option>
+                                                <option {{ flashMessages.get('status', config && config.status) == 0 ? 'selected' : ''}} value="0">Disable</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <div class="col-sm-9 offset-sm-3">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <a href="{{ route('backend.post-tool.config.index') }}" class="btn btn-light" type="reset">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+@end

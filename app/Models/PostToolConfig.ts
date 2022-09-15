@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class ToolConfig extends BaseModel {
+export default class PostToolConfig extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -9,16 +9,13 @@ export default class ToolConfig extends BaseModel {
   public adminID: number
 
   @column()
-  public wpSite: string
+  public site: string
 
   @column()
-  public wpUsername: string
+  public siteAPIKey: string
 
   @column()
-  public wpPassword: string
-
-  @column()
-  public youtubeAPIKey: string
+  public sourceAPIKey: string
 
   @column()
   public source: string
@@ -35,5 +32,8 @@ export default class ToolConfig extends BaseModel {
   static statusDisable: number = 0
   static statusEnable: number = 1
   static statusDelete: number = -1
-  
+
+  static get table() {
+    return 'post_tool_config'
+  }
 }
