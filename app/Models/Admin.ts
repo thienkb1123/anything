@@ -17,9 +17,16 @@ export default class Admin extends BaseModel {
   @column()
   public role: number
 
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  @column.dateTime({ autoUpdate: true })
+  public lastLogin: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public registeredAt: DateTime
+
+  static get table() {
+    return 'admin'
+  }
 }
