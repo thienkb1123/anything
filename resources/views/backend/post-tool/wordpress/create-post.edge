@@ -26,7 +26,7 @@
                             <h6>Datasource</h6>
                             <div class="mb-3">
                                 <label class="col-form-label">Link video youtube</label>
-                                <input class="form-control {{ flashMessages.has('errors.linkVideoYoutube') ? 'is-invalid' : '' }}" name="linkVideoYoutube" type="text" value="{{ flashMessages.get('linkVideoYoutube', params && params.linkVideoYoutube || '') }}">
+                                <input class="form-control {{ flashMessages.has('errors.linkVideoYoutube') ? 'is-invalid' : '' }}" name="linkVideoYoutube" type="text" value="{{ flashMessages.get('linkVideoYoutube', params && params.linkVideoYoutube) || '' }}">
                                 @if (flashMessages.has('errors.linkVideoYoutube'))
                                     <div class="invalid-feedback">{{ flashMessages.get('errors.linkVideoYoutube') }}</div>
                                 @endif
@@ -92,37 +92,40 @@
 
 @section('js')
     <script>
-
-        let data = [];
-        const categorySelection = '{{ params && params.categories || '' }}'
+        let dataCategories = [];
+        const categoriesSelection = '{{ params && params.categories || '' }}'
         @if(categories.length)
             @each(category in categories)
-
-
-                console.log()
-                data.push({
+                dataCategories.push({
                     id: {{ category.id }},
                     text: '{{ category.name }}',
-                    selected: false,
                 })
             @endeach
         @endif
         
-        let placeholder = 'First your need select site create a post'
-        if (data.length) {
-            placeholder = 'Choose categories'
+        let placeholderCategories = 'First your need select site create a post'
+        if (dataCategories.length) {
+            placeholderCategories = 'Choose categories'
+        }
+        
+        newSelec2Custom('categories-create-post-wp', placeholderCategories, dataCategories, categoriesSelection.split(","))
+
+        let dataTags = [];
+        const tagsSelection = '{{ params && params.tags || '' }}'
+        @if(tags.length)
+            @each(tag in tags)
+                dataTags.push({
+                    id: {{ tag.id }},
+                    text: '{{ tag.name }}',
+                })
+            @endeach
+        @endif
+        
+        let placeholderTags = 'First your need select site create a post'
+        if (dataTags.length) {
+            placeholderTags = 'Choose tags'
         }
 
-        const _c = $('#categories-create-post-wp')
-        _c.select2({
-            placeholder: placeholder,
-            data: data
-        })
-        _c.val(categorySelection.split(",")).trigger('change')
-
-        const tagsSelection = '{{ params && params.tags || '' }}'
-
-        const _tag = $('#tags-create-post-wp')
-        _tag.val(tagsSelection.split(",")).trigger('change')
+        newSelec2Custom('tags-create-post-wp', placeholderTags, dataTags, tagsSelection.split(","))
     </script>
 @end

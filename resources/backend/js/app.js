@@ -40,16 +40,33 @@ function confirmDelete(url) {
     });
 }
 
-$.fn.Select2UpdatePlaceholder = function (newPlaceholder) {
+function newSelec2Custom(id, placeholder, data = [], selections = []) {
+    const _id = $(`#${id}`)
+    _id.select2({
+        placeholder: placeholder,
+        data: data
+    })
+
+    if (selections.length) {
+        _id.val(selections).trigger('change')
+    }
+}
+
+function updateSelect2Custom(id, data = [], placeholder) {
+    const _id = $(`#${id}`)
+    if (data.length) {
+        _id.append(data)
+    }
+
+    _id.select2UpdatePlaceholder(placeholder)
+    _id.trigger('change')
+}
+
+$.fn.select2UpdatePlaceholder = function (newPlaceholder) {
     var $select2 = $(this).data('select2');
     $select2.selection.placeholder.text = newPlaceholder;
     return $select2.$container.find('.select2-selection__placeholder').text(newPlaceholder);
 };
-
-// With Placeholder
-$("#tags-create-post-wp").select2({
-    placeholder: "First your need select site create a post"
-});
 
 $("#any-select2-site").select2({
     placeholder: "Select site create a post",
@@ -65,9 +82,9 @@ $("#any-select2-site").select2({
         const _categories = $('#categories-create-post-wp')
         const _tags = $('#tags-create-post-wp')
 
-        _categories.Select2UpdatePlaceholder('Getting data. Please wait')
+        _categories.select2UpdatePlaceholder('Getting data. Please wait')
         _categories.trigger('change')
-        _tags.Select2UpdatePlaceholder('Getting data. Please wait')
+        _tags.select2UpdatePlaceholder('Getting data. Please wait').trigger('change')
         _tags.trigger('change')
 
         const settings = {
@@ -84,22 +101,22 @@ $("#any-select2-site").select2({
             }
 
             let categories = response.result.categories
+            let dataCategories = []
             for (const category of categories) {
                 if (_categories.find("option[value='" + category.id + "']").length == 0) {
-                    _categories.append(new Option(category.text, category.id, false, false))
+                    dataCategories.push(new Option(category.text, category.id, false, false))
                 }
             }
-            _categories.Select2UpdatePlaceholder('Select categories')
-            _categories.trigger('change')
+            updateSelect2Custom('categories-create-post-wp', dataCategories, 'Select categories')
 
             let tags = response.result.tags
+            let dataTags = []
             for (const tag of tags) {
                 if (_tags.find("option[value='" + tag.id + "']").length == 0) {
-                    _tags.append(new Option(tag.text, tag.id, false, false))
+                    dataTags.push(new Option(tag.text, tag.id, false, false))
                 }
             }
-            _tags.Select2UpdatePlaceholder('Select tags')
-            _tags.trigger('change')
+            updateSelect2Custom('tags-create-post-wp', dataTags, 'Select tags')
             return
         });
     });

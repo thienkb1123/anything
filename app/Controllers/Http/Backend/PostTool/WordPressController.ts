@@ -7,7 +7,6 @@ import WordPress, { Category, Tag } from 'App/Models/WordPress'
 import Alert, { Option } from 'App/Pkg/Alert'
 import Common from 'App/Pkg/Common'
 
-
 export default class WordPressController {
 
   public async create({ request, view, auth }: HttpContextContract) {
@@ -48,15 +47,23 @@ export default class WordPressController {
       site: schema.string({ trim: true })
     })
 
-    const data = await request.validate({ schema: newCreatePostSchema })
-    const videoID = Common.getVideoIDYoutubeFromLink(data.linkVideoYoutube)
+    try {
+      await request.validate({ schema: newCreatePostSchema, data: request.all() })
+    } catch (error) {
+      session.flash('errors', error.messages)
+      return response.redirect().withQs(request.all()).toRoute('backend.post-tool.wordpress.create')
+    }
+
+    const linkVideoYoutube = request.input('linkVideoYoutube')
+    const videoID = Common.getVideoIDYoutubeFromLink(linkVideoYoutube)
     if (!videoID) {
       session.flash('alert', Alert.create("The link video is invalid", Alert.error))
       return response.redirect().withQs(request.all()).toRoute('backend.post-tool.wordpress.create')
     }
 
     try {
-      const config = await PostToolConfig.findBy('site', data.site)
+      const site = request.input('site')
+      const config = await PostToolConfig.findBy('site', site)
       if (!config?.site || !config?.siteAPIKey || !config?.sourceAPIKey) {
         session.flash('alert', Alert.create("Config is invalid", Alert.error))
         return response.redirect().withQs(request.all()).toRoute('backend.post-tool.wordpress.create')
@@ -67,40 +74,34 @@ export default class WordPressController {
       const commentThreads = await Youtube.getCommentsThread(config.sourceAPIKey, videoID)
       const commentThreadsItems = commentThreads.items
 
-      let first: number = 0
-      let second: number = 0
       let commentsFirst: string[] = []
-      let commentsSecond: string[] = []
       const maxCountGetComment = 2
+      const firtStartGetComment = 0
+      commentThreadsItems.slice(firtStartGetComment, maxCountGetComment).map(val => {
+        commentsFirst.push(val.snippet.topLevelComment.snippet.textOriginal)
+      })
 
-      for (let i in commentThreadsItems) {
-        const val = commentThreadsItems[i]
-        if (first < maxCountGetComment) {
-          commentsFirst.push(val.snippet.topLevelComment.snippet.textOriginal)
-          first++
-          continue
-        }
-
-        if (second < maxCountGetComment) {
-          commentsSecond.push(val.snippet.topLevelComment.snippet.textOriginal)
-          second++
-          continue
-        }
-        break
-      }
+      let commentsSecond: string[] = []
+      const secondStartGetComment = firtStartGetComment * maxCountGetComment
+      commentThreadsItems.slice(secondStartGetComment, secondStartGetComment + maxCountGetComment).map(val => {
+        commentsSecond.push(val.snippet.topLevelComment.snippet.textOriginal)
+      })
 
       const imageAddr = Youtube.getThumbnail(videosItem.snippet.thumbnails, '')
-
       const content = await view.render('template.post', {
         title: videosItem.snippet.title,
         desciption: videosItem.snippet.description,
         tags: videosItem.snippet.tags,
-        embed: data.linkVideoYoutube,
+        embed: linkVideoYoutube,
         commentsFirst: commentsFirst,
         commentsSecond: commentsSecond,
       })
 
-      const respCreateMedia = await WordPress.createMedia(config.siteAPIKey, imageAddr, Common.makeFileName(videosItem.snippet.title))
+      const respCreateMedia = await WordPress.createMedia(
+        config.siteAPIKey,
+        imageAddr,
+        Common.makeFileName(videosItem.snippet.title)
+      )
       await WordPress.createPost(config.siteAPIKey, {
         title: videosItem.snippet.title,
         slug: Common.makeSlug(videosItem.snippet.title),
@@ -115,13 +116,17 @@ export default class WordPressController {
       session.flash('alert', Alert.create('Create a post successfully.You can check data in manage your site', Alert.success))
     } catch (error) {
       session.flash('alert', Alert.create("Create failure. Let is trye", Alert.error))
+      return response.redirect().withQs(request.all()).toRoute('backend.post-tool.wordpress.create')
     }
 
-    return response.redirect().withQs(request.all()).toRoute('backend.post-tool.wordpress.create')
+    return response.redirect().toRoute('backend.post-tool.wordpress.create')
   }
 
   public async infoCreatePost({ request, response }: HttpContextContract) {
     const siteAddr = request.input('siteAddr')
+    if (!siteAddr) {
+      return response.json({ code: 400, message: 'param invalid' })
+    }
 
     let listCategories: Category[] = []
     let listTags: Tag[] = []
@@ -129,26 +134,17 @@ export default class WordPressController {
       listCategories = await WordPress.listCategories(siteAddr)
       listTags = await WordPress.listTags(siteAddr)
     } catch (error) {
-      return response.json({
-        code: 400,
-        message: error
-      })
+      return response.json({ code: 400, message: error })
     }
 
     let categories: object[] = []
     for (let category of listCategories) {
-      categories.push({
-        id: category.id,
-        text: category.name
-      })
+      categories.push({ id: category.id, text: category.name })
     }
 
     let tags: object[] = []
     for (let tag of listTags) {
-      tags.push({
-        id: tag.id,
-        text: tag.name
-      })
+      tags.push({ id: tag.id, text: tag.name })
     }
 
     return response.json({

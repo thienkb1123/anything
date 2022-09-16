@@ -1,8 +1,8 @@
 import axios from 'axios'
 export default class Youtube {
 
-  static urlVideo = 'https://youtube.googleapis.com/youtube/v3/Videos'
-  static urlCommentThread = "https://youtube.googleapis.com/youtube/v3/CommentThreads"
+  static urlVideo = 'https://youtube.googleapis.com/youtube/v3/videos'
+  static urlCommentThread = "https://youtube.googleapis.com/youtube/v3/commentThreads"
   static part = 'snippet'
   static orderRelevance = 'relevance';
 
