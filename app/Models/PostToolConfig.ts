@@ -2,11 +2,13 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class PostToolConfig extends BaseModel {
+  public static table = 'post_tool_config'
+
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public adminID: number
+  public author: number
 
   @column()
   public site: string
@@ -32,8 +34,4 @@ export default class PostToolConfig extends BaseModel {
   static statusDisable: number = 0
   static statusEnable: number = 1
   static statusDelete: number = -1
-
-  static get table() {
-    return 'post_tool_config'
-  }
 }

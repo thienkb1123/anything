@@ -36,24 +36,14 @@ Route.group(() => {
     Route.get('/profile/index', 'Backend/ProfileController.index').as('profile.index')
 
     Route.group(() => {
-        Route.get('/config', 'Backend/MakeContentToolConfigController.index').as('tools.makecontent.config.index')
-        Route.get('/config/create', 'Backend/MakeContentToolConfigController.create').as('tools.makecontent.config.create')
-        Route.post('/config', 'Backend/MakeContentToolConfigController.store').as('tools.makecontent.config.store')
-        Route.get('/config/:id', 'Backend/MakeContentToolConfigController.show').as('tools.makecontent.config.show')
-        Route.put('/config/:id', 'Backend/MakeContentToolConfigController.update').as('tools.makecontent.config.update')
-        Route.delete('/config/:id', 'Backend/MakeContentToolConfigController.destroy').as('tools.makecontent.config.destroy')
-
-        Route.get('/youtube', 'Backend/MakeContentFromYoutubeController.create').as('tools.makecontent.youtube.create')
-        Route.post('/youtube', 'Backend/MakeContentFromYoutubeController.store').as('tools.makecontent.youtube.store')
-        Route.get('/youtube/info-create-post', 'Backend/MakeContentFromYoutubeController.infoCreatePost').as('tools.makecontent.youtube.infoCreatePost')
-
-    }).prefix('/tools/make-content')
-
-    Route.group(() => {
         Route.resource('/config', 'Backend/PostTool/ConfigController').only(['create', 'index', 'store', 'show', 'update', 'destroy'])
         
         Route.resource('/wordpress', 'Backend/PostTool/WordPressController').only(['create', 'store'])
         Route.get('/wordpress/info-create-post', 'Backend/PostTool/WordPressController.infoCreatePost').as('wordpress.info-create-post')
     }).prefix('/post-tool').as('post-tool')
+
+
+    Route.resource('post', 'Backend/PostController')
+    Route.resource('media', 'Backend/MediaController')
 
 }).prefix('/any-admin').as('backend').middleware('auth')

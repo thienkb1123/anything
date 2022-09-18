@@ -62,7 +62,7 @@ export default class ConfigController {
         const data = await request.validate({ schema: this.newPostToolConfig })
         try {
             await PostToolConfig.create({
-                adminID: auth.user?.id as number,
+                author: auth.user?.id as number,
                 site: data.site,
                 siteAPIKey: data.siteAPIKey,
                 sourceAPIKey: data.sourceAPIKey,
@@ -71,7 +71,7 @@ export default class ConfigController {
             })
             session.flash('alert', Alert.create('Create successfully', Alert.success))
         } catch (error) {
-            session.flash('alert', Alert.create("Create failure. Let's trye", Alert.error))
+            session.flash('alert', Alert.create("Create failure. Let's try", Alert.error))
         }
 
         return response.redirect().toRoute('backend.post-tool.config.index')
@@ -120,7 +120,6 @@ export default class ConfigController {
                     updated_at: Common.currentDateTime()
                 })
         } catch (error) {
-            console.log(error)
             return response.json({
                 code: 400,
                 message: 'Failure'

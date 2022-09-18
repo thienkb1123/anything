@@ -1,0 +1,92 @@
+<div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Avatar</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header pb-0">
+                                    <h5>Multi File Upload</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form class="dropzone dropzone-primary" id="multiFileUpload" action="/upload.php">
+                                        <div class="dz-message needsclick"><i class="icon-cloud-up"></i>
+                                            <h6>Drop files here or click to upload.</h6><span
+                                                class="note needsclick">(This is just a demo dropzone. Selected files
+                                                are <strong>not</strong> actually uploaded.)</span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-9 col-md-12 box-col-12">
+                            <div class="file-content">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="media">
+                                        </div>
+                                    </div>
+                                    <div class="card-body file-manager">
+                                        <h4>All Files</h4>
+                                        <ul class="files">
+                                            <li class="file-box">
+                                                <div class="file-top">
+                                                    <i class="fa fa-file-image-o txt-primary"></i>
+                                                    <i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                                </div>
+                                                <div class="file-bottom">
+                                                    <h6>Logo.psd </h6>
+                                                    <p class="mb-1">2.0 MB</p>
+                                                </div>
+                                            </li>
+                                            <li class="file-box">
+                                                <div class="file-top">
+                                                    <i class="fa fa-file-archive-o txt-secondary"></i>
+                                                    <i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                                </div>
+                                                <div class="file-bottom">
+                                                    <h6>Project.zip </h6>
+                                                    <p class="mb-1">1.90 GB</p>
+                                                </div>
+                                            </li>
+                                            <li class="file-box">
+                                                <div class="file-top">
+                                                    <i class="fa fa-file-excel-o txt-success"></i>
+                                                    <i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                                </div>
+                                                <div class="file-bottom">
+                                                    <h6>Backend.xls</h6>
+                                                    <p class="mb-1">2.00 GB</p>
+                                                </div>
+                                            </li>
+                                            <li class="file-box">
+                                                <div class="file-top">
+                                                    <i class="fa fa-file-text-o txt-info"></i>
+                                                    <i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                                </div>
+                                                <div class="file-bottom">
+                                                    <h6>requirements.txt </h6>
+                                                    <p class="mb-1">0.90 KB</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-secondary" type="button">Set avatar</button>
+            </div>
+        </div>
+    </div>
+</div>

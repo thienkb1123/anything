@@ -4,7 +4,7 @@ function swalAlert(title, message, type, redirectURL) {
         text: message,
         icon: type,
         html: true
-    }).then(function () {
+    }).then(function() {
         if (redirectURL) {
             window.location = redirectURL
         }
@@ -27,9 +27,9 @@ function confirmDelete(url) {
                 dataType: 'json'
             };
 
-            $.ajax(settings).done(function (response) {
+            $.ajax(settings).done(function(response) {
                 if (response.code == 0) {
-                    $(`#row-${response.result.id}`).fadeOut(300, function () { $(this).remove() })
+                    $(`#row-${response.result.id}`).fadeOut(300, function() { $(this).remove() })
                     return
                 }
 
@@ -38,6 +38,10 @@ function confirmDelete(url) {
             });
         }
     });
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function newSelec2Custom(id, placeholder, data = [], selections = []) {
@@ -62,16 +66,16 @@ function updateSelect2Custom(id, data = [], placeholder) {
     _id.trigger('change')
 }
 
-$.fn.select2UpdatePlaceholder = function (newPlaceholder) {
+$.fn.select2UpdatePlaceholder = function(newPlaceholder) {
     var $select2 = $(this).data('select2');
     $select2.selection.placeholder.text = newPlaceholder;
     return $select2.$container.find('.select2-selection__placeholder').text(newPlaceholder);
 };
 
 $("#any-select2-site").select2({
-    placeholder: "Select site create a post",
-})
-    .on('change', function (e) {
+        placeholder: "Select site create a post",
+    })
+    .on('change', function(e) {
 
         const siteAddr = $("#any-select2-site option:selected").text();
         if (!siteAddr) {
@@ -94,7 +98,7 @@ $("#any-select2-site").select2({
             dataType: 'json'
         };
 
-        $.ajax(settings).done(function (response) {
+        $.ajax(settings).done(function(response) {
             if (response.code != 0) {
                 swalAlert('Error', "Getting tags and categories an error occurred. Refresh the page and let's try", 'error')
                 return
@@ -122,3 +126,12 @@ $("#any-select2-site").select2({
     });
 
 $(".any-select2-basic").select2();
+
+
+
+$("form").submit(function(e) {
+    var data_array = $("form").map(function() {
+        return $(this).serializeArray();
+    });
+
+});

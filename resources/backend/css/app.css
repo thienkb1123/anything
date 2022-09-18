@@ -108,3 +108,20 @@
 .select2-container--default .select2-selection--multiple .select2-selection__choice:last-child {
     margin-right: 6px;
 }
+
+.modal-open {
+    padding-right: 0 !important;
+}
+
+.modal-open .modal {
+    padding-right: 0 !important;
+}
+
+.btn-set-avatar {
+    padding: 20px;
+    text-align: center !important;
+}
+
+.file-content .files .file-box {
+    cursor: pointer;
+}

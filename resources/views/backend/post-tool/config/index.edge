@@ -1,5 +1,5 @@
 @layout('backend/layout')
-@set('title', 'List Post Tool Configs')
+@set('title', 'List Posts Tool Configs')
 
 @section('content')
 <div class="page-body">
@@ -10,7 +10,7 @@
                     <h3>List</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
-                        <li class="breadcrumb-item active">List Post Tool Configs</li>
+                        <li class="breadcrumb-item active">List Posts Tool Configs</li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
@@ -52,12 +52,9 @@
                                                 <td>{{ config.site }}</td>
                                                 <td>{{ config.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</td>
                                                 <td>
-                                                    <div class="any-checkbox any-checkbox-styled">
-                                                        <label>
-                                                            <input type="checkbox" {{ config.status == 1 ? 'checked' : '' }} class="any-checkbox-switch" disabled>
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
+                                                    <label class="d-block mb-0" for="chk-ani">
+                                                        <input {{ config.status == 1 ? 'checked' : '' }} class="checkbox_animated"  type="checkbox">
+                                                    </label>
                                                 </td>
                                                 <td>
                                                     <button href="javascript:void(0)" onclick="confirmDelete('{{ route('backend.post-tool.config.destroy', {id: config.id}, {qs: {_method: 'DELETE'}}) }}')" class="btn btn-danger btn-xs" type="button">Delete</button>

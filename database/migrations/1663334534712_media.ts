@@ -6,10 +6,11 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
+      table.text('name')
+      table.string('type_of_file', 20)
       table.string('type', 20)
-      table.text('content')
+      table.string('size', 20)
       table.dateTime('created_at', { useTz: true })
-      table.dateTime('updated_at', { useTz: true })
     })
   }
 

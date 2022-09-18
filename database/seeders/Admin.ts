@@ -9,7 +9,6 @@ export default class extends BaseSeeder {
         email: 'admin@admin.com',
         password: await Hash.make('123123'),
         status: 1,
-        role: 1,
       },
     ])
   }

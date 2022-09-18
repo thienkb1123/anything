@@ -2,6 +2,8 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Admin extends BaseModel {
+  public static table = 'admin'
+
   @column({ isPrimary: true })
   public id: number
 
@@ -25,8 +27,4 @@ export default class Admin extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public registeredAt: DateTime
-
-  static get table() {
-    return 'admin'
-  }
 }

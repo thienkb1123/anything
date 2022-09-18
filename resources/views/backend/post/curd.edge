@@ -1,0 +1,222 @@
+@layout('backend/layout')
+@set('title', title)
+@section('content')
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Create</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">{{ title }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-9 xl-60 box-col-8">
+                <form action="{{ formActionURL }}" method="POST" id="formData">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h5>Custom styles</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="col-form-label">Title</label>
+                                <input class="form-control" name="title" type="text" value="">
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label">Slug</label>
+                                <input class="form-control" name="slug" type="text" value="">
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label">Summary</label>
+                                <textarea class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="col-form-label">Content</label>
+                                <textarea id="content" name="content" cols="2" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-end">
+                            <button class="btn btn-primary" id="onSubmit" type="submit">Submit</button>
+                            <a href="{{ route('backend.post-tool.config.index') }}" class="btn btn-light"
+                                type="reset">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-3 xl-40 box-col-4">
+                <div class="job-sidebar">
+                    <a class="btn btn-primary job-toggle" href="javascript:void(0)">filter</a>
+                    <div class="job-left-aside custom-scrollbar">
+                        <form action="{{ formActionURL }}" method="POST" id="formMeta">
+                            <div class="default-according style-1 faq-accordion job-accordion" id="accordionoc">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0 p-0">
+                                                    <button class="btn btn-link ps-0" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapseicon" aria-expanded="true"
+                                                        aria-controls="collapseicon">Status</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse show" id="collapseicon" aria-labelledby="collapseicon"
+                                                data-parent="#accordion">
+                                                <div class="card-body animate-chk">
+                                                    <div class="checkbox-animated">
+                                                        <label class="d-block" for="chk-ani">
+                                                            <input class="checkbox_animated" id="chk-ani" name="status"
+                                                                type="radio"> Publish
+                                                        </label>
+                                                        <label class="d-block" for="chk-ani1">
+                                                            <input class="checkbox_animated" id="chk-ani1" name="status"
+                                                                type="radio"> Draft
+                                                        </label>
+                                                        <label class="d-block" for="chk-ani2">
+                                                            <input class="checkbox_animated" id="chk-ani2" name="status"
+                                                                type="radio"> Private
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0 p-0">
+                                                    <button class="btn btn-link ps-0" data-bs-toggle="collapse"
+                                                        data-bs-target="#category" aria-expanded="false"
+                                                        aria-controls="category">Categories</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="category" aria-labelledby="category"
+                                                data-parent="#accordion">
+                                                <div class="card-body filter-cards-view animate-chk">
+                                                    <div class="job-filter mb-3">
+                                                        <div class="faq-form">
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Search..">
+                                                            <i class="search-icon" data-feather="search"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="location-checkbox">
+                                                        <label class="d-block" for="chk-ani6">
+                                                            <input class="checkbox_animated" id="chk-ani6" name="categories[]"
+                                                                type="checkbox">Letraset
+                                                        </label>
+                                                        <label class="d-block" for="chk-ani6">
+                                                            <input class="checkbox_animated" id="chk-ani6" name="categories[]"
+                                                                type="checkbox">
+                                                            Letraset
+                                                        </label>
+                                                        <label class="d-block" for="chk-ani6">
+                                                            <input class="checkbox_animated" id="chk-ani6" name="categories[]"
+                                                                type="checkbox">
+                                                            Letraset
+                                                        </label>
+                                                        <label class="d-block" for="chk-ani6">
+                                                            <input class="checkbox_animated" id="chk-ani6" name="categories[]"
+                                                                type="checkbox">
+                                                            Letraset
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0 p-0">
+                                                    <button class="btn btn-link ps-0" data-bs-toggle="collapse"
+                                                        data-bs-target="#tag" aria-expanded="false"
+                                                        aria-controls="tag">Tags</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse" id="tag" aria-labelledby="tag"
+                                                data-parent="#accordion">
+                                                <div class="card-body filter-cards-view animate-chk">
+                                                    <div class="job-filter mb-3">
+                                                        <div class="faq-form">
+                                                            <input class="form-control" type="text"
+                                                                placeholder="Search.."><i class="search-icon"
+                                                                data-feather="search"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="location-checkbox">
+                                                        <label class="d-block" for="chk-ani6">
+                                                            <input class="checkbox_animated" id="chk-ani6" name="tags[]"
+                                                                type="checkbox">Letraset
+                                                        </label>
+                                                        <label class="d-block" for="chk-ani6">
+                                                            <input class="checkbox_animated" id="chk-ani6" name="tags[]"
+                                                                type="checkbox">Letraset
+                                                        </label>
+                                                        <label class="d-block" for="chk-ani6">
+                                                            <input class="checkbox_animated" id="chk-ani6" name="tags[]"
+                                                                type="checkbox">Letraset
+                                                        </label>
+                                                        <label class="d-block" for="chk-ani6">
+                                                            <input class="checkbox_animated" id="chk-ani6" name="tags[]"
+                                                                type="checkbox">Letraset
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5 class="mb-0 p-0">
+                                                    <button class="btn btn-link ps-0" data-bs-toggle="collapse"
+                                                        data-bs-target="#avatar" aria-expanded="true"
+                                                        aria-controls="avatar">Avatar</button>
+                                                </h5>
+                                            </div>
+                                            <div class="collapse show" id="avatar" aria-labelledby="avatar"
+                                                data-parent="#accordion">
+                                                <div class="card-body animate-chk">
+                                                    <!-- Simple demo-->
+                                                    <button class="btn btn-outline-primary btn-set-avatar" type="button"
+                                                        data-bs-toggle="modal" data-original-title="Media"
+                                                        data-bs-target="#mediaModal">Set avatar</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+
+    @!component('backend/common/media')
+</div>
+@end
+
+@section('jsPlugin')
+@!component('backend/common/ckediter')
+<script src="{{ asset('assets/backend/viho/js/dropzone/dropzone.js') }}"></script>
+<script src="{{ asset('assets/backend/any/dropzone-script.js') }}"></script>
+@end
+
+@section('cssPlugin')
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/backend/viho/css/dropzone.css') }}">
+@end
