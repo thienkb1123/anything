@@ -125,13 +125,18 @@ $("#any-select2-site").select2({
         });
     });
 
-$(".any-select2-basic").select2();
+$(".any-select2-basic").select2()
 
+// $(".form-submit").submit(function(e) {
+//     // e.preventDefault()
+//     let formData = $(".form-submit").map(function() {
+//         return $(this).serializeArray()
+//     })
 
-
-$("form").submit(function(e) {
-    var data_array = $("form").map(function() {
-        return $(this).serializeArray();
-    });
-
-});
+//     let formAction = $(this).attr("action")
+//     $.ajax({
+//         type: "POST",
+//         url: formAction,
+//         data: formData
+//     });
+// });

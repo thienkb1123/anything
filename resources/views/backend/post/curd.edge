@@ -17,18 +17,22 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-9 xl-60 box-col-8">
-                <form action="{{ formActionURL }}" method="POST" id="formData">
+        <form action="{{ formActionURL }}" method="POST" class="form-submit">
+            <div class="row">
+                <div class="col-xl-9 xl-60 box-col-8">
+
                     <div class="card">
                         <div class="card-header pb-0">
-                            <h5>Custom styles</h5>
+                            <h5>Information post</h5>
                         </div>
 
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="col-form-label">Title</label>
-                                <input class="form-control" name="title" type="text" value="">
+                                <input class="form-control {{ flashMessages.has('errors.title') ? 'is-invalid' : '' }}" name="title" type="text" value="">
+                                @if (flashMessages.has('errors.title'))
+                                    <div class="invalid-feedback">{{ flashMessages.get('errors.title') }}</div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label">Slug</label>
@@ -36,27 +40,32 @@
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label">Summary</label>
-                                <textarea class="form-control" rows="4"></textarea>
+                                <textarea class="form-control {{ flashMessages.has('errors.summary') ? 'is-invalid' : '' }}" name="summary" rows="4"></textarea>
+                                @if (flashMessages.has('errors.summary'))
+                                    <div class="invalid-feedback">{{ flashMessages.get('errors.summary') }}</div>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label">Content</label>
-                                <textarea id="content" name="content" cols="2" rows="2"></textarea>
+                                <textarea class="form-control {{ flashMessages.has('errors.content') ? 'is-invalid' : '' }}" id="content" name="content" cols="2" rows="2"></textarea>
+                                @if (flashMessages.has('errors.content'))
+                                    <div class="invalid-feedback">{{ flashMessages.get('errors.content') }}</div>
+                                @endif
                             </div>
                         </div>
 
                         <div class="card-footer text-end">
-                            <button class="btn btn-primary" id="onSubmit" type="submit">Submit</button>
+                            <button class="btn btn-primary" type="submit">Submit</button>
                             <a href="{{ route('backend.post-tool.config.index') }}" class="btn btn-light"
                                 type="reset">Cancel</a>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="col-xl-3 xl-40 box-col-4">
-                <div class="job-sidebar">
-                    <a class="btn btn-primary job-toggle" href="javascript:void(0)">filter</a>
-                    <div class="job-left-aside custom-scrollbar">
-                        <form action="{{ formActionURL }}" method="POST" id="formMeta">
+                </div>
+                <div class="col-xl-3 xl-40 box-col-4">
+                    <div class="job-sidebar">
+                        <a class="btn btn-primary job-toggle" href="javascript:void(0)">filter</a>
+                        <div class="job-left-aside custom-scrollbar">
+
                             <div class="default-according style-1 faq-accordion job-accordion" id="accordionoc">
                                 <div class="row">
                                     <div class="col-xl-12">
@@ -93,8 +102,9 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5 class="mb-0 p-0">
-                                                    <button class="btn btn-link ps-0" data-bs-toggle="collapse"
-                                                        data-bs-target="#category" aria-expanded="false"
+                                                    <button type="button" class="btn btn-link ps-0"
+                                                        data-bs-toggle="collapse" data-bs-target="#category"
+                                                        aria-expanded="false"
                                                         aria-controls="category">Categories</button>
                                                 </h5>
                                             </div>
@@ -110,22 +120,22 @@
                                                     </div>
                                                     <div class="location-checkbox">
                                                         <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6" name="categories[]"
-                                                                type="checkbox">Letraset
+                                                            <input class="checkbox_animated" id="chk-ani6"
+                                                                name="categories[]" type="checkbox">Letraset
                                                         </label>
                                                         <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6" name="categories[]"
-                                                                type="checkbox">
+                                                            <input class="checkbox_animated" id="chk-ani6"
+                                                                name="categories[]" type="checkbox">
                                                             Letraset
                                                         </label>
                                                         <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6" name="categories[]"
-                                                                type="checkbox">
+                                                            <input class="checkbox_animated" id="chk-ani6"
+                                                                name="categories[]" type="checkbox">
                                                             Letraset
                                                         </label>
                                                         <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6" name="categories[]"
-                                                                type="checkbox">
+                                                            <input class="checkbox_animated" id="chk-ani6"
+                                                                name="categories[]" type="checkbox">
                                                             Letraset
                                                         </label>
                                                     </div>
@@ -138,9 +148,9 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5 class="mb-0 p-0">
-                                                    <button class="btn btn-link ps-0" data-bs-toggle="collapse"
-                                                        data-bs-target="#tag" aria-expanded="false"
-                                                        aria-controls="tag">Tags</button>
+                                                    <button type="button" class="btn btn-link ps-0"
+                                                        data-bs-toggle="collapse" data-bs-target="#tag"
+                                                        aria-expanded="false" aria-controls="tag">Tags</button>
                                                 </h5>
                                             </div>
                                             <div class="collapse" id="tag" aria-labelledby="tag"
@@ -180,9 +190,9 @@
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5 class="mb-0 p-0">
-                                                    <button class="btn btn-link ps-0" data-bs-toggle="collapse"
-                                                        data-bs-target="#avatar" aria-expanded="true"
-                                                        aria-controls="avatar">Avatar</button>
+                                                    <button type="button" class="btn btn-link ps-0"
+                                                        data-bs-toggle="collapse" data-bs-target="#avatar"
+                                                        aria-expanded="true" aria-controls="avatar">Avatar</button>
                                                 </h5>
                                             </div>
                                             <div class="collapse show" id="avatar" aria-labelledby="avatar"
@@ -199,11 +209,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <!-- Container-fluid Ends-->
 

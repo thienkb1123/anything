@@ -1,5 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
+import Media from 'App/Models/Media'
+import Common from 'App/Pkg/Common'
 
 export default class MediaController {
 
@@ -17,20 +19,39 @@ export default class MediaController {
         })
     }
 
-    aaaa() {
-
-    }
-
     public async store({ request, response }: HttpContextContract) {
-        const images = request.files('files')
+        const files = request.files('files', {
+            size: '5mb',
+            extnames: ['jpg', 'jpg', 'gif', 'png'],
+        })
 
-        for (let image of images) {
-            await image.move(Application.publicPath('post'),{
-                overwrite: false, // overwrite in case of conflict
-            })
+        let mediaList: Media[] = [];
+        for (let file of files) {
+            if (!file.isValid) {
+                continue
+            }
+
+            const fileName = Common.createFileName(file.clientName)
+            const path = Common.pathMovePerMonth('media')
+            await file.move(
+                Application.publicPath(path),
+                {
+                    overwrite: false,
+                    name: fileName,
+                }
+            )
+
+            const media = new Media()
+            media.name = fileName
+            media.path = `/${path}/${fileName}`
+            media.typeOfFile = file.extname as string
+            media.type = file.type as string
+            media.size = file.size
+            mediaList.push(media)
         }
-        
-        return response.json(images)
+
+        await Media.createMany(mediaList)
+        return response.json(files)
     }
 
     public async show({ request, view }: HttpContextContract) {

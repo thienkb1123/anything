@@ -44,5 +44,9 @@ export default class PostValidator {
    * }
    *
    */
-  public messages: CustomMessages = {}
+  public messages: CustomMessages = {
+    'title.required': 'Title is required',
+    'summary.required': 'Summary is required',
+    'content.required': 'Content is required'
+  }
 }

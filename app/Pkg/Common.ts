@@ -1,6 +1,6 @@
 import url from 'url'
 import slugify from "slugify";
-import { DateTime } from 'luxon'
+import { DateTime, Duration } from 'luxon'
 
 export default class Common {
 
@@ -31,8 +31,16 @@ export default class Common {
         })
     }
 
-    static currentDateTime (): string {
+    static currentDateTime(): string {
         return DateTime.now().toFormat('yyyy-MM-dd HH:mm:ss')
+    }
+
+    static pathMovePerMonth(name: string): string {
+        return `${name}/${DateTime.now().toFormat('yyyy/MM')}`
+    }
+
+    static createFileName(clientName: string): string {
+        return `${DateTime.now().toMillis()}-${clientName}`
     }
 
 }

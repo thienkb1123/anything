@@ -11,13 +11,16 @@ export default class Media extends BaseModel {
   public name: string
 
   @column()
+  public path: string
+
+  @column()
   public typeOfFile: string
 
   @column()
   public type: string
 
   @column()
-  public size: string
+  public size: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
