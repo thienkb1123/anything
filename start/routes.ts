@@ -43,7 +43,8 @@ Route.group(() => {
     }).prefix('/post-tool').as('post-tool')
 
 
-    Route.resource('post', 'Backend/PostController')
-    Route.resource('media', 'Backend/MediaController')
+    Route.resource('/post', 'Backend/PostController')
+    Route.get('/media/list', 'Backend/MediaController.list').as('media.list')
+    Route.resource('/media', 'Backend/MediaController')
 
 }).prefix('/any-admin').as('backend').middleware('auth')

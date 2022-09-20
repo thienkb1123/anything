@@ -6,14 +6,12 @@ import Common from 'App/Pkg/Common'
 export default class MediaController {
 
     public async index({ request, view }: HttpContextContract) {
-
         return view.render('backend.post.index', {
             posts: []
         })
     }
 
     public async create({ request, view }: HttpContextContract) {
-
         return view.render('backend.post.curd', {
             title: 'Create a post',
         })
@@ -59,12 +57,13 @@ export default class MediaController {
         return view.render('backend.post.curd')
     }
 
-    public async edit({ request }: HttpContextContract) {
-
-    }
-
-    public async update({ request }: HttpContextContract) {
-
+    public async list({ request, response }: HttpContextContract) {
+        const list = await Media.query().orderBy('created_at', 'desc').limit(20)
+        return response.json({
+            code: 0,
+            message: '',
+            result: list
+        })
     }
 
     public async destroy({ request }: HttpContextContract) {

@@ -125,3 +125,18 @@
 .file-content .files .file-box {
     cursor: pointer;
 }
+
+.dropzone {
+    padding: 0 !important;
+    min-height: 20px I !important;
+}
+
+.gallery h6 {
+    margin-top: 3px;
+    font-size: 13px;
+    margin-bottom: 0 !important;
+}
+
+.gallery p {
+    margin-bottom: 0 !important;
+}

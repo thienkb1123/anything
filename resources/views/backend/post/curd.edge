@@ -104,41 +104,17 @@
                                                 <h5 class="mb-0 p-0">
                                                     <button type="button" class="btn btn-link ps-0"
                                                         data-bs-toggle="collapse" data-bs-target="#category"
-                                                        aria-expanded="false"
+                                                        aria-expanded="true"
                                                         aria-controls="category">Categories</button>
                                                 </h5>
                                             </div>
-                                            <div class="collapse" id="category" aria-labelledby="category"
+                                            <div class="collapse show" id="category" aria-labelledby="category"
                                                 data-parent="#accordion">
                                                 <div class="card-body filter-cards-view animate-chk">
-                                                    <div class="job-filter mb-3">
-                                                        <div class="faq-form">
-                                                            <input class="form-control" type="text"
-                                                                placeholder="Search..">
-                                                            <i class="search-icon" data-feather="search"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="location-checkbox">
-                                                        <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6"
-                                                                name="categories[]" type="checkbox">Letraset
-                                                        </label>
-                                                        <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6"
-                                                                name="categories[]" type="checkbox">
-                                                            Letraset
-                                                        </label>
-                                                        <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6"
-                                                                name="categories[]" type="checkbox">
-                                                            Letraset
-                                                        </label>
-                                                        <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6"
-                                                                name="categories[]" type="checkbox">
-                                                            Letraset
-                                                        </label>
-                                                    </div>
+                                                    <select id="any-select2-category" multiple="multiple" name="status">
+                                                        <option value="1">Enable</option>
+                                                        <option value="0">Disable</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -150,37 +126,16 @@
                                                 <h5 class="mb-0 p-0">
                                                     <button type="button" class="btn btn-link ps-0"
                                                         data-bs-toggle="collapse" data-bs-target="#tag"
-                                                        aria-expanded="false" aria-controls="tag">Tags</button>
+                                                        aria-expanded="true" aria-controls="tag">Tags</button>
                                                 </h5>
                                             </div>
-                                            <div class="collapse" id="tag" aria-labelledby="tag"
+                                            <div class="collapse show" id="tag" aria-labelledby="tag"
                                                 data-parent="#accordion">
                                                 <div class="card-body filter-cards-view animate-chk">
-                                                    <div class="job-filter mb-3">
-                                                        <div class="faq-form">
-                                                            <input class="form-control" type="text"
-                                                                placeholder="Search.."><i class="search-icon"
-                                                                data-feather="search"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="location-checkbox">
-                                                        <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6" name="tags[]"
-                                                                type="checkbox">Letraset
-                                                        </label>
-                                                        <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6" name="tags[]"
-                                                                type="checkbox">Letraset
-                                                        </label>
-                                                        <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6" name="tags[]"
-                                                                type="checkbox">Letraset
-                                                        </label>
-                                                        <label class="d-block" for="chk-ani6">
-                                                            <input class="checkbox_animated" id="chk-ani6" name="tags[]"
-                                                                type="checkbox">Letraset
-                                                        </label>
-                                                    </div>
+                                                    <select id="any-select2-tag" multiple="multiple" name="status">
+                                                        <option value="1">Enable</option>
+                                                        <option value="0">Disable</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -225,6 +180,13 @@
 @!component('backend/common/ckediter')
 <script src="{{ asset('assets/backend/viho/js/dropzone/dropzone.js') }}"></script>
 <script src="{{ asset('assets/backend/any/dropzone-script.js') }}"></script>
+@end
+
+@section('js')
+<script>
+newSelec2Custom('any-select2-category', '', [], [])
+newSelec2Custom('any-select2-tag', '', [], [])
+</script>
 @end
 
 @section('cssPlugin')

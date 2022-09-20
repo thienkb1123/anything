@@ -12,7 +12,7 @@ export default class WordPressController {
   public async create({ request, view, auth }: HttpContextContract) {
     const listConfigs = await PostToolConfig.query()
       .where('status', PostToolConfig.statusEnable)
-      .where('admin_id', auth.user?.id)
+      .where('author', auth.user?.id)
       .finally()
 
     let alert: Option | null = null

@@ -44,18 +44,6 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function newSelec2Custom(id, placeholder, data = [], selections = []) {
-    const _id = $(`#${id}`)
-    _id.select2({
-        placeholder: placeholder,
-        data: data
-    })
-
-    if (selections.length) {
-        _id.val(selections).trigger('change')
-    }
-}
-
 function updateSelect2Custom(id, data = [], placeholder) {
     const _id = $(`#${id}`)
     if (data.length) {
@@ -127,16 +115,14 @@ $("#any-select2-site").select2({
 
 $(".any-select2-basic").select2()
 
-// $(".form-submit").submit(function(e) {
-//     // e.preventDefault()
-//     let formData = $(".form-submit").map(function() {
-//         return $(this).serializeArray()
-//     })
+function newSelec2Custom(id, placeholder, data = [], selections = []) {
+    const _id = $(`#${id}`)
+    _id.select2({
+        placeholder: placeholder,
+        data: data
+    })
 
-//     let formAction = $(this).attr("action")
-//     $.ajax({
-//         type: "POST",
-//         url: formAction,
-//         data: formData
-//     });
-// });
+    if (selections.length) {
+        _id.val(selections).trigger('change')
+    }
+}

@@ -21,11 +21,12 @@ export default class ConfigController {
         ]),
     })
 
-    public async index({ request, view }: HttpContextContract) {
+    public async index({ request, auth, view }: HttpContextContract) {
         const limit = 10
         const page = request.input('page', 1)
         const listConfigs = await PostToolConfig.query()
             .where('status', '<>', PostToolConfig.statusDelete)
+            .where('author', auth.user?.id)
             .paginate(page, limit)
 
         return view.render('backend.post-tool.config.index', {
@@ -48,7 +49,7 @@ export default class ConfigController {
 
         const config = await PostToolConfig.query()
             .where('id', id)
-            .where('admin_id', auth.user?.id)
+            .where('author', auth.user?.id)
             .firstOrFail()
 
         return view.render('backend.post-tool.config.curd', {
@@ -71,6 +72,7 @@ export default class ConfigController {
             })
             session.flash('alert', Alert.create('Create successfully', Alert.success))
         } catch (error) {
+            console.log(error)
             session.flash('alert', Alert.create("Create failure. Let's try", Alert.error))
         }
 
@@ -88,7 +90,7 @@ export default class ConfigController {
         try {
             await PostToolConfig.query()
                 .where('id', id)
-                .where('admin_id', auth.user?.id)
+                .where('author', auth.user?.id)
                 .update({
                     site: data.site,
                     siteAPIKey: data.siteAPIKey,
@@ -114,7 +116,7 @@ export default class ConfigController {
         try {
             const res = await PostToolConfig.query()
                 .where('id', id)
-                .where('admin_id', auth.user?.id)
+                .where('author', auth.user?.id)
                 .update({
                     status: PostToolConfig.statusDelete,
                     updated_at: Common.currentDateTime()

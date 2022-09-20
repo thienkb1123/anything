@@ -201,6 +201,7 @@
         <!-- Load js from page -->
 
         <script src="{{ asset('assets/backend/any/app.js') }}"></script>
+        @!section('js')
 
         @if (flashMessages.has('alert') || alert)
             <!-- Alert from action -->
