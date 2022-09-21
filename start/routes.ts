@@ -49,6 +49,8 @@ Route.group(() => {
 
     Route.put('/tag/:id/status', 'Backend/TagController.statusUpdate').as('tag.status-update')
     Route.resource('/tag', 'Backend/TagController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
-    Route.resource('/category', 'Backend/CategoryController')
+    
+    Route.put('/category/:id/status', 'Backend/CategoryController.statusUpdate').as('category.status-update')
+    Route.resource('/category', 'Backend/CategoryController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
 
 }).prefix('/any-admin').as('backend').middleware('auth')

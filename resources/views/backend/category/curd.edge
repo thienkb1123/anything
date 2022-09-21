@@ -1,0 +1,78 @@
+@layout('backend/layout') 
+@section('content')
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Create</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">{{ title }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <form class="form theme-form" action="{{ formActionURL }}" method="POST">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Title</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.title') ? 'is-invalid' : '' }}" name="title" type="text" value="{{ flashMessages.get('title', tag && tag.title || '') }}" required>
+                                            @if (flashMessages.has('errors.title'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.title') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Slug</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control {{ flashMessages.has('errors.slug') ? 'is-invalid' : '' }}" name="slug" type="text" value="{{ flashMessages.get('slug', tag && tag.slug || '') }}">
+                                            @if (flashMessages.has('errors.slug'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.slug') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Content</label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control {{ flashMessages.has('errors.content') ? 'is-invalid' : '' }}" name="content" rows="4">{{ flashMessages.get('content', tag && tag.content || '') }}</textarea>
+                                            @if (flashMessages.has('errors.content'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.content') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row not-validate">
+                                        <label class="col-sm-3 col-form-label">Status</label>
+                                        <div class="col-sm-9">
+                                            <select class="any-select2-basic col-sm-12" name="status">
+                                                <option {{ flashMessages.get('status', tag && tag.status) == 1 ? 'selected' : '' }} value="1">Enable</option>
+                                                <option {{ flashMessages.get('status', tag && tag.status) == 0 ? 'selected' : ''}} value="0">Disable</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <div class="col-sm-9 offset-sm-3">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <a href="{{ route('backend.tag.index') }}" class="btn btn-light" type="reset">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+@end

@@ -1,0 +1,88 @@
+@layout('backend/layout')
+
+@section('content')
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>List</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('backend.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">List Tags</li>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
+                    <!-- Bookmark Start-->
+                    <div class="social-tab custom-bookmark">
+                        <ul>
+                            <li>
+                                <a class="nav-link active" href="{{ route('backend.category.create') }}">
+                                    <i data-feather="plus-circle"></i>Add New
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Bookmark Ends-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive any-table">
+                            <table class="table">
+                                <thead class="table-primary">
+                                    <tr class="dashed">
+                                        <th scope="col">Title</th>
+                                        <th class="any-w-15" scope="col-1">CreatedAt</th>
+                                        <th class="any-w-15" scope="col-1">Status</th>
+                                        <th class="any-w-15" scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if(categories.length)
+                                        @each(row in categories)
+                                            <tr class="dashed" id="row-{{ row.id }}">
+                                                <td>{{ row.title }}</td>
+                                                <td>{{ row.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</td>
+                                                <td>
+                                                    <label class="d-block mb-0" for="chk-ani">
+                                                        <input onchange="onChangeStatus(this, '{{ route('backend.category.status-update', {id: row.id}) }}')" {{ row.status == 1 ? 'checked' : '' }} class="checkbox_animated" type="checkbox">
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <button href="javascript:void(0)" onclick="onDelete('{{ route('backend.category.destroy', {id: row.id}, {qs: {_method: 'DELETE'}}) }}')" class="btn btn-danger btn-xs" type="button">Delete</button>
+                                                    <a href="{{ route('backend.category.edit', {id: row.id}) }}" class="btn btn-primary btn-xs" type="button">Edit</a>
+                                                </td>
+                                            </tr>
+                                        @endeach
+                                    @else
+                                        <td colspan="4">
+                                            <p class="text-center">No data</p>
+                                        </td>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @if(categories.length)
+                        <div class="card-footer">
+                            @!component('backend/common/pagination', {
+                                pagination: categories.getUrlsForRange(categories.firstPage, categories.lastPage),
+                                meta: categories.getMeta()
+                            })
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>
+@end
