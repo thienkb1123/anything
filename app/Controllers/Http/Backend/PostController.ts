@@ -21,9 +21,6 @@ export default class PostController {
   }
 
   public async store({ request, response, session, auth }: HttpContextContract) {
-
-    console.log(request.all())
-
     const payload = await request.validate(PostValidator)
     try {
       await Post.create({
@@ -38,7 +35,7 @@ export default class PostController {
     } catch (error) {
       session.flash('alert', Alert.create("Create failure. Let's try", Alert.error))
     }
-    return response.redirect().toRoute('backend.post.index')
+    return response.redirect().toRoute('backend.tag.index')
   }
 
   public async show({ request, view }: HttpContextContract) {

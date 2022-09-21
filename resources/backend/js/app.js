@@ -4,40 +4,13 @@ function swalAlert(title, message, type, redirectURL) {
         text: message,
         icon: type,
         html: true
-    }).then(function() {
+    }).then(function () {
         if (redirectURL) {
             window.location = redirectURL
         }
 
         console.log(redirectURL)
     })
-}
-
-function confirmDelete(url) {
-    swal({
-        title: 'Are you sure?',
-        text: 'Once deleted, you will not be able to recover this!',
-        icon: 'warning',
-        buttons: true,
-    }).then((willDelete) => {
-        if (willDelete) {
-            const settings = {
-                url: url,
-                method: 'DELETE',
-                dataType: 'json'
-            };
-
-            $.ajax(settings).done(function(response) {
-                if (response.code == 0) {
-                    $(`#row-${response.result.id}`).fadeOut(300, function() { $(this).remove() })
-                    return
-                }
-
-                swalAlert('Error', "An error occurred. Refresh the page and let's try", 'error')
-                return
-            });
-        }
-    });
 }
 
 function sleep(ms) {
@@ -54,16 +27,16 @@ function updateSelect2Custom(id, data = [], placeholder) {
     _id.trigger('change')
 }
 
-$.fn.select2UpdatePlaceholder = function(newPlaceholder) {
+$.fn.select2UpdatePlaceholder = function (newPlaceholder) {
     var $select2 = $(this).data('select2');
     $select2.selection.placeholder.text = newPlaceholder;
     return $select2.$container.find('.select2-selection__placeholder').text(newPlaceholder);
 };
 
 $("#any-select2-site").select2({
-        placeholder: "Select site create a post",
-    })
-    .on('change', function(e) {
+    placeholder: "Select site create a post",
+})
+    .on('change', function (e) {
 
         const siteAddr = $("#any-select2-site option:selected").text();
         if (!siteAddr) {
@@ -86,7 +59,7 @@ $("#any-select2-site").select2({
             dataType: 'json'
         };
 
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
             if (response.code != 0) {
                 swalAlert('Error', "Getting tags and categories an error occurred. Refresh the page and let's try", 'error')
                 return
@@ -125,4 +98,83 @@ function newSelec2Custom(id, placeholder, data = [], selections = []) {
     if (selections.length) {
         _id.val(selections).trigger('change')
     }
+}
+
+function onDelete(url) {
+    swal({
+        title: 'Are you sure?',
+        text: 'Once deleted, you will not be able to recover this!',
+        icon: 'warning',
+        buttons: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            const settings = {
+                url: url,
+                method: 'DELETE',
+                dataType: 'json'
+            };
+
+            $.ajax(settings).done(function (response) {
+                if (response.code == 0) {
+                    $(`#row-${response.result.id}`).fadeOut(300, function () { $(this).remove() })
+                    notify('Delete success')
+                    return
+                }
+
+                notify("An error occurred. Refresh the page and let's try")
+                return
+            });
+        }
+    });
+}
+
+function onChangeStatus(obj, url) {
+    const status = obj.checked ? 1 : 0
+    const settings = {
+        url: url,
+        method: 'PUT',
+        data: { status: status },
+        dataType: 'json'
+    };
+
+    $.ajax(settings).done(function (response) {
+        let msg = 'Update status success'
+        if (response.code != 0) {
+            msg = 'Update status fail'
+        }
+        notify(msg)
+        return
+    });
+}
+
+function notify(msg = '') {
+    if (!msg) {
+        return
+    }
+    $.notify({
+        message: msg
+    },
+        {
+            type: 'primary',
+            allow_dismiss: false,
+            newest_on_top: false,
+            mouse_over: false,
+            showProgressbar: false,
+            spacing: 10,
+            timer: 1000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            },
+            offset: {
+                x: 30,
+                y: 30
+            },
+            delay: 1000,
+            z_index: 10000,
+            animate: {
+                enter: 'animated bounce',
+                exit: 'animated bounce'
+            }
+        });
 }

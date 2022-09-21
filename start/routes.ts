@@ -47,4 +47,8 @@ Route.group(() => {
     Route.get('/media/list', 'Backend/MediaController.list').as('media.list')
     Route.resource('/media', 'Backend/MediaController')
 
+    Route.put('/tag/:id/status', 'Backend/TagController.statusUpdate').as('tag.status-update')
+    Route.resource('/tag', 'Backend/TagController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
+    Route.resource('/category', 'Backend/CategoryController')
+
 }).prefix('/any-admin').as('backend').middleware('auth')

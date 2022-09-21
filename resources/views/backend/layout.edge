@@ -127,8 +127,28 @@
                                         <a class="nav-link menu-title" href="javascript:void(0)">
                                         <i data-feather="home"></i><span>Post</span></a>
                                         <ul class="nav-submenu menu-content">
-                                            <li><a href="{{ route('backend.post.index') }}">List</a></li>
-                                            <li><a href="{{ route('backend.post.create') }}">Create</a></li>
+                                            <li><a href="{{ route('backend.post.index') }}">List Post</a></li>
+                                            <li><a href="{{ route('backend.post.create') }}">Add new Post</a></li>
+                                            <li>
+                                                <a class="submenu-title" href="javascript:void(0)">
+                                                    Tag
+                                                    <span class="sub-arrow"><i class="fa fa-chevron-right"></i></span>
+                                                </a>
+                                                <ul class="nav-sub-childmenu submenu-content">
+                                                    <li><a href="{{ route('backend.tag.index') }}">List</a></li>
+                                                    <li><a href="{{ route('backend.tag.create') }}">Add new</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a class="submenu-title" href="javascript:void(0)">
+                                                    Category
+                                                    <span class="sub-arrow"><i class="fa fa-chevron-right"></i></span>
+                                                </a>
+                                                <ul class="nav-sub-childmenu submenu-content">
+                                                    <li><a href="{{ route('backend.category.index') }}">List</a></li>
+                                                    <li><a href="{{ route('backend.category.create') }}">Add new</a></li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
@@ -142,7 +162,7 @@
                                                 </a>
                                                 <ul class="nav-sub-childmenu submenu-content">
                                                     <li><a href="{{ route('backend.post-tool.config.index') }}">List</a></li>
-                                                    <li><a href="{{ route('backend.post-tool.config.create') }}">Create</a></li>
+                                                    <li><a href="{{ route('backend.post-tool.config.create') }}">Add new</a></li>
                                                 </ul>
                                             </li>
                                             <li>
@@ -191,6 +211,7 @@
         <!-- Bootstrap js-->
         <script src="{{ asset('assets/backend/viho/js/bootstrap/popper.min.js') }}"></script>
         <script src="{{ asset('assets/backend/viho/js/bootstrap/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/backend/viho/js/notify/bootstrap-notify.min.js') }}"></script>
         <!-- Plugins JS start-->
         <script src="{{ asset('assets/backend/viho/js/sweet-alert/sweetalert.min.js') }}"></script>
         <script src="{{ asset('assets/backend/viho/js/select2/select2.full.min.js') }}"></script>
