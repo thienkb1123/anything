@@ -56,7 +56,7 @@
 
                         <div class="card-footer text-end">
                             <button class="btn btn-primary" type="submit">Submit</button>
-                            <a href="{{ route('backend.post-tool.config.index') }}" class="btn btn-light"
+                            <a href="{{ route('backend.post.index') }}" class="btn btn-light"
                                 type="reset">Cancel</a>
                         </div>
                     </div>
@@ -77,21 +77,17 @@
                                                         aria-controls="collapseicon">Status</button>
                                                 </h5>
                                             </div>
-                                            <div class="collapse show" id="collapseicon" aria-labelledby="collapseicon"
-                                                data-parent="#accordion">
+                                            <div class="collapse show" id="collapseicon" aria-labelledby="collapseicon" data-parent="#accordion">
                                                 <div class="card-body animate-chk">
                                                     <div class="checkbox-animated">
                                                         <label class="d-block" for="chk-ani">
-                                                            <input class="checkbox_animated" id="chk-ani" name="status"
-                                                                type="radio"> Publish
+                                                            <input class="checkbox_animated" {{ flashMessages.get('status') == 1 ? 'checked': '' }} name="status" type="radio" value="1"> Publish
                                                         </label>
                                                         <label class="d-block" for="chk-ani1">
-                                                            <input class="checkbox_animated" id="chk-ani1" name="status"
-                                                                type="radio"> Draft
+                                                            <input class="checkbox_animated" name="status" type="radio" value="2"> Draft
                                                         </label>
                                                         <label class="d-block" for="chk-ani2">
-                                                            <input class="checkbox_animated" id="chk-ani2" name="status"
-                                                                type="radio"> Private
+                                                            <input class="checkbox_animated" name="status" type="radio" value="0"> Private
                                                         </label>
                                                     </div>
                                                 </div>
@@ -111,9 +107,8 @@
                                             <div class="collapse show" id="category" aria-labelledby="category"
                                                 data-parent="#accordion">
                                                 <div class="card-body filter-cards-view animate-chk">
-                                                    <select id="any-select2-category" multiple="multiple" name="status">
-                                                        <option value="1">Enable</option>
-                                                        <option value="0">Disable</option>
+                                                    <select id="any-select2-category" multiple="multiple" name="categories[]">
+                                                        
                                                     </select>
                                                 </div>
                                             </div>
@@ -132,9 +127,8 @@
                                             <div class="collapse show" id="tag" aria-labelledby="tag"
                                                 data-parent="#accordion">
                                                 <div class="card-body filter-cards-view animate-chk">
-                                                    <select id="any-select2-tag" multiple="multiple" name="status">
-                                                        <option value="1">Enable</option>
-                                                        <option value="0">Disable</option>
+                                                    <select id="any-select2-tag" multiple="multiple" name="tags[]">
+                                                       
                                                     </select>
                                                 </div>
                                             </div>
@@ -184,8 +178,17 @@
 
 @section('js')
 <script>
-newSelec2Custom('any-select2-category', '', [], [])
-newSelec2Custom('any-select2-tag', '', [], [])
+$('#any-select2-category').anySelect({
+    placeholder: 'Select categories',
+    url: "{{ route('api.category.list') }}",
+    selections: []
+})
+
+$('#any-select2-tag').anySelect({
+    placeholder: 'Select tags',
+    url: "{{ route('api.tag.list') }}",
+    selections: ['2', '4']
+})
 </script>
 @end
 

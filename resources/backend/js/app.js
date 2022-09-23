@@ -88,6 +88,57 @@ $("#any-select2-site").select2({
 
 $(".any-select2-basic").select2()
 
+$.fn.anySelect = function (opts) {
+    $(this).select2({
+        placeholder: opts.placeholder,
+        ajax: {
+            url: opts.url,
+            dataType: 'json',
+            type: "GET",
+            data: function (params) {
+                var query = {
+                    search: params.term,
+                }
+                return query;
+            },
+            processResults: function (resp) {
+                if (resp.code != 0) {
+                    return
+                }
+                return {
+                    results: $.map(resp.result.items, function (item) {
+                        return {
+                            text: item.title,
+                            id: item.id,
+                        }
+                    })
+                }
+            },
+        }
+    })
+
+    const _this = $(this)
+    if (opts.selections && opts.selections.length) {
+        $.ajax({
+            type: 'GET',
+            url: opts.url,
+            data: { ids: opts.selections.toString() }
+        }).then(function (resp) {
+            if (resp.code != 0) {
+                return
+            }
+
+            for (item of resp.result.items) {
+                const option = new Option(item.title, item.id, true, true)
+                _this.append(option)
+            }
+
+            console.log($(this).val())
+            _this.trigger('change')
+        })
+    }
+}
+
 function newSelec2Custom(id, placeholder, data = [], selections = []) {
     const _id = $(`#${id}`)
     _id.select2({

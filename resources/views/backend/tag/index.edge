@@ -52,7 +52,7 @@
                                                 <td>{{ row.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</td>
                                                 <td>
                                                     <label class="d-block mb-0" for="chk-ani">
-                                                        <input onclick="onChangeStatus(this, '{{ route('backend.tag.status-update', {id: row.id}) }}')" {{ row.status == 1 ? 'checked' : '' }} class="checkbox_animated" value="{{ row.status }}"  type="checkbox">
+                                                        <input onclick="onChangeStatus(this, '{{ route('backend.tag.status', {id: row.id}) }}')" {{ row.status == 1 ? 'checked' : '' }} class="checkbox_animated" value="{{ row.status }}"  type="checkbox">
                                                     </label>
                                                 </td>
                                                 <td>

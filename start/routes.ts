@@ -47,10 +47,16 @@ Route.group(() => {
     Route.get('/media/list', 'Backend/MediaController.list').as('media.list')
     Route.resource('/media', 'Backend/MediaController')
 
-    Route.put('/tag/:id/status', 'Backend/TagController.statusUpdate').as('tag.status-update')
+    Route.put('/tag/:id/status', 'Backend/TagController.status').as('tag.status')
     Route.resource('/tag', 'Backend/TagController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
     
-    Route.put('/category/:id/status', 'Backend/CategoryController.statusUpdate').as('category.status-update')
+    Route.put('/category/:id/status', 'Backend/CategoryController.status').as('category.status')
     Route.resource('/category', 'Backend/CategoryController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
 
 }).prefix('/any-admin').as('backend').middleware('auth')
+
+
+Route.group(()=>{
+    Route.get('tag', 'Backend/TagController.apiList').as('tag.list')
+    Route.get('category', 'Backend/CategoryController.apiList').as('category.list')
+}).prefix('any-api/v1').as('api')

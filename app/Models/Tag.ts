@@ -35,4 +35,5 @@ export default class Tag extends BaseModel {
   public updatedAt: DateTime
 
   public static statusDelete = -1
+  public static statusPublish = 1
 }

@@ -7,7 +7,7 @@ import Common from 'App/Pkg/Common'
 import Client from 'App/Pkg/Client'
 
 export default class CategoryController {
-  public async index({ request, auth, view }: HttpContextContract) {
+  async index({ request, auth, view }: HttpContextContract) {
     const limit = 10
     const page = request.input('page', 1)
     const categories = await Category.query()
@@ -21,14 +21,14 @@ export default class CategoryController {
     })
   }
 
-  public async create({ view }: HttpContextContract) {
+  async create({ view }: HttpContextContract) {
     return view.render('backend.tag.curd', {
       title: 'Create a new category',
       formActionURL: Route.makeUrl('backend.category.store'),
     })
   }
 
-  public async store({ request, response, session, auth }: HttpContextContract) {
+  async store({ request, response, session, auth }: HttpContextContract) {
     const payload = await request.validate(CategoryValidator)
     try {
       await Category.create({
@@ -46,7 +46,7 @@ export default class CategoryController {
     return response.redirect().toRoute('backend.category.index')
   }
 
-  public async edit({ request, response, auth, view }: HttpContextContract) {
+  async edit({ request, response, auth, view }: HttpContextContract) {
     const id = request.param('id')
     if (!id) {
       return response.redirect().toRoute('backend.category.index')
@@ -64,7 +64,7 @@ export default class CategoryController {
     })
   }
 
-  public async update({ request, response, auth, session }: HttpContextContract) {
+  async update({ request, response, auth, session }: HttpContextContract) {
     const id = request.param('id')
     if (!id) {
       return response.redirect().toRoute('backend.tag.index')
@@ -89,7 +89,7 @@ export default class CategoryController {
     return response.redirect().toRoute('backend.category.index')
   }
 
-  public async destroy({ request, response, auth }: HttpContextContract) {
+  async destroy({ request, response, auth }: HttpContextContract) {
     const id = request.param('id')
     if (!id) {
       return response.redirect().toRoute('backend.category.index')
@@ -109,7 +109,7 @@ export default class CategoryController {
     return response.json(Client.NewRespJSON(Client.codeOk, Client.messageOk, { id: id }))
   }
 
-  public async statusUpdate({ request, response, auth }: HttpContextContract) {
+  async status({ request, response, auth }: HttpContextContract) {
     const id = request.param('id')
     if (!id) {
       return response.redirect().toRoute('backend.category.index')
@@ -126,5 +126,28 @@ export default class CategoryController {
       return response.json(Client.NewRespJSON(Client.codeError, Client.messageError))
     }
     return response.json(Client.NewRespJSON(Client.codeOk, Client.messageOk, { id: id }))
+  }
+
+  async apiList({ request, response }: HttpContextContract) {
+    const search = request.input('search')
+    const query = Category.query()
+    if (search) {
+      query.whereILike('title', `%${search}%`)
+    }
+
+    const ids = request.input('ids')
+    if (ids) {
+      query.whereIn('id', ids.split(','))
+    }
+
+    const listTags = await query
+      .select('id', 'title')
+      .where('status', Category.statusPublish)
+    return response.json(
+      Client.NewRespJSON(
+        Client.codeOk,
+        Client.messageOk,
+        { items: listTags || [] },
+      ))
   }
 }
