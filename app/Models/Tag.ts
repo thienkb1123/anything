@@ -12,12 +12,12 @@ export default class Tag extends BaseModel {
   public author: number
 
   @column()
-  public title: string
+  public name: string
 
   @column()
   @slugify({
     strategy: 'dbIncrement',
-    fields: ['title'],
+    fields: ['name'],
     allowUpdates: false,
   })
   public slug: string

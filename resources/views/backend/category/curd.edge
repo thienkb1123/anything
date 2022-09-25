@@ -24,11 +24,11 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3 row">
-                                        <label class="col-sm-3 col-form-label">Title</label>
+                                        <label class="col-sm-3 col-form-label">Name</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control {{ flashMessages.has('errors.title') ? 'is-invalid' : '' }}" name="title" type="text" value="{{ flashMessages.get('title', tag && tag.title || '') }}" required>
-                                            @if (flashMessages.has('errors.title'))
-                                                <div class="invalid-feedback">{{ flashMessages.get('errors.title') }}</div>
+                                            <input class="form-control {{ flashMessages.has('errors.name') ? 'is-invalid' : '' }}" name="name" type="text" value="{{ flashMessages.get('name', tag && tag.title || '') }}" required>
+                                            @if (flashMessages.has('errors.name'))
+                                                <div class="invalid-feedback">{{ flashMessages.get('errors.name') }}</div>
                                             @endif
                                         </div>
                                     </div>

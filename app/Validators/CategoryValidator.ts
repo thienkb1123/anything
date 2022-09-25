@@ -24,7 +24,7 @@ export default class CategoryValidator {
    *    ```
    */
   public schema = schema.create({
-    title: schema.string(),
+    name: schema.string(),
   })
 
   /**

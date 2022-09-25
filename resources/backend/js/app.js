@@ -4,7 +4,7 @@ function swalAlert(title, message, type, redirectURL) {
         text: message,
         icon: type,
         html: true
-    }).then(function () {
+    }).then(function() {
         if (redirectURL) {
             window.location = redirectURL
         }
@@ -27,16 +27,16 @@ function updateSelect2Custom(id, data = [], placeholder) {
     _id.trigger('change')
 }
 
-$.fn.select2UpdatePlaceholder = function (newPlaceholder) {
+$.fn.select2UpdatePlaceholder = function(newPlaceholder) {
     var $select2 = $(this).data('select2');
     $select2.selection.placeholder.text = newPlaceholder;
     return $select2.$container.find('.select2-selection__placeholder').text(newPlaceholder);
 };
 
 $("#any-select2-site").select2({
-    placeholder: "Select site create a post",
-})
-    .on('change', function (e) {
+        placeholder: "Select site create a post",
+    })
+    .on('change', function(e) {
 
         const siteAddr = $("#any-select2-site option:selected").text();
         if (!siteAddr) {
@@ -59,7 +59,7 @@ $("#any-select2-site").select2({
             dataType: 'json'
         };
 
-        $.ajax(settings).done(function (response) {
+        $.ajax(settings).done(function(response) {
             if (response.code != 0) {
                 swalAlert('Error', "Getting tags and categories an error occurred. Refresh the page and let's try", 'error')
                 return
@@ -88,27 +88,28 @@ $("#any-select2-site").select2({
 
 $(".any-select2-basic").select2()
 
-$.fn.anySelect = function (opts) {
+$.fn.anySelect = function(opts) {
     $(this).select2({
         placeholder: opts.placeholder,
         ajax: {
             url: opts.url,
             dataType: 'json',
             type: "GET",
-            data: function (params) {
+            data: function(params) {
                 var query = {
                     search: params.term,
                 }
                 return query;
             },
-            processResults: function (resp) {
+            processResults: function(resp) {
                 if (resp.code != 0) {
                     return
                 }
                 return {
-                    results: $.map(resp.result.items, function (item) {
+                    results: $.map(resp.result.items, function(item) {
+                        console.log(item)
                         return {
-                            text: item.title,
+                            text: item.name,
                             id: item.id,
                         }
                     })
@@ -118,18 +119,18 @@ $.fn.anySelect = function (opts) {
     })
 
     const _this = $(this)
-    if (opts.selections && opts.selections.length) {
+    if (opts.selections) {
         $.ajax({
             type: 'GET',
             url: opts.url,
-            data: { ids: opts.selections.toString() }
-        }).then(function (resp) {
+            data: { ids: opts.selections }
+        }).then(function(resp) {
             if (resp.code != 0) {
                 return
             }
 
             for (item of resp.result.items) {
-                const option = new Option(item.title, item.id, true, true)
+                const option = new Option(item.name, item.id, true, true)
                 _this.append(option)
             }
 
@@ -165,9 +166,9 @@ function onDelete(url) {
                 dataType: 'json'
             };
 
-            $.ajax(settings).done(function (response) {
+            $.ajax(settings).done(function(response) {
                 if (response.code == 0) {
-                    $(`#row-${response.result.id}`).fadeOut(300, function () { $(this).remove() })
+                    $(`#row-${response.result.id}`).fadeOut(300, function() { $(this).remove() })
                     notify('Delete success')
                     return
                 }
@@ -188,7 +189,7 @@ function onChangeStatus(obj, url) {
         dataType: 'json'
     };
 
-    $.ajax(settings).done(function (response) {
+    $.ajax(settings).done(function(response) {
         let msg = 'Update status success'
         if (response.code != 0) {
             msg = 'Update status fail'
@@ -204,28 +205,27 @@ function notify(msg = '') {
     }
     $.notify({
         message: msg
-    },
-        {
-            type: 'primary',
-            allow_dismiss: false,
-            newest_on_top: false,
-            mouse_over: false,
-            showProgressbar: false,
-            spacing: 10,
-            timer: 1000,
-            placement: {
-                from: 'top',
-                align: 'right'
-            },
-            offset: {
-                x: 30,
-                y: 30
-            },
-            delay: 1000,
-            z_index: 10000,
-            animate: {
-                enter: 'animated bounce',
-                exit: 'animated bounce'
-            }
-        });
+    }, {
+        type: 'primary',
+        allow_dismiss: false,
+        newest_on_top: false,
+        mouse_over: false,
+        showProgressbar: false,
+        spacing: 10,
+        timer: 1000,
+        placement: {
+            from: 'top',
+            align: 'right'
+        },
+        offset: {
+            x: 30,
+            y: 30
+        },
+        delay: 1000,
+        z_index: 10000,
+        animate: {
+            enter: 'animated bounce',
+            exit: 'animated bounce'
+        }
+    });
 }

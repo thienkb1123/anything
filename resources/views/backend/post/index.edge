@@ -18,7 +18,7 @@
                     <div class="social-tab custom-bookmark">
                         <ul>
                             <li>
-                                <a class="nav-link active" href="{{ route('backend.post-tool.config.create') }}">
+                                <a class="nav-link active" href="{{ route('backend.post.create') }}">
                                     <i data-feather="plus-circle"></i>Add New
                                 </a>
                             </li>
@@ -39,7 +39,8 @@
                             <table class="table">
                                 <thead class="table-primary">
                                     <tr class="dashed">
-                                        <th scope="col">WP Site</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Slug</th>
                                         <th class="any-w-15" scope="col-1">CreatedAt</th>
                                         <th class="any-w-15" scope="col-1">Status</th>
                                         <th class="any-w-15" scope="col">Action</th>
@@ -47,21 +48,22 @@
                                 </thead>
                                 <tbody>
                                     @if(posts.length)
-                                        @each(config in posts)
-                                            <tr class="dashed" id="row-{{ config.id }}">
-                                                <td>{{ config.site }}</td>
-                                                <td>{{ config.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</td>
+                                        @each(row in posts)
+                                            <tr class="dashed" id="row-{{ row.id }}">
+                                                <td>{{ row.title }}</td>
+                                                <td>{{ row.slug }}</td>
+                                                <td>{{ row.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</td>
                                                 <td>
                                                     <div class="any-checkbox any-checkbox-styled">
                                                         <label>
-                                                            <input type="checkbox" {{ config.status == 1 ? 'checked' : '' }} class="any-checkbox-switch" disabled>
+                                                            <input type="checkbox" {{ row.status == 1 ? 'checked' : '' }} class="any-checkbox-switch" disabled>
                                                             <span></span>
                                                         </label>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button href="javascript:void(0)" onclick="confirmDelete('{{ route('backend.post-tool.config.destroy', {id: config.id}, {qs: {_method: 'DELETE'}}) }}')" class="btn btn-danger btn-xs" type="button">Delete</button>
-                                                    <a href="{{ route('backend.post-tool.config.update', {id: config.id}) }}" class="btn btn-primary btn-xs" type="button">Edit</a>
+                                                    <button href="javascript:void(0)" onclick="onDelete('{{ route('backend.post.destroy', {id: row.id}, {qs: {_method: 'DELETE'}}) }}')" class="btn btn-danger btn-xs" type="button">Delete</button>
+                                                    <a href="{{ route('backend.post.edit', {id: row.id}) }}" class="btn btn-primary btn-xs" type="button">Edit</a>
                                                 </td>
                                             </tr>
                                         @endeach

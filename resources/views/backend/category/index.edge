@@ -38,7 +38,7 @@
                             <table class="table">
                                 <thead class="table-primary">
                                     <tr class="dashed">
-                                        <th scope="col">Title</th>
+                                        <th scope="col">Name</th>
                                         <th class="any-w-15" scope="col-1">CreatedAt</th>
                                         <th class="any-w-15" scope="col-1">Status</th>
                                         <th class="any-w-15" scope="col">Action</th>
@@ -48,7 +48,7 @@
                                     @if(categories.length)
                                         @each(row in categories)
                                             <tr class="dashed" id="row-{{ row.id }}">
-                                                <td>{{ row.title }}</td>
+                                                <td>{{ row.name }}</td>
                                                 <td>{{ row.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</td>
                                                 <td>
                                                     <label class="d-block mb-0" for="chk-ani">

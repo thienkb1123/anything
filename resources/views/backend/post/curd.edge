@@ -15,6 +15,7 @@
             </div>
         </div>
     </div>
+
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <form action="{{ formActionURL }}" method="POST" class="form-submit">
@@ -29,31 +30,30 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="col-form-label">Title</label>
-                                <input class="form-control {{ flashMessages.has('errors.title') ? 'is-invalid' : '' }}" name="title" type="text" value="">
+                                <input class="form-control {{ flashMessages.has('errors.title') ? 'is-invalid' : '' }}" name="title" type="text" value="{{ flashMessages.get('title') || post && post.title || '' }}">
                                 @if (flashMessages.has('errors.title'))
                                     <div class="invalid-feedback">{{ flashMessages.get('errors.title') }}</div>
                                 @endif
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label">Slug</label>
-                                <input class="form-control" name="slug" type="text" value="">
+                                <input class="form-control" name="slug" type="text" value="{{ flashMessages.get('slug') || post && post.slug || '' }}">
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label">Summary</label>
-                                <textarea class="form-control {{ flashMessages.has('errors.summary') ? 'is-invalid' : '' }}" name="summary" rows="4"></textarea>
+                                <textarea class="form-control {{ flashMessages.has('errors.summary') ? 'is-invalid' : '' }}" name="summary" rows="4">{{ flashMessages.get('summary') || post && post.summary || '' }}</textarea>
                                 @if (flashMessages.has('errors.summary'))
                                     <div class="invalid-feedback">{{ flashMessages.get('errors.summary') }}</div>
                                 @endif
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label">Content</label>
-                                <textarea class="form-control {{ flashMessages.has('errors.content') ? 'is-invalid' : '' }}" id="content" name="content" cols="2" rows="2"></textarea>
+                                <textarea class="form-control {{ flashMessages.has('errors.content') ? 'is-invalid' : '' }}" id="content" name="content" cols="2" rows="2">{{ flashMessages.get('content') || post && post.content || '' }}</textarea>
                                 @if (flashMessages.has('errors.content'))
                                     <div class="invalid-feedback">{{ flashMessages.get('errors.content') }}</div>
                                 @endif
                             </div>
                         </div>
-
                         <div class="card-footer text-end">
                             <button class="btn btn-primary" type="submit">Submit</button>
                             <a href="{{ route('backend.post.index') }}" class="btn btn-light"
@@ -81,13 +81,13 @@
                                                 <div class="card-body animate-chk">
                                                     <div class="checkbox-animated">
                                                         <label class="d-block" for="chk-ani">
-                                                            <input class="checkbox_animated" {{ flashMessages.get('status') == 1 ? 'checked': '' }} name="status" type="radio" value="1"> Publish
+                                                            <input class="checkbox_animated" {{ flashMessages.get('status', post && post.status) == 1 ? 'checked': '' }} checked name="status" type="radio" value="1"> Publish
                                                         </label>
                                                         <label class="d-block" for="chk-ani1">
-                                                            <input class="checkbox_animated" name="status" type="radio" value="2"> Draft
+                                                            <input class="checkbox_animated" {{ flashMessages.get('status', post && post.status) == 2 ? 'checked': '' }} name="status" type="radio" value="2"> Draft
                                                         </label>
                                                         <label class="d-block" for="chk-ani2">
-                                                            <input class="checkbox_animated" name="status" type="radio" value="0"> Private
+                                                            <input class="checkbox_animated" {{ flashMessages.get('status', post && post.status) == 0 ? 'checked': '' }} name="status" type="radio" value="0"> Private
                                                         </label>
                                                     </div>
                                                 </div>
@@ -108,7 +108,6 @@
                                                 data-parent="#accordion">
                                                 <div class="card-body filter-cards-view animate-chk">
                                                     <select id="any-select2-category" multiple="multiple" name="categories[]">
-                                                        
                                                     </select>
                                                 </div>
                                             </div>
@@ -128,7 +127,6 @@
                                                 data-parent="#accordion">
                                                 <div class="card-body filter-cards-view animate-chk">
                                                     <select id="any-select2-tag" multiple="multiple" name="tags[]">
-                                                       
                                                     </select>
                                                 </div>
                                             </div>
@@ -181,13 +179,13 @@
 $('#any-select2-category').anySelect({
     placeholder: 'Select categories',
     url: "{{ route('api.category.list') }}",
-    selections: []
+    selections: "{{ flashMessages.get('categories') || post && post.$extras && post.$extras.categoriesID || '' }}"
 })
 
 $('#any-select2-tag').anySelect({
     placeholder: 'Select tags',
     url: "{{ route('api.tag.list') }}",
-    selections: ['2', '4']
+    selections: "{{ flashMessages.get('tags') || post && post.$extras && post.$extras.tagsID || '' }}"
 })
 </script>
 @end

@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 
 export default class Post extends BaseModel {
   public static table = 'post'
@@ -14,6 +15,11 @@ export default class Post extends BaseModel {
   public title: string
 
   @column()
+  @slugify({
+    strategy: 'dbIncrement',
+    fields: ['title'],
+    allowUpdates: false,
+  })
   public slug: string
 
   @column()
@@ -30,4 +36,7 @@ export default class Post extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  public static statusDelete = -1
+  public static statusPublish = 1
 }

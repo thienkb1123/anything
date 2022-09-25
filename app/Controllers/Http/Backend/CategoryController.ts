@@ -33,7 +33,7 @@ export default class CategoryController {
     try {
       await Category.create({
         author: auth.user?.id as number,
-        title: payload.title,
+        name: payload.name,
         slug: request.input('slug', ''),
         content: request.input('content', ''),
         status: request.input('status') as number,
@@ -76,7 +76,7 @@ export default class CategoryController {
         .where('id', id)
         .where('author', auth.user?.id)
         .update({
-          title: payload.title,
+          name: payload.name,
           slug: request.input('slug', ''),
           content: request.input('content', ''),
           status: request.input('status') as number,
@@ -132,7 +132,7 @@ export default class CategoryController {
     const search = request.input('search')
     const query = Category.query()
     if (search) {
-      query.whereILike('title', `%${search}%`)
+      query.whereILike('name', `%${search}%`)
     }
 
     const ids = request.input('ids')
@@ -141,7 +141,7 @@ export default class CategoryController {
     }
 
     const listTags = await query
-      .select('id', 'title')
+      .select('id', 'name')
       .where('status', Category.statusPublish)
     return response.json(
       Client.NewRespJSON(

@@ -26,9 +26,6 @@ export default class PostValidator {
    */
   public schema = schema.create({
     title: schema.string(),
-    slug: schema.string({}, [
-      rules.unique({ table: 'post', column: 'slug' })
-    ]),
     summary: schema.string(),
     content: schema.string()
   })
