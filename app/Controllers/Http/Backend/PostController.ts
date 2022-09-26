@@ -8,6 +8,7 @@ import Client from 'App/Pkg/Client'
 import Post from 'App/Models/Post'
 import PostTag from 'App/Models/PostTag'
 import PostCategory from 'App/Models/PostCategory'
+import PostMedia from 'App/Models/PostMedia'
 
 export default class PostController {
     async index({ request, auth, view }: HttpContextContract) {
@@ -19,12 +20,12 @@ export default class PostController {
             .paginate(page, limit)
 
         return view.render('backend.post.index', {
-            title: 'Tag',
+            title: 'List posts',
             posts: posts
         })
     }
 
-    async create({ request, view }: HttpContextContract) {
+    async create({ view }: HttpContextContract) {
         return view.render('backend.post.curd', {
             title: 'Create a post',
             formActionURL: Route.makeUrl('backend.post.store'),
@@ -43,8 +44,14 @@ export default class PostController {
                 status: request.input('status') as number,
             })
 
-            this.setPostTags(post.id, request.input('tags'))
-            this.setPostCategories(post.id, request.input('categories'))
+            const tags = request.input('tags') || []
+            this.setPostTags(post.id, tags)
+
+            const categories = request.input('categories') || []
+            this.setPostCategories(post.id, categories)
+
+            const mediaID = Number(request.input('mediaID'))
+            this.setPostMedia(post.id, mediaID)
 
             session.flash('alert', Alert.create('Create successfully', Alert.success))
         } catch (error) {
@@ -71,10 +78,10 @@ export default class PostController {
                 Database.raw('GROUP_CONCAT(post_tag.tag_id) as tagsID'),
                 Database.raw('GROUP_CONCAT(post_category.category_id) as categoriesID')
             )
-            .where('id', id)
-            .join('post_tag', 'post_tag.post_id', '=', 'post.id')
-            .join('post_category', 'post_category.post_id', '=', 'post.id')
-            .where('author', auth.user?.id)
+            .where('post.id', id)
+            .leftJoin('post_tag', 'post_tag.post_id', '=', 'post.id')
+            .leftJoin('post_category', 'post_category.post_id', '=', 'post.id')
+            .where('post.author', auth.user?.id)
             .firstOrFail()
 
         return view.render('backend.post.curd', {
@@ -103,8 +110,14 @@ export default class PostController {
                     status: request.input('status') as number,
                 })
 
-            this.setPostTags(id, request.input('tags'))
-            this.setPostCategories(id, request.input('categories'))
+            const tags = request.input('tags') || []
+            this.setPostTags(id, tags)
+
+            const categories = request.input('categories') || []
+            this.setPostCategories(id, categories)
+
+            const mediaID = Number(request.input('mediaID'))
+            this.setPostMedia(id, mediaID)
 
             session.flash('alert', Alert.create('Edit successfully', Alert.success))
         } catch (error) {
@@ -136,53 +149,68 @@ export default class PostController {
     }
 
     async setPostTags(postID: number, tags: string[]) {
-        if (!tags) {
-            return false
-        }
-
         const postTags = await PostTag.query()
             .select(Database.raw('GROUP_CONCAT(tag_id) as tagsID'))
             .where('post_id', postID)
             .firstOrFail()
 
-
-        const oldTags = postTags.$extras.tagsID.split(',')
+        const oldTags = String(postTags?.$extras.tagsID).split(',')
         const tagsDelete = oldTags.filter(val => !tags.includes(val));
-        if (tagsDelete) {
+        if (tagsDelete.length) {
             await PostTag.query().where('post_id', postID).whereIn('tag_id', tagsDelete).delete()
         }
 
         for (const tag of tags) {
-            const postTag = new PostTag()
-            postTag.postID = postID
-            postTag.tagID = Number(tag)
-            await PostTag.updateOrCreate({ postID: postID, tagID: Number(tag) }, postTag)
+            await PostTag.updateOrCreate(
+                { postID: postID, tagID: Number(tag) },
+                { postID: postID, tagID: Number(tag) }
+            )
         }
     }
 
     async setPostCategories(postID: number, categories: string[]) {
-        if (!categories) {
-            return false
-        }
-
         const postCategories = await PostCategory.query()
             .select(Database.raw('GROUP_CONCAT(category_id) as categoriesID'))
             .where('post_id', postID)
             .firstOrFail()
 
-        const oldCategories = postCategories.$extras.categoriesID.split(',')
+        const oldCategories = String(postCategories?.$extras.categoriesID).split(',')
         const categoriesDelete = oldCategories.filter(val => !categories.includes(val));
-        if (categoriesDelete) {
+        if (categoriesDelete.length) {
             await PostCategory.query().where('post_id', postID).whereIn('category_id', categoriesDelete).delete()
         }
 
         for (const category of categories) {
-            const postCategory = new PostCategory()
-            postCategory.postID = postID
-            postCategory.categoryID = Number(category)
-            await PostCategory.updateOrCreate({ postID: postID, categoryID: Number(category) }, postCategory)
+            console.log("category ", category, "postID", postID)
+            try {
+                await PostCategory.updateOrCreate(
+                    { postID: postID, categoryID: Number(category) },
+                    { postID: postID, categoryID: Number(category) }
+                )
+            } catch (error) {
+                console.log(error)
+            }
         }
 
         return true
+    }
+
+    async setPostMedia(postID: number, mediaID: number) {
+        console.log(mediaID)
+        if (!mediaID) {
+            return
+        }
+
+        const postMedias = await PostMedia.query()
+            .select('media_id')
+            .where('post_id', postID)
+            .firstOrFail()
+
+        console.log(postMedias)
+
+        await PostMedia.updateOrCreate(
+            { postID: postID, mediaID: mediaID },
+            { postID: postID, mediaID: mediaID }
+        )
     }
 }

@@ -145,11 +145,12 @@
                                             <div class="collapse show" id="avatar" aria-labelledby="avatar"
                                                 data-parent="#accordion">
                                                 <div class="card-body animate-chk">
+                                                    <figure itemprop="associatedMedia" itemscope="">
+                                                        <img class="img-thumbnail" src="/media/2022/09/1664164975090-pexels-pixabay-414102.jpg" itemprop="thumbnail" alt="Image description">
+                                                    </figure>
                                                     <!-- Simple demo-->
-                                                    <button class="btn btn-outline-primary btn-set-avatar" type="button"
-                                                        data-bs-toggle="modal" data-original-title="Media"
-                                                        data-bs-target="#mediaModal">Set avatar</button>
-
+                                                    <input type="hidden" id="mediaID" name="mediaID" value="">
+                                                    <button class="btn btn-outline-primary btn-set-avatar" type="button" id="mediaBtn">Set avatar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,10 +172,10 @@
 @section('jsPlugin')
 @!component('backend/common/ckediter')
 <script src="{{ asset('assets/backend/viho/js/dropzone/dropzone.js') }}"></script>
-<script src="{{ asset('assets/backend/any/dropzone-script.js') }}"></script>
 @end
 
 @section('js')
+<script src="{{ asset('assets/backend/any/dropzone-script.js') }}"></script>
 <script>
 $('#any-select2-category').anySelect({
     placeholder: 'Select categories',

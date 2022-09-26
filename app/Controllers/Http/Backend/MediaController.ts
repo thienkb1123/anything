@@ -2,22 +2,23 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
 import Media from 'App/Models/Media'
 import Common from 'App/Pkg/Common'
+import Client from 'App/Pkg/Client'
 
 export default class MediaController {
 
-    public async index({ request, view }: HttpContextContract) {
+    async index({ request, view }: HttpContextContract) {
         return view.render('backend.post.index', {
             posts: []
         })
     }
 
-    public async create({ request, view }: HttpContextContract) {
+    async create({ request, view }: HttpContextContract) {
         return view.render('backend.post.curd', {
             title: 'Create a post',
         })
     }
 
-    public async store({ request, response }: HttpContextContract) {
+    async store({ request, response }: HttpContextContract) {
         const files = request.files('files', {
             size: '5mb',
             extnames: ['jpg', 'jpg', 'gif', 'png'],
@@ -52,21 +53,27 @@ export default class MediaController {
         return response.json(files)
     }
 
-    public async show({ request, view }: HttpContextContract) {
+    async show({ request, view }: HttpContextContract) {
 
         return view.render('backend.post.curd')
     }
 
-    public async list({ request, response }: HttpContextContract) {
-        const list = await Media.query().orderBy('created_at', 'desc').limit(20)
-        return response.json({
-            code: 0,
-            message: '',
-            result: list
-        })
+    async list({ request, response }: HttpContextContract) {
+        const list = await Media.query()
+            .select('id', 'name', 'path', 'size', 'created_at')
+            .orderBy('created_at', 'desc')
+            .limit(20)
+
+            console.log(list)
+
+        return response.json(Client.NewRespJSON(
+            Client.codeOk,
+            Client.messageOk,
+            { items: list || [] },
+        ))
     }
 
-    public async destroy({ request }: HttpContextContract) {
+    async destroy({ request }: HttpContextContract) {
 
     }
 }

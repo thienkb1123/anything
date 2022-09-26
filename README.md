@@ -33,5 +33,4 @@ $ node ace list:routes
 # Validator classes
 $ node ace make:validator CreateUser
 
-
 ```

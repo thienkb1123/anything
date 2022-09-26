@@ -9,78 +9,24 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header pb-0">
-                                    <h5>Multi File Upload</h5>
-                                </div>
-                                <div class="card-body">
-                                    <form class="dropzone dropzone-primary" id="multiFileUpload" action="/upload.php">
-                                        <div class="dz-message needsclick"><i class="icon-cloud-up"></i>
-                                            <h6>Drop files here or click to upload.</h6><span
-                                                class="note needsclick">(This is just a demo dropzone. Selected files
-                                                are <strong>not</strong> actually uploaded.)</span>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-9 col-md-12 box-col-12">
+                        <div class="col-sm-12 col-md-12 box-col-12">
                             <div class="file-content">
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="media">
+                                            <div class="media-body text-end">
+                                                <div class="btn btn-outline-primary ms-2 dropzone" id="multiFileUpload">
+                                                    <i data-feather="upload"></i>Upload
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="card-body file-manager">
                                         <h4>All Files</h4>
-                                        <div class="gallery my-gallery card-body row" itemscope="" id="list-files">
-                                            <figure class="col-xl-2 col-md-2 xl-33" itemprop="associatedMedia" itemscope="">
-                                                <img class="img-thumbnail" src="/media/2022/09/1663658614009-pexels-pixabay-414102.jpg" itemprop="thumbnail" alt="Image description">
-                                                <figcaption itemprop="caption description">
-                                                    <h6>1663658614009-pexels-pixabay-414102.jpg</h6>
-                                                    <p class="mb-1">2.0 MB</p>
-                                                    <p> <b>Created at : </b> 2022-09-20 14:23:34</p>
-                                                </figcaption>
-                                            </figure>
-
-                                            <figure class="col-xl-2 col-md-2 xl-33" itemprop="associatedMedia" itemscope="">
-                                                <img class="img-thumbnail" src="/media/2022/09/1663658614009-pexels-pixabay-414102.jpg" itemprop="thumbnail" alt="Image description">
-                                                <figcaption itemprop="caption description">
-                                                    <h6>1663658614009-pexels-pixabay-414102.jpg</h6>
-                                                    <p class="mb-1">2.0 MB</p>
-                                                    <p> <b>Created at : </b> 2022-09-20 14:23:34</p>
-                                                </figcaption>
-                                            </figure>
-
-                                            <figure class="col-xl-2 col-md-2 xl-33" itemprop="associatedMedia" itemscope="">
-                                                <img class="img-thumbnail" src="/media/2022/09/1663658614009-pexels-pixabay-414102.jpg" itemprop="thumbnail" alt="Image description">
-                                                <figcaption itemprop="caption description">
-                                                    <h6>1663658614009-pexels-pixabay-414102.jpg</h6>
-                                                    <p class="mb-1">2.0 MB</p>
-                                                    <p> <b>Created at : </b> 2022-09-20 14:23:34</p>
-                                                </figcaption>
-                                            </figure>
-
-                                            <figure class="col-xl-2 col-md-2 xl-33" itemprop="associatedMedia" itemscope="">
-                                                <img class="img-thumbnail" src="/media/2022/09/1663658614009-pexels-pixabay-414102.jpg" itemprop="thumbnail" alt="Image description">
-                                                <figcaption itemprop="caption description">
-                                                    <h6>1663658614009-pexels-pixabay-414102.jpg</h6>
-                                                    <p class="mb-1">2.0 MB</p>
-                                                    <p> <b>Created at : </b> 2022-09-20 14:23:34</p>
-                                                </figcaption>
-                                            </figure>
-
-                                            <figure class="col-xl-2 col-md-2 xl-33" itemprop="associatedMedia" itemscope="">
-                                                <img class="img-thumbnail" src="/media/2022/09/1663658614009-pexels-pixabay-414102.jpg" itemprop="thumbnail" alt="Image description">
-                                                <figcaption itemprop="caption description">
-                                                    <h6>1663658614009-pexels-pixabay-414102.jpg</h6>
-                                                    <p class="mb-1">2.0 MB</p>
-                                                    <p> <b>Created at : </b> 2022-09-20 14:23:34</p>
-                                                </figcaption>
-                                            </figure>
+                                        <ul class="files" id="list-files">
                                             
-                                          </div>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +36,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button>
-                <button class="btn btn-secondary" type="button">Set avatar</button>
+                <button class="btn btn-secondary" onclick="onSetAvatar()" type="button">Set avatar</button>
             </div>
         </div>
     </div>
