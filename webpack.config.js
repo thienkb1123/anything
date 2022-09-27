@@ -71,6 +71,14 @@ Encore.copyFiles([
   {
     from: './resources/backend/css',
     to: 'backend/any/[path][name].[ext]'
+  },
+  {
+    from: './resources/frontend/css',
+    to: '[path][name].[ext]'
+  },
+  {
+    from: './resources/frontend/js',
+    to: '[path][name].[ext]'
   }
 ])
 
