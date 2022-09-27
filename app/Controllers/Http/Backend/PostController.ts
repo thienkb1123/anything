@@ -75,12 +75,16 @@ export default class PostController {
                 'post.summary',
                 'post.content',
                 'post.status',
+                'media.id as mediaID',
+                'media.path as mediaPath',
                 Database.raw('GROUP_CONCAT(post_tag.tag_id) as tagsID'),
                 Database.raw('GROUP_CONCAT(post_category.category_id) as categoriesID')
             )
             .where('post.id', id)
             .leftJoin('post_tag', 'post_tag.post_id', '=', 'post.id')
             .leftJoin('post_category', 'post_category.post_id', '=', 'post.id')
+            .leftJoin('post_media', 'post_media.post_id', '=', 'post.id')
+            .leftJoin('media', 'media.id', '=', 'post_media.media_id')
             .where('post.author', auth.user?.id)
             .firstOrFail()
 
@@ -196,17 +200,14 @@ export default class PostController {
     }
 
     async setPostMedia(postID: number, mediaID: number) {
-        console.log(mediaID)
-        if (!mediaID) {
-            return
-        }
-
-        const postMedias = await PostMedia.query()
+        const postMedia = await PostMedia.query()
             .select('media_id')
             .where('post_id', postID)
-            .firstOrFail()
+            .first()
 
-        console.log(postMedias)
+        if (postMedia && postMedia.mediaID != mediaID) {
+            await PostMedia.query().where('post_id', postID).delete()
+        }
 
         await PostMedia.updateOrCreate(
             { postID: postID, mediaID: mediaID },

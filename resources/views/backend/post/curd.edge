@@ -145,12 +145,20 @@
                                             <div class="collapse show" id="avatar" aria-labelledby="avatar"
                                                 data-parent="#accordion">
                                                 <div class="card-body animate-chk">
-                                                    <figure itemprop="associatedMedia" itemscope="">
-                                                        <img class="img-thumbnail" src="/media/2022/09/1664164975090-pexels-pixabay-414102.jpg" itemprop="thumbnail" alt="Image description">
-                                                    </figure>
-                                                    <!-- Simple demo-->
-                                                    <input type="hidden" id="mediaID" name="mediaID" value="">
-                                                    <button class="btn btn-outline-primary btn-set-avatar" type="button" id="mediaBtn">Set avatar</button>
+                                                    <div class="any-gallery" id="any-gallery">
+                                                        @if(post && post.$extras && post.$extras.mediaPath)
+                                                        <figure itemprop="associatedMedia">
+                                                            <img class="img-thumbnail" src="{{ post.$extras.mediaPath }}" itemprop="thumbnail" alt="Image description">
+                                                        </figure>
+                                                        @end
+                                                    </div>
+                                                   
+                                                    <input type="hidden" id="mediaID" name="mediaID" value="{{ flashMessages.get('mediaID') || post && post.$extras && post.$extras.mediaID || 0 }}">
+                                                    @if(post && post.$extras && post.$extras.mediaPath)
+                                                        <button class="btn btn-outline-primary btn-set-avatar" type="button" id="mediaBtn">Change avatar</button>
+                                                    @else
+                                                        <button class="btn btn-outline-primary btn-set-avatar" type="button" id="mediaBtn">Add avatar</button>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

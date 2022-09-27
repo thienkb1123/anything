@@ -23,7 +23,7 @@ var DropzoneInit = function () {
 }();
 DropzoneInit.init()
 
-function viewItems() {
+function viewItems(mediaID) {
     $.ajax({
         url: "/any-admin/media/list",
         type: 'GET',
@@ -36,7 +36,7 @@ function viewItems() {
             let tempalte = ''
             for (row of res.result.items) {
                 tempalte += `
-                    <li class="file-box" data-id="${row.id}" data-path="${row.path}">
+                    <li class="file-box${mediaID === row.id ? ' active' : ''}" data-id="${row.id}" data-path="${row.path}">
                         <div class="file-top">
                             <img src="${row.path}" alt="${row.name}">
                         </div>
@@ -54,12 +54,23 @@ function viewItems() {
     });
 }
 
+
+/**
+ * Handler set media to form-data
+ */
 function onSetAvatar() {
     const id = $('.file-box.active').attr('data-id');
-    $('#mediaID').val(id)
-    $('#mediaModal').modal('hide')
-}
+    $('input[name="mediaID"]').val(id)
 
+    const path = $('.file-box.active').attr('data-path');
+    $('#any-gallery').html(`
+        <figure itemprop="associatedMedia">
+            <img class="img-thumbnail" src="${path}" itemprop="thumbnail" alt="Image description">
+        </figure>
+    `)
+
+    $('#mediaModal').modal('hide');
+}
 
 /**
  * Handler media
@@ -69,12 +80,15 @@ function onSetAvatar() {
 $(document).ready(function () {
     $('#mediaBtn').on('click', function () {
         $('#mediaModal').modal('toggle')
-        viewItems()
+
+
+        const mediaID = $('input[name="mediaID"]').val()
+        viewItems(mediaID)
     });
 
     $('body').on('click', '.file-box', function (e) {
         $(this).toggleClass('active', 1000).siblings().removeClass('active');
-        
+
     })
 });
 
