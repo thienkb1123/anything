@@ -22,6 +22,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 
 Route.get('/', 'Frontend/HomeController.index')
+Route.get('/detail', 'Frontend/HomeController.detail')
 
 
 // Admin
