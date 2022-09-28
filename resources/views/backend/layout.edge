@@ -125,10 +125,19 @@
                                     </li>
                                     <li class="dropdown">
                                         <a class="nav-link menu-title" href="javascript:void(0)">
+                                        <i data-feather="home"></i><span>Menu</span></a>
+                                        <ul class="nav-submenu menu-content">
+                                            <li><a href="{{ route('backend.menu.index') }}">List</a></li>
+                                            <li><a href="{{ route('backend.menu.create') }}">Add new</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a class="nav-link menu-title" href="javascript:void(0)">
                                         <i data-feather="home"></i><span>Post</span></a>
                                         <ul class="nav-submenu menu-content">
-                                            <li><a href="{{ route('backend.post.index') }}">List Post</a></li>
-                                            <li><a href="{{ route('backend.post.create') }}">Add new Post</a></li>
+                                            <li><a href="{{ route('backend.post.index') }}">List</a></li>
+                                            <li><a href="{{ route('backend.post.create') }}">Add new</a></li>
                                             <li>
                                                 <a class="submenu-title" href="javascript:void(0)">
                                                     Tag

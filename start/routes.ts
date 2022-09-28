@@ -54,6 +54,9 @@ Route.group(() => {
     Route.put('/category/:id/status', 'Backend/CategoryController.status').as('category.status')
     Route.resource('/category', 'Backend/CategoryController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
 
+    Route.put('/menu/:id/status', 'Backend/MenuController.status').as('menu.status')
+    Route.resource('/menu', 'Backend/MenuController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
+
 }).prefix('/any-admin').as('backend').middleware('auth')
 
 

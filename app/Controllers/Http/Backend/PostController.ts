@@ -152,6 +152,25 @@ export default class PostController {
         return response.json(Client.NewRespJSON(Client.codeOk, Client.messageOk, { id: id }))
     }
 
+    async status({ request, response, auth }: HttpContextContract) {
+        const id = request.param('id')
+        if (!id) {
+            return response.redirect().toRoute('backend.post.index')
+        }
+        try {
+            await Post.query()
+                .where('id', id)
+                .where('author', auth.user?.id)
+                .update({
+                    status: Number(request.input('status')),
+                    updated_at: Common.currentDateTime()
+                })
+        } catch (error) {
+            return response.json(Client.NewRespJSON(Client.codeError, Client.messageError))
+        }
+        return response.json(Client.NewRespJSON(Client.codeOk, Client.messageOk, { id: id }))
+    }
+
     async setPostTags(postID: number, tags: string[]) {
         const postTags = await PostTag.query()
             .select(Database.raw('GROUP_CONCAT(tag_id) as tagsID'))
@@ -185,7 +204,6 @@ export default class PostController {
         }
 
         for (const category of categories) {
-            console.log("category ", category, "postID", postID)
             try {
                 await PostCategory.updateOrCreate(
                     { postID: postID, categoryID: Number(category) },
@@ -195,8 +213,6 @@ export default class PostController {
                 console.log(error)
             }
         }
-
-        return true
     }
 
     async setPostMedia(postID: number, mediaID: number) {
