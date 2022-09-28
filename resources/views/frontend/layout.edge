@@ -5,40 +5,546 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+        integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/app.css') }}">
     <title>Hello, world!</title>
 </head>
 
 <body>
-
-    <header>
-        <div class="container">
-            <nav class="navbar navbar-light bg-light">
-                <div class="container">
-                    <a class="navbar-brand" href="#">
-                        <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24">
-                    </a>
+    <header id="header-wrapper">
+        <nav class="topbar-wrap flex-c">
+            <div class="container row-x1">
+                <div class="topbar flex-sb section" id="topbar" name="Topbar">
+                    <div class="widget">
+                        <ul class="link-list list-style">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">About Us</a>
+                            </li>
+                            <li>
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        <ul class="social-icons social">
+                            <li class="facebook">
+                                <a alt="facebook" class="fa-facebook"
+                                    href="https://www.facebook.com/probloggertemplates" rel="noopener noreferrer"
+                                    target="_blank" title="facebook"></a>
+                            </li>
+                            <li class="twitter">
+                                <a alt="twitter" class="fa-twitter" href="https://twitter.com/probtemplates"
+                                    rel="noopener noreferrer" target="_blank" title="twitter"></a>
+                            </li>
+                            <li class="youtube">
+                                <a alt="youtube" class="fa-youtube" href="#" rel="noopener noreferrer" target="_blank"
+                                    title="youtube"></a>
+                            </li>
+                            <li class="pinterest">
+                                <a alt="pinterest" class="fa-pinterest"
+                                    href="https://www.pinterest.com/probloggertemplates/" rel="noopener noreferrer"
+                                    target="_blank" title="pinterest"></a>
+                            </li>
+                            <li class="Teste">
+                                <a alt="Teste" class="fa-Teste"
+                                    href="{getPosts} $label={Your Label} $type={Your Label} $color={#ff0000}"
+                                    rel="noopener noreferrer" target="_blank" title="Teste"></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </nav>
+            </div>
+        </nav>
+        <div class="main-header">
+            <div class="header-inner show">
+                <div class="header-header flex-c">
+                    <div class="container">
+                        <div class="header-items">
+                            <div class="flex-left">
+                                <a class="mobile-menu-toggle" href="#" role="button" title="Menu"></a>
+                                <div class="main-logo section" id="main-logo" name="Header Logo">
+                                    <div class="widget">
+                                        <a class="logo-img" href="https://magspot-template.blogspot.com/" rel="home">
+                                            <img alt="Magspot - Blogger Template"
+                                                data-dark-src="https://1.bp.blogspot.com/-EG9_OzrmI9Q/YTtnl8J2U0I/AAAAAAAAAfI/Vta2ee6-b4UAX7DocjFIJCFe8QVL-dxvQCLcBGAsYHQ/dark-logo.png"
+                                                data-src="https://1.bp.blogspot.com/-qk-KYK0bNHs/YTtnqLmlGcI/AAAAAAAAAfM/QHXtzMxhl7kLAGjfMOM8E73Th_TZsnOJgCLcBGAsYHQ/s320/logo.png"
+                                                height="80"
+                                                src="https://1.bp.blogspot.com/-qk-KYK0bNHs/YTtnqLmlGcI/AAAAAAAAAfM/QHXtzMxhl7kLAGjfMOM8E73Th_TZsnOJgCLcBGAsYHQ/s320/logo.png"
+                                                title="Magspot - Blogger Template" width="320">
+                                            <h1 id="h1-off">Magspot - Blogger Template</h1>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="magspot-main-menu section" id="magspot-main-menu" name="Header Menu">
+                                    <div class="widget show-menu">
+                                        <ul class="main-nav" id="main-nav">
+                                            <li id="item-0">
+                                                <a href="/">Home</a>
+                                            </li>
+                                            <li id="item-1" class="has-sub">
+                                                <a href="#">Features</a>
+                                                <ul class="sub-menu sm-1">
+                                                    <li id="item-2">
+                                                        <a href="#">Ticker News</a>
+                                                    </li>
+                                                    <li id="item-3">
+                                                        <a href="#">5 Featured Styles</a>
+                                                    </li>
+                                                    <li id="item-4">
+                                                        <a href="#">8 Content Blocks</a>
+                                                    </li>
+                                                    <li id="item-5" class="has-sub">
+                                                        <a href="#">Post Layouts</a>
+                                                        <ul class="sub-menu sm-2">
+                                                            <li id="item-6">
+                                                                <a
+                                                                    href="/2021/07/9-benefits-of-swimming-weight-loss.html">Left
+                                                                    Sidebar</a>
+                                                            </li>
+                                                            <li id="item-7">
+                                                                <a
+                                                                    href="/2021/07/7-things-to-know-when-planning-your-trip.html">Full
+                                                                    Width</a>
+                                                            </li>
+                                                            <li id="item-8">
+                                                                <a
+                                                                    href="/2021/07/why-navigation-system-doesnt-work-always.html">Right
+                                                                    Sidebar</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li id="item-9">
+                                                        <a href="#">Contact Page</a>
+                                                    </li>
+                                                    <li id="item-10">
+                                                        <a href="#">Error Page</a>
+                                                    </li>
+                                                    <li id="item-11">
+                                                        <a href="#">RTL Support</a>
+                                                    </li>
+                                                    <li id="item-12">
+                                                        <a href="#">MailChimp</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li id="item-15">
+                                                <a href="/p/tipography.html">Tipography</a>
+                                            </li>
+                                            <li id="item-16">
+                                                <a href="/p/shortcodes.html">Shortcodes</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
+    <div class="flex-c" id="ticker-wrapper">
+        <div class="ticker container section" id="ticker">
+            <div class="widget PopularPosts">
+                <div class="widget-title">
+                    <h3 class="title">Trending</h3>
+                </div>
+                <div class="widget-content">
+                    <div class="ticker-items">
+                        <div class="ticker-item item-2 active">
+                            <h2 class="entry-title">
+                                <a href="https://magspot-template.blogspot.com/2021/07/how-we-know-disinfectants-should-kill.html"
+                                    title="How We Know Disinfectants Should Kill the Covid-19">How We Know Disinfectants
+                                    Should Kill the Covid-19</a>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="ticker-nav">
+                        <button class="tn-prev" aria-label="Previous"></button>
+                        <button class="tn-next" aria-label="Next"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-c has-ticker" id="featured-wrapper">
+        <div class="featured container section" id="featured" name="Featured Posts">
+            <div class="widget HTML is-visible type-feat1">
+                <div class="widget-content">
+                    <div class="featured-items">
+                        <div class="featured-item cs item-0">
+                            <a class="entry-inner" href="#" title="title">
+                                <span class="entry-image-wrap before-mask is-image">
+                                    <span class="entry-image pbt-lazy"
+                                        data-src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt66.jpg"
+                                        style="background-image:url(https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w567-h442-p-k-no-nu/pbt66.jpg)">
+                                    </span>
+                                </span>
+                                <div class="entry-header entry-info">
+                                    <span class="entry-category">Apple</span>
+                                    <h2 class="entry-title">11 of Best Laptops Evaluated Based on Budget</h2>
+                                    <div class="entry-meta">
+                                        <span class="entry-author mi">
+                                            <span class="sp">by</span>
+                                            <span class="author-name">John Doe</span>
+                                        </span>
+                                        <span class="entry-time mi">
+                                            <span class="sp">-</span>
+                                            <time class="published" datetime="2021-08-02T06:33:00.013-07:00">August 02,
+                                                2021</time>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="featured-grid">
+                            <div class="featured-item cs item-1">
+                                <a class="entry-inner" href="#" title="#">
+                                    <span class="entry-image-wrap before-mask is-image">
+                                        <span class="entry-image pbt-lazy"
+                                            data-src="https://1.bp.blogspot.com/-7vg-bSX8xLI/YQfz0dY-yoI/AAAAAAAAAWs/t91KpNFtLSYrInDU5jWlbeotvsEyrrsuwCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt65.jpg"
+                                            style="background-image:url(https://1.bp.blogspot.com/-7vg-bSX8xLI/YQfz0dY-yoI/AAAAAAAAAWs/t91KpNFtLSYrInDU5jWlbeotvsEyrrsuwCLcBGAsYHQ/w567-h220-p-k-no-nu/pbt65.jpg)">
+                                        </span>
+                                    </span>
+                                    <div class="entry-header entry-info">
+                                        <span class="entry-category">Laptops</span>
+                                        <h2 class="entry-title">Apple Watch Series 5 is the Best One Yet By Consumer
+                                        </h2>
+                                        <div class="entry-meta">
+                                            <span class="entry-time mi">
+                                                <time class="published" datetime="2021-08-02T06:32:00.000-07:00">August
+                                                    02,
+                                                    2021</time>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="featured-item cs item-2">
+                                <a class="entry-inner" href="#" title="#">
+                                    <span class="entry-image-wrap before-mask is-image">
+                                        <span class="entry-image pbt-lazy"
+                                            data-src="https://1.bp.blogspot.com/-gj2q6SmAQ8w/YQfyUcMT0sI/AAAAAAAAAWM/NPXqUCw77IEK7JCX930V-tdVQxwy-SOZACLcBGAsYHQ/w72-h72-p-k-no-nu/pbt61.jpg"
+                                            style="background-image:url(https://1.bp.blogspot.com/-gj2q6SmAQ8w/YQfyUcMT0sI/AAAAAAAAAWM/NPXqUCw77IEK7JCX930V-tdVQxwy-SOZACLcBGAsYHQ/w282-h220-p-k-no-nu/pbt61.jpg)">
+                                        </span>
+                                    </span>
+                                    <div class="entry-header entry-info">
+                                        <span class="entry-category">Laptops</span>
+                                        <h2 class="entry-title">Here’s What People Think of iOS 13 New Dark Mode</h2>
+                                        <div class="entry-meta">
+                                            <span class="entry-time mi">
+                                                <time class="published" datetime="2021-08-02T06:28:00.002-07:00">August
+                                                    02,
+                                                    2021</time>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="featured-item cs item-3">
+                                <a class="entry-inner" href="#" title="#">
+                                    <span class="entry-image-wrap before-mask is-image">
+                                        <image class="entry-image pbt-lazy"
+                                            data-src="https://1.bp.blogspot.com/-mMOheBhfqNw/YQfynJ__muI/AAAAAAAAAWU/aYmWy7V9Aocp1npTdAgOgBT8-3mZ0ZvowCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt62.jpg"
+                                            style="background-image:url(https://1.bp.blogspot.com/-mMOheBhfqNw/YQfynJ__muI/AAAAAAAAAWU/aYmWy7V9Aocp1npTdAgOgBT8-3mZ0ZvowCLcBGAsYHQ/w282-h220-p-k-no-nu/pbt62.jpg)">
+                                        </span>
+                                    </span>
+                                    <div class="entry-header entry-info">
+                                        <span class="entry-category">Apple</span>
+                                        <h2 class="entry-title">18 Practices for Building Responsive Web Applications
+                                        </h2>
+                                        <div class="entry-meta">
+                                            <span class="entry-time mi">
+                                                <time class="published" datetime="2021-08-02T06:27:00.000-07:00">August
+                                                    02,
+                                                    2021</time>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-c content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="content-section section" id="content-section-1" name="Content Section 1">
+
+                        <div class="main section" id="main" name="Main Posts">
+                            <div class="widget Blog index-blog flex-col" data-version="2" id="Blog1">
+                                <div class="title-wrap main-title">
+                                    <h3 class="title">Latest Posts</h3><a class="title-link" href="/search">View all</a>
+                                </div>
+                                <div class="blog-posts index-post-wrap list1-items">
+                                    <article class="index-post list1-item hentry post-0">
+                                        <a class="entry-image-wrap is-image" href="#" title="Title">
+                                            <img class="entry-image pbt-lazy"
+                                                src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w259-h165-p-k-no-nu/pbt66.jpg"
+                                                alt="" />
+                                            <span class="entry-category">Apple</span>
+                                        </a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title">
+                                                <a href="#" rel="bookmark" title="#">
+                                                    11 of Best Laptops Evaluated Based on Budget
+                                                </a>
+                                            </h2>
+                                            <p class="entry-excerpt excerpt">
+                                                Lorem Ipsum is simply dummy text of the
+                                                printing and typesetting industry. Lorem Ipsum has been…
+                                            </p>
+                                            <div class="entry-meta">
+                                                <span class="entry-author mi">
+                                                    <span class="by sp">by</span>
+                                                    <span class="author-name">John Doe</span>
+                                                </span>
+                                                <span class="entry-time mi">
+                                                    <span class="sp">-</span>
+                                                    <time class="published" datetime="2021-08-02T06:33:00-07:00">
+                                                        August 02, 2021
+                                                    </time>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+
+                                    <article class="index-post list1-item hentry post-0">
+                                        <a class="entry-image-wrap is-image" href="#" title="Title">
+                                            <img class="entry-image pbt-lazy"
+                                                src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w259-h165-p-k-no-nu/pbt66.jpg"
+                                                alt="" />
+                                            <span class="entry-category">Apple</span>
+                                        </a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title">
+                                                <a href="#" rel="bookmark" title="#">
+                                                    11 of Best Laptops Evaluated Based on Budget
+                                                </a>
+                                            </h2>
+                                            <p class="entry-excerpt excerpt">
+                                                Lorem Ipsum is simply dummy text of the
+                                                printing and typesetting industry. Lorem Ipsum has been…
+                                            </p>
+                                            <div class="entry-meta">
+                                                <span class="entry-author mi">
+                                                    <span class="by sp">by</span>
+                                                    <span class="author-name">John Doe</span>
+                                                </span>
+                                                <span class="entry-time mi">
+                                                    <span class="sp">-</span>
+                                                    <time class="published" datetime="2021-08-02T06:33:00-07:00">
+                                                        August 02, 2021
+                                                    </time>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+
+                                    <article class="index-post list1-item hentry post-0">
+                                        <a class="entry-image-wrap is-image" href="#" title="Title">
+                                            <img class="entry-image pbt-lazy"
+                                                src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w259-h165-p-k-no-nu/pbt66.jpg"
+                                                alt="" />
+                                            <span class="entry-category">Apple</span>
+                                        </a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title">
+                                                <a href="#" rel="bookmark" title="#">
+                                                    11 of Best Laptops Evaluated Based on Budget
+                                                </a>
+                                            </h2>
+                                            <p class="entry-excerpt excerpt">
+                                                Lorem Ipsum is simply dummy text of the
+                                                printing and typesetting industry. Lorem Ipsum has been…
+                                            </p>
+                                            <div class="entry-meta">
+                                                <span class="entry-author mi">
+                                                    <span class="by sp">by</span>
+                                                    <span class="author-name">John Doe</span>
+                                                </span>
+                                                <span class="entry-time mi">
+                                                    <span class="sp">-</span>
+                                                    <time class="published" datetime="2021-08-02T06:33:00-07:00">
+                                                        August 02, 2021
+                                                    </time>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+
+                                    <article class="index-post list1-item hentry post-0">
+                                        <a class="entry-image-wrap is-image" href="#" title="Title">
+                                            <img class="entry-image pbt-lazy"
+                                                src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w259-h165-p-k-no-nu/pbt66.jpg"
+                                                alt="" />
+                                            <span class="entry-category">Apple</span>
+                                        </a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title">
+                                                <a href="#" rel="bookmark" title="#">
+                                                    11 of Best Laptops Evaluated Based on Budget
+                                                </a>
+                                            </h2>
+                                            <p class="entry-excerpt excerpt">
+                                                Lorem Ipsum is simply dummy text of the
+                                                printing and typesetting industry. Lorem Ipsum has been…
+                                            </p>
+                                            <div class="entry-meta">
+                                                <span class="entry-author mi">
+                                                    <span class="by sp">by</span>
+                                                    <span class="author-name">John Doe</span>
+                                                </span>
+                                                <span class="entry-time mi">
+                                                    <span class="sp">-</span>
+                                                    <time class="published" datetime="2021-08-02T06:33:00-07:00">
+                                                        August 02, 2021
+                                                    </time>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </article>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="sidebar pbt-section section" id="sidebar" name="Sidebar">
+                        <div class="widget LinkList" data-version="2" id="LinkList1">
+                            <div class="widget LinkList" data-version="2" id="LinkList1">
+                                <div class="widget-title title-wrap">
+                                    <h3 class="title">Follow Us</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="social-icons social sb-a">
+                                        <li class="facebook">
+                                            <a alt="facebook" class="fa-facebook btn" data-side="true"
+                                                href="https://www.facebook.com/probloggertemplates"
+                                                rel="noopener noreferrer" target="_blank" title="facebook">
+                                                <span class="text">Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li class="twitter">
+                                            <a alt="twitter" class="fa-twitter btn" data-side="true"
+                                                href="https://twitter.com/probtemplates" rel="noopener noreferrer"
+                                                target="_blank" title="twitter">
+                                                <span class="text">Twitter</span>
+                                            </a>
+                                        </li>
+                                        <li class="youtube">
+                                            <a alt="youtube" class="fa-youtube btn" data-side="true"
+                                                href="https://www.youtube.com/probloggertemplates?sub_confirmation=1"
+                                                rel="noopener noreferrer" target="_blank" title="youtube">
+                                                <span class="text">YouTube</span>
+                                            </a>
+                                        </li>
+                                        <li class="instagram">
+                                            <a alt="instagram" class="fa-instagram btn" data-side="true"
+                                                href="https://instagram.com/probloggertemplates"
+                                                rel="noopener noreferrer" target="_blank" title="instagram">
+                                                <span class="text">Instagram</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="flex-col" id="footer-wrapper">
+        <div class="primary-footer flex-c">
+            <div class="container">
+                <div class="about-section flex-sb section" id="magspot-about-section" name="About Section">
+                    <div class="widget Image" data-version="2" id="Image51">
+                        <a class="footer-logo custom-image" href="https://magspot-template.blogspot.com/" rel="home">
+                            <img alt="Magspot - Blogger Template"
+                                data-src="https://1.bp.blogspot.com/-ogJcgqV3vIY/YTkSC7V8-9I/AAAAAAAAAeM/CZqbD8p4wRInPRzed1A2PMXXRkw2_C1lQCLcBGAsYHQ/s320/dark-logo.png"
+                                height="80" id="Image51_img"
+                                src="https://1.bp.blogspot.com/-ogJcgqV3vIY/YTkSC7V8-9I/AAAAAAAAAeM/CZqbD8p4wRInPRzed1A2PMXXRkw2_C1lQCLcBGAsYHQ/s320/dark-logo.png"
+                                width="320">
+
+                        </a>
+                        <div class="footer-info">
+                            <h3 class="title">About Us</h3>
+                            <p class="image-caption excerpt">Lorem Ipsum is simply dummy text of the printing and
+                                typesetting industry. Lorem Ipsum has been the industry's.</p>
+                        </div>
+                    </div>
+                    <div class="widget LinkList" data-version="2" id="LinkList203">
+                        <ul class="social-icons social sb-h">
+                            <li class="facebook"><a alt="facebook" class="fa-facebook btn"
+                                    href="https://www.facebook.com/probloggertemplates" rel="noopener noreferrer"
+                                    target="_blank" title="facebook"></a></li>
+                            <li class="twitter"><a alt="twitter" class="fa-twitter btn"
+                                    href="https://twitter.com/probtemplates" rel="noopener noreferrer" target="_blank"
+                                    title="twitter"></a></li>
+                            <li class="youtube"><a alt="youtube" class="fa-youtube btn"
+                                    href="https://www.youtube.com/probloggertemplates?sub_confirmation=1"
+                                    rel="noopener noreferrer" target="_blank" title="youtube"></a></li>
+                            <li class="instagram"><a alt="instagram" class="fa-instagram btn"
+                                    href="https://instagram.com/probloggertemplates.com" rel="noopener noreferrer"
+                                    target="_blank" title="instagram"></a></li>
+                            <li class="pinterest"><a alt="pinterest" class="fa-pinterest btn"
+                                    href="https://www.pinterest.com/probloggertemplates/" rel="noopener noreferrer"
+                                    target="_blank" title="pinterest"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar flex-c">
+            <div class="container flex-sb">
+                <div class="footer-copyright section" id="footer-copyright" name="Footer Copyright">
+                    <div class="widget Text" data-version="2" id="Text50">
+                        Design by - <a href="https://probloggertemplates.com/" title="Blogger Templates">Pro Blogger
+                            Templates</a>
+                    </div>
+                </div>
+                <div class="footer-menu section" id="footer-menu" name="Footer Menu">
+                    <div class="widget LinkList" data-version="2" id="LinkList204">
+                        <ul class="link-list">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
 </body>
 
 </html>
