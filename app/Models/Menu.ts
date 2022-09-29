@@ -36,4 +36,7 @@ export default class Menu extends BaseModel {
 
     public static statusDelete = -1
     public static statusPublish = 1
+    public static isParent = 0 
+
+    public subMenu: Menu[]
 }

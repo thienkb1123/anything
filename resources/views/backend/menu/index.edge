@@ -39,6 +39,7 @@
                                 <thead class="table-primary">
                                     <tr class="dashed">
                                         <th scope="col">Name</th>
+                                        <th scope="col">Parent</th>
                                         <th scope="col">Slug</th>
                                         <th class="any-w-15" scope="col-1">Created at</th>
                                         <th class="any-w-10" scope="col-1">Status</th>
@@ -50,6 +51,7 @@
                                         @each(row in menuList)
                                             <tr class="dashed" id="row-{{ row.id }}">
                                                 <td>{{ row.name }}</td>
+                                                <td>{{ row.$extras && row.$extras.parent || '' }}</td>
                                                 <td>{{ row.slug }}</td>
                                                 <td>{{ row.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</td>
                                                 <td>
@@ -64,7 +66,7 @@
                                             </tr>
                                         @endeach
                                     @else
-                                        <td colspan="5">
+                                        <td colspan="6">
                                             <p class="text-center">No data</p>
                                         </td>
                                     @endif

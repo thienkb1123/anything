@@ -1,0 +1,100 @@
+<header id="header-wrapper">
+    <nav class="topbar-wrap flex-c">
+        <div class="container row-x1">
+            <div class="topbar flex-sb section" id="topbar" name="Topbar">
+                <div class="widget">
+                    <ul class="link-list list-style">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="widget">
+                    <ul class="social-icons social">
+                        <li class="facebook">
+                            <a alt="facebook" class="fa-facebook"
+                                href="https://www.facebook.com/probloggertemplates" rel="noopener noreferrer"
+                                target="_blank" title="facebook"></a>
+                        </li>
+                        <li class="twitter">
+                            <a alt="twitter" class="fa-twitter" href="https://twitter.com/probtemplates"
+                                rel="noopener noreferrer" target="_blank" title="twitter"></a>
+                        </li>
+                        <li class="youtube">
+                            <a alt="youtube" class="fa-youtube" href="#" rel="noopener noreferrer" target="_blank"
+                                title="youtube"></a>
+                        </li>
+                        <li class="pinterest">
+                            <a alt="pinterest" class="fa-pinterest"
+                                href="https://www.pinterest.com/probloggertemplates/" rel="noopener noreferrer"
+                                target="_blank" title="pinterest"></a>
+                        </li>
+                        <li class="Teste">
+                            <a alt="Teste" class="fa-Teste"
+                                href="{getPosts} $label={Your Label} $type={Your Label} $color={#ff0000}"
+                                rel="noopener noreferrer" target="_blank" title="Teste"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="main-header">
+        <div class="header-inner show">
+            <div class="header-header flex-c">
+                <div class="container">
+                    <div class="header-items">
+                        <div class="flex-left">
+                            <a class="mobile-menu-toggle" href="#" role="button" title="Menu"></a>
+                            <div class="main-logo section" id="main-logo" name="Header Logo">
+                                <div class="widget">
+                                    <a class="logo-img" href="{{ route() }}" rel="home">
+                                        <img alt="Magspot - Blogger Template"
+                                            data-dark-src="https://1.bp.blogspot.com/-EG9_OzrmI9Q/YTtnl8J2U0I/AAAAAAAAAfI/Vta2ee6-b4UAX7DocjFIJCFe8QVL-dxvQCLcBGAsYHQ/dark-logo.png"
+                                            data-src="https://1.bp.blogspot.com/-qk-KYK0bNHs/YTtnqLmlGcI/AAAAAAAAAfM/QHXtzMxhl7kLAGjfMOM8E73Th_TZsnOJgCLcBGAsYHQ/s320/logo.png"
+                                            height="80"
+                                            src="https://1.bp.blogspot.com/-qk-KYK0bNHs/YTtnqLmlGcI/AAAAAAAAAfM/QHXtzMxhl7kLAGjfMOM8E73Th_TZsnOJgCLcBGAsYHQ/s320/logo.png"
+                                            title="Magspot - Blogger Template" width="320">
+                                        <h1 id="h1-off">Magspot - Blogger Template</h1>
+                                    </a>
+                                </div>
+                            </div>
+
+                            @if (menuList.length)
+                            <div class="magspot-main-menu section" id="magspot-main-menu" name="Header Menu">
+                                <div class="widget show-menu">
+                                    <ul class="main-nav" id="main-nav">
+                                        @each(menu in menuList)
+                                            <li {{ menu.subMenu && menu.subMenu.length ? ' class="has-sub"' : '' }}>
+                                                <a href="{{ menu.slug }}">{{ menu.name }}</a>
+                                                @if (menu.subMenu && menu.subMenu.length)
+                                                    <ul class="sub-menu sm-1">
+                                                        @each(subsMenu in menu.subMenu)
+                                                            <li>
+                                                                <a href="{{ subsMenu.slug }}">{{ subsMenu.name }}</a>
+                                                            </li>
+                                                        @endeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endeach
+                                    </ul>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

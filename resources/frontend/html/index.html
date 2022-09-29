@@ -1,3 +1,32 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+
+@thienkb1123
+thienkb1123
+/
+anything
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+anything/resources/views/frontend/layout.edge
+
+thien.be #update template home page
+Latest commit 7f63ac5 20 hours ago
+History
+0 contributors
+822 lines (801 sloc) 59.2 KB
+
 <!doctype html>
 <html lang="en">
 
@@ -16,9 +45,144 @@
 </head>
 
 <body>
-
-    @include('frontend/static/header')
-
+    <header id="header-wrapper">
+        <nav class="topbar-wrap flex-c">
+            <div class="container row-x1">
+                <div class="topbar flex-sb section" id="topbar" name="Topbar">
+                    <div class="widget">
+                        <ul class="link-list list-style">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">About Us</a>
+                            </li>
+                            <li>
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget">
+                        <ul class="social-icons social">
+                            <li class="facebook">
+                                <a alt="facebook" class="fa-facebook"
+                                    href="https://www.facebook.com/probloggertemplates" rel="noopener noreferrer"
+                                    target="_blank" title="facebook"></a>
+                            </li>
+                            <li class="twitter">
+                                <a alt="twitter" class="fa-twitter" href="https://twitter.com/probtemplates"
+                                    rel="noopener noreferrer" target="_blank" title="twitter"></a>
+                            </li>
+                            <li class="youtube">
+                                <a alt="youtube" class="fa-youtube" href="#" rel="noopener noreferrer" target="_blank"
+                                    title="youtube"></a>
+                            </li>
+                            <li class="pinterest">
+                                <a alt="pinterest" class="fa-pinterest"
+                                    href="https://www.pinterest.com/probloggertemplates/" rel="noopener noreferrer"
+                                    target="_blank" title="pinterest"></a>
+                            </li>
+                            <li class="Teste">
+                                <a alt="Teste" class="fa-Teste"
+                                    href="{getPosts} $label={Your Label} $type={Your Label} $color={#ff0000}"
+                                    rel="noopener noreferrer" target="_blank" title="Teste"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="main-header">
+            <div class="header-inner show">
+                <div class="header-header flex-c">
+                    <div class="container">
+                        <div class="header-items">
+                            <div class="flex-left">
+                                <a class="mobile-menu-toggle" href="#" role="button" title="Menu"></a>
+                                <div class="main-logo section" id="main-logo" name="Header Logo">
+                                    <div class="widget">
+                                        <a class="logo-img" href="https://magspot-template.blogspot.com/" rel="home">
+                                            <img alt="Magspot - Blogger Template"
+                                                data-dark-src="https://1.bp.blogspot.com/-EG9_OzrmI9Q/YTtnl8J2U0I/AAAAAAAAAfI/Vta2ee6-b4UAX7DocjFIJCFe8QVL-dxvQCLcBGAsYHQ/dark-logo.png"
+                                                data-src="https://1.bp.blogspot.com/-qk-KYK0bNHs/YTtnqLmlGcI/AAAAAAAAAfM/QHXtzMxhl7kLAGjfMOM8E73Th_TZsnOJgCLcBGAsYHQ/s320/logo.png"
+                                                height="80"
+                                                src="https://1.bp.blogspot.com/-qk-KYK0bNHs/YTtnqLmlGcI/AAAAAAAAAfM/QHXtzMxhl7kLAGjfMOM8E73Th_TZsnOJgCLcBGAsYHQ/s320/logo.png"
+                                                title="Magspot - Blogger Template" width="320">
+                                            <h1 id="h1-off">Magspot - Blogger Template</h1>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="magspot-main-menu section" id="magspot-main-menu" name="Header Menu">
+                                    <div class="widget show-menu">
+                                        <ul class="main-nav" id="main-nav">
+                                            <li id="item-0">
+                                                <a href="/">Home</a>
+                                            </li>
+                                            <li id="item-1" class="has-sub">
+                                                <a href="#">Features</a>
+                                                <ul class="sub-menu sm-1">
+                                                    <li id="item-2">
+                                                        <a href="#">Ticker News</a>
+                                                    </li>
+                                                    <li id="item-3">
+                                                        <a href="#">5 Featured Styles</a>
+                                                    </li>
+                                                    <li id="item-4">
+                                                        <a href="#">8 Content Blocks</a>
+                                                    </li>
+                                                    <li id="item-5" class="has-sub">
+                                                        <a href="#">Post Layouts</a>
+                                                        <ul class="sub-menu sm-2">
+                                                            <li id="item-6">
+                                                                <a
+                                                                    href="/2021/07/9-benefits-of-swimming-weight-loss.html">Left
+                                                                    Sidebar</a>
+                                                            </li>
+                                                            <li id="item-7">
+                                                                <a
+                                                                    href="/2021/07/7-things-to-know-when-planning-your-trip.html">Full
+                                                                    Width</a>
+                                                            </li>
+                                                            <li id="item-8">
+                                                                <a
+                                                                    href="/2021/07/why-navigation-system-doesnt-work-always.html">Right
+                                                                    Sidebar</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li id="item-9">
+                                                        <a href="#">Contact Page</a>
+                                                    </li>
+                                                    <li id="item-10">
+                                                        <a href="#">Error Page</a>
+                                                    </li>
+                                                    <li id="item-11">
+                                                        <a href="#">RTL Support</a>
+                                                    </li>
+                                                    <li id="item-12">
+                                                        <a href="#">MailChimp</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li id="item-15">
+                                                <a href="/p/tipography.html">Tipography</a>
+                                            </li>
+                                            <li id="item-16">
+                                                <a href="/p/shortcodes.html">Shortcodes</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="flex-c" id="ticker-wrapper">
         <div class="ticker container section" id="ticker">

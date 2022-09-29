@@ -13,8 +13,10 @@ export default class MenuController {
         const limit = 10
         const page = request.input('page', 1)
         const menuList = await Menu.query()
-            .where('status', '<>', Menu.statusDelete)
-            .where('author', auth.user?.id)
+            .select('menu.id', 'menu.name', 'menuParent.name as parent', 'menu.slug', 'menu.status', 'menu.created_at')
+            .leftJoin('menu as menuParent', 'menuParent.id', '=', 'menu.parent_id')
+            .where('menu.status', '<>', Menu.statusDelete)
+            .where('menu.author', auth.user?.id)
             .paginate(page, limit)
 
         return view.render('backend.menu.index', {
