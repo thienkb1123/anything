@@ -19,38 +19,49 @@ export default class MediaController {
     }
 
     async store({ request, response }: HttpContextContract) {
-        const files = request.files('files', {
+        const file = request.file('file', {
             size: '5mb',
             extnames: ['jpg', 'jpg', 'gif', 'png'],
         })
 
-        let mediaList: Media[] = [];
-        for (let file of files) {
-            if (!file.isValid) {
-                continue
-            }
-
-            const fileName = Common.createFileName(file.clientName)
-            const path = Common.pathMovePerMonth('media')
-            await file.move(
-                Application.publicPath(path),
-                {
-                    overwrite: false,
-                    name: fileName,
-                }
-            )
-
-            const media = new Media()
-            media.name = fileName
-            media.path = `/${path}/${fileName}`
-            media.typeOfFile = file.extname as string
-            media.type = file.type as string
-            media.size = file.size
-            mediaList.push(media)
+        if (!file) {
+            return response.json({
+                "success": 0,
+                "message": "file input wrong"
+            })
         }
 
-        await Media.createMany(mediaList)
-        return response.json(files)
+        if (!file.isValid) {
+            return response.json({
+                "success": 0,
+                "message": file.errors
+            })
+        }
+
+        const fileName = Common.createFileName(file.clientName)
+        const path = Common.pathMovePerMonth('media')
+        await file.move(
+            Application.publicPath(path),
+            {
+                overwrite: false,
+                name: fileName,
+            }
+        )
+
+        const media = new Media()
+        media.name = fileName
+        media.path = `/${path}/${fileName}`
+        media.typeOfFile = file.extname as string
+        media.type = file.type as string
+        media.size = file.size
+        media.save()
+
+        return response.json({
+            "success": 1,
+            "file": {
+                "url": media.path,
+            }
+        })
     }
 
     async show({ request, view }: HttpContextContract) {
@@ -64,7 +75,7 @@ export default class MediaController {
             .orderBy('created_at', 'desc')
             .limit(20)
 
-            console.log(list)
+        console.log(list)
 
         return response.json(Client.NewRespJSON(
             Client.codeOk,

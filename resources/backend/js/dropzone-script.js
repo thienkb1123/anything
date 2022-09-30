@@ -1,9 +1,8 @@
 var DropzoneInit = function () {
     var NewDropzone = function () {
         Dropzone.options.multiFileUpload = {
-            paramName: "files",
-            maxFiles: 10,
-            maxFilesize: 10,
+            uploadMultiple: false,
+            paramName: "file",
             url: '/any-admin/media',
             accept: function (file, done) {
                 done();

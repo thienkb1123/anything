@@ -1,0 +1,105 @@
+<!-- Load Tools -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script><!-- List -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script><!-- Checklist -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/image@latest"></script><!-- Image -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+
+<!-- Load Editor.js's Core -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+
+<!-- Initialization -->
+<script>
+    const editor = new EditorJS({
+        readOnly: false,
+        holder: 'editorjs',
+        tools: {
+            header: {
+                class: Header,
+                inlineToolbar: ['marker', 'link'],
+                config: {
+                    placeholder: 'Header'
+                },
+                shortcut: 'CMD+SHIFT+H'
+            },
+            list: {
+                class: List,
+                inlineToolbar: true,
+                shortcut: 'CMD+SHIFT+L'
+            },
+            checklist: {
+                class: Checklist,
+                inlineToolbar: true,
+            },
+            quote: {
+                class: Quote,
+                inlineToolbar: true,
+                config: {
+                    quotePlaceholder: 'Enter a quote',
+                    captionPlaceholder: 'Quote\'s author',
+                },
+                shortcut: 'CMD+SHIFT+O'
+            },
+            warning: Warning,
+            marker: {
+                class: Marker,
+                shortcut: 'CMD+SHIFT+M'
+            },
+            code: {
+                class: CodeTool,
+                shortcut: 'CMD+SHIFT+C'
+            },
+            delimiter: Delimiter,
+            inlineCode: {
+                class: InlineCode,
+                shortcut: 'CMD+SHIFT+C'
+            },
+            linkTool: LinkTool,
+            embed: Embed,
+            table: {
+                class: Table,
+                inlineToolbar: true,
+                shortcut: 'CMD+ALT+T'
+            },
+            image: {
+                class: ImageTool,
+                config: {
+                    endpoints: {
+                        byFile: "{{ route('backend.media.store') }}",
+                        byUrl: "{{ route('backend.media.store') }}",
+                    },
+                    field: 'file'
+                },
+            },
+            embed: {
+                class: Embed,
+                config: {
+                    services: {
+                        youtube: true,
+                        coub: true
+                    }
+                }
+            }
+        },
+        data: {
+            blocks: [
+                {
+                    type: "paragraph",
+                    data: {
+                        text: "Enter content here",
+                    }
+                },
+            ]
+        }
+    });
+
+</script>

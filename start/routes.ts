@@ -38,7 +38,7 @@ Route.group(() => {
 
     Route.group(() => {
         Route.resource('/config', 'Backend/PostTool/ConfigController').only(['create', 'index', 'store', 'show', 'update', 'destroy'])
-        
+
         Route.resource('/wordpress', 'Backend/PostTool/WordPressController').only(['create', 'store'])
         Route.get('/wordpress/info-create-post', 'Backend/PostTool/WordPressController.infoCreatePost').as('wordpress.info-create-post')
     }).prefix('/post-tool').as('post-tool')
@@ -50,17 +50,19 @@ Route.group(() => {
 
     Route.put('/tag/:id/status', 'Backend/TagController.status').as('tag.status')
     Route.resource('/tag', 'Backend/TagController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
-    
+
     Route.put('/category/:id/status', 'Backend/CategoryController.status').as('category.status')
     Route.resource('/category', 'Backend/CategoryController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
 
     Route.put('/menu/:id/status', 'Backend/MenuController.status').as('menu.status')
     Route.resource('/menu', 'Backend/MenuController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
 
+    Route.resource('ckfinder', 'Backend/CkFinderController')
+
 }).prefix('/any-admin').as('backend').middleware('auth')
 
 
-Route.group(()=>{
+Route.group(() => {
     Route.get('tag', 'Backend/TagController.apiList').as('tag.list')
     Route.get('category', 'Backend/CategoryController.apiList').as('category.list')
 }).prefix('any-api/v1').as('api')
