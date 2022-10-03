@@ -29,9 +29,9 @@
         },
     ]
 
-    let content = {{{ content }}}
+    let content = `{{{ content }}}`
     if (content) {
-        blocksData = content
+        blocksData = JSON.parse(content)
     }
 
     console.log(blocksData)

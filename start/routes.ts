@@ -20,17 +20,9 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-
-Route.get('/', 'Frontend/HomeController.index')
-Route.get('/detail', 'Frontend/HomeController.detail')
-
-
-// Admin
+// Back-end
 Route.any('/any-admin/login', 'Backend/AuthController.login').as('backend.auth.login')
 Route.any('/any-admin/logout', 'Backend/AuthController.logout').as('backend.auth.logout')
-
-Route.resource('/tess', 'Backend/AuthController')
-
 Route.group(() => {
     Route.get('', 'Backend/HomeController.index').as('home')
 
@@ -42,7 +34,6 @@ Route.group(() => {
         Route.resource('/wordpress', 'Backend/PostTool/WordPressController').only(['create', 'store'])
         Route.get('/wordpress/info-create-post', 'Backend/PostTool/WordPressController.infoCreatePost').as('wordpress.info-create-post')
     }).prefix('/post-tool').as('post-tool')
-
 
     Route.resource('/post', 'Backend/PostController')
     Route.get('/media/list', 'Backend/MediaController.list').as('media.list')
@@ -57,12 +48,14 @@ Route.group(() => {
     Route.put('/menu/:id/status', 'Backend/MenuController.status').as('menu.status')
     Route.resource('/menu', 'Backend/MenuController').only(['create', 'index', 'store', 'edit', 'update', 'destroy'])
 
-    Route.resource('ckfinder', 'Backend/CkFinderController')
-
+    Route.resource('page-builder', 'Backend/PageBuildersController')
 }).prefix('/any-admin').as('backend').middleware('auth')
-
 
 Route.group(() => {
     Route.get('tag', 'Backend/TagController.apiList').as('tag.list')
     Route.get('category', 'Backend/CategoryController.apiList').as('category.list')
 }).prefix('any-api/v1').as('api')
+
+// Front-end
+Route.get('/', 'Frontend/HomeController.index')
+Route.get('/:slug', 'Frontend/PostsController.show').where('slug', /^[a-z0-9_-]+$/).as('frontend.post.show')

@@ -134,6 +134,15 @@
 
                                     <li class="dropdown">
                                         <a class="nav-link menu-title" href="javascript:void(0)">
+                                        <i data-feather="home"></i><span>Page Build</span></a>
+                                        <ul class="nav-submenu menu-content">
+                                            <li><a href="{{ route('backend.page_builder.index') }}">List</a></li>
+                                            <li><a href="{{ route('backend.page_builder.create') }}">Add new</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a class="nav-link menu-title" href="javascript:void(0)">
                                         <i data-feather="home"></i><span>Post</span></a>
                                         <ul class="nav-submenu menu-content">
                                             <li><a href="{{ route('backend.post.index') }}">List</a></li>

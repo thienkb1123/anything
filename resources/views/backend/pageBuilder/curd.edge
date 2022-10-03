@@ -24,12 +24,12 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3 row">
-                                        <label class="col-sm-3 col-form-label">Name</label>
+                                        <label class="col-sm-3 col-form-label">Title</label>
                                         <div class="col-sm-9">
                                             <input
-                                                class="form-control {{ flashMessages.has('errors.name') ? 'is-invalid' : '' }}"
+                                                class="form-control {{ flashMessages.has('errors.title') ? 'is-invalid' : '' }}"
                                                 name="name" type="text"
-                                                value="{{ flashMessages.get('name') || category && category.name || '' }}"
+                                                value="{{ flashMessages.get('name', tag && tag.title || '') }}"
                                                 required>
                                             @if (flashMessages.has('errors.name'))
                                             <div class="invalid-feedback">{{ flashMessages.get('errors.name') }}</div>
@@ -42,22 +42,9 @@
                                             <input
                                                 class="form-control {{ flashMessages.has('errors.slug') ? 'is-invalid' : '' }}"
                                                 name="slug" type="text"
-                                                value="{{ flashMessages.get('slug') || category && category.slug || '' }}">
+                                                value="{{ flashMessages.get('slug', tag && tag.slug || '') }}">
                                             @if (flashMessages.has('errors.slug'))
                                             <div class="invalid-feedback">{{ flashMessages.get('errors.slug') }}</div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label class="col-sm-3 col-form-label">Content</label>
-                                        <div class="col-sm-9">
-                                            <textarea
-                                                class="form-control {{ flashMessages.has('errors.content') ? 'is-invalid' : '' }}"
-                                                name="content"
-                                                rows="4">{{ flashMessages.get('content') || category && category.content || '' }}</textarea>
-                                            @if (flashMessages.has('errors.content'))
-                                            <div class="invalid-feedback">{{ flashMessages.get('errors.content') }}
-                                            </div>
                                             @endif
                                         </div>
                                     </div>
@@ -65,9 +52,9 @@
                                         <label class="col-sm-3 col-form-label">Status</label>
                                         <div class="col-sm-9">
                                             <select class="any-select2-basic col-sm-12" name="status">
-                                                <option {{ flashMessages.get('status', category && category.status)==1
+                                                <option {{ flashMessages.get('status', tag && tag.status)==1
                                                     ? 'selected' : '' }} value="1">Enable</option>
-                                                <option {{ flashMessages.get('status', category && category.status)==0
+                                                <option {{ flashMessages.get('status', tag && tag.status)==0
                                                     ? 'selected' : '' }} value="0">Disable</option>
                                             </select>
                                         </div>
@@ -78,7 +65,7 @@
                         <div class="card-footer text-end">
                             <div class="col-sm-9 offset-sm-3">
                                 <button class="btn btn-primary" type="submit">Submit</button>
-                                <a href="{{ route('backend.category.index') }}" class="btn btn-light" type="reset">Cancel</a>
+                                <a href="{{ route('backend.tag.index') }}" class="btn btn-light" type="reset">Cancel</a>
                             </div>
                         </div>
                     </form>
