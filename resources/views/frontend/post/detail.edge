@@ -18,11 +18,12 @@
                                                 <a class="label"
                                                     href="https://magspot-template.blogspot.com/search/label/Healthy">Healthy</a>
                                             </nav>
-                                            <h1 class="entry-title">How We Know Disinfectants Should Kill the
-                                                Covid-19</h1>
+                                            <h1 class="entry-title">
+                                                {{ post.title }}
+                                            </h1>
                                             <div class="entry-meta">
                                                 <div class="align-left">
-                                                    <span class="entry-author mi">
+                                                    {{-- <span class="entry-author mi">
                                                         <span class="author-avatar-wrap">
                                                             <span class="author-avatar pbt-lazy"
                                                                 data-src="//2.bp.blogspot.com/-mFOqema7MSc/YxZosxlyG9I/AAAAAAAABHo/P0HJqy1TKQEBmNBJPOFxwFI5dXKoDQX5QCK4BGAYYCw/w72-h72-p-k-no-nu/profile.webp"
@@ -31,12 +32,12 @@
                                                         <span class="by sp">by</span>
                                                         <span class="author-name">John
                                                             Doe</span>
-                                                    </span>
+                                                    </span> --}}
                                                     <span class="entry-time mi">
-                                                        <span class="sp">-</span>
-                                                        <time class="published"
-                                                            datetime="2021-07-31T12:21:00-07:00">July 31,
-                                                            2021</time>
+                                                        {{-- <span class="sp">-</span> --}}
+                                                        <time class="published" datetime="{{ post.createdAt }}">
+                                                            {{ post.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}
+                                                        </time>
                                                     </span>
                                                 </div>
                                                 <div class="align-right">
@@ -46,63 +47,7 @@
                                         </div>
                                         <div class="entry-content-wrap flex-col">
                                             <div class="post-body entry-content" id="post-body">
-                                                <div class="separator" style="clear: both; text-align: center;">
-                                                    <img alt="How We Know Disinfectants Should Kill the Covid-19"
-                                                        border="0" data-original-height="533" data-original-width="800"
-                                                        src="https://1.bp.blogspot.com/-924Nb_-CUFk/YQWxvsD9YjI/AAAAAAAAATs/QxsGc6FOEE4wbNcATLB9to38uneI51YEACLcBGAsYHQ/s16000/pbt41.jpg"
-                                                        title="How We Know Disinfectants Should Kill the Covid-19">
-                                                </div>
-                                                <br>Lorem Ipsum is simply dummy text of the printing and
-                                                typesetting industry. Lorem Ipsum has been the industry's standard
-                                                dummy text ever since the 1500s, when an unknown printer took a
-                                                galley of type and scrambled it to make a type specimen
-                                                book.
-                                                <br>
-                                                <br>
-                                                <blockquote class="tr_bq">
-                                                    <i>Lorem Ipsum has been the industry's
-                                                        standard dummy text ever since the 1500s, when an unknown
-                                                        printer took a galley of type and scrambled it to make a
-                                                        type specimen book.</i>
-                                                    <br>
-                                                    <br>
-                                                    <b>- John Doe</b>
-                                                </blockquote>
-                                                <br>
-                                                <div>It was popularised in the 1960s with the release of Letraset
-                                                    sheets containing Lorem Ipsum passages, and more recently with
-                                                    desktop publishing software like Aldus PageMaker including
-                                                    versions of Lorem Ipsum.
-                                                    <br>
-                                                    <br>
-                                                    <ul>
-                                                        <li>Lorem Ipsum has been the industry's</li>
-                                                        <li>The generated Lorem Ipsum is therefore always</li>
-                                                        <li>Making this the first true generator </li>
-                                                    </ul>
-                                                    <br>It is a long established fact that a reader will be
-                                                    distracted by the readable content of a page when looking at its
-                                                    layout. The point of using Lorem Ipsum is that it has a
-                                                    more-or-less normal distribution of letters, as opposed to using
-                                                    'Content here, content here', making it look like readable
-                                                    English.
-                                                    <br>
-                                                    <br>
-                                                    <div>It uses a dictionary of over 200 Latin words, combined with
-                                                        a handful of model sentence structures, to generate Lorem
-                                                        Ipsum which looks reasonable. The generated Lorem Ipsum is
-                                                        therefore always free from repetition, injected humour, or
-                                                        non-characteristic words etc.
-                                                        <br>
-                                                        <br>There are many
-                                                        variations of passages of Lorem Ipsum available, but the
-                                                        majority have suffered alteration in some form, by injected
-                                                        humour, or randomised words which don't look even slightly
-                                                        believable. If you are going to use a passage of Lorem
-                                                        Ipsum, you need to be sure there isn't anything embarrassing
-                                                        hidden in the middle of text.
-                                                    </div>
-                                                </div>
+
                                             </div>
                                             <div class="entry-labels">
                                                 <span class="labels-label btn">Tags</span>
@@ -481,4 +426,16 @@
         </div>
     </div>
 </div>
+@end
+
+
+@section('js')
+<script src="https://cdn.jsdelivr.net/npm/editorjs-parser@1/build/Parser.browser.min.js"></script>
+
+<script>
+    const parser = new edjsParser();
+    const content = parser.parse({{{ post.content }}});
+    document.getElementById("post-body").innerHTML = content
+</script>
+
 @end

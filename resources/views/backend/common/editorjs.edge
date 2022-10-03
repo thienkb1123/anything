@@ -12,7 +12,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/image@latest"></script><!-- Image -->
-<script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
 <script src="{{ asset('assets/backend/any/file-manager/connect.js') }}"></script><!-- File Manager -->
 
 <!-- Load Editor.js's Core -->
@@ -20,21 +19,21 @@
 
 <!-- Initialization -->
 <script>
-    let blocksData = [
-        {
-            type: "paragraph",
-            data: {
-                text: "Enter content here",
-            }
-        },
-    ]
+    let blocksData = {
+        blocks: [
+            {
+                type: "paragraph",
+                data: {
+                    text: "Enter content here",
+                }
+            },
+        ]
+    }
 
-    let content = `{{{ content }}}`
+    const content = `{{{ content }}}`
     if (content) {
         blocksData = JSON.parse(content)
     }
-
-    console.log(blocksData)
 
     const editor = new EditorJS({
         readOnly: false,
@@ -108,12 +107,10 @@
             },
             fileManager: AnyFileManager,
         },
-        data: {
-            blocks: blocksData
-        },
+        data: blocksData,
         onChange: (api, event) => {
             editor.save().then((outputData) => {
-                $('input[name=content]').val(JSON.stringify(outputData.blocks))
+                $('input[name=content]').val(JSON.stringify(outputData))
             }).catch((error) => {
                 console.log('Saving failed: ', error)
             });

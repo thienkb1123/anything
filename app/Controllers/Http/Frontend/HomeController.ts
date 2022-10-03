@@ -4,32 +4,7 @@ import Post from 'App/Models/Post'
 
 export default class HomeController {
     public async index({ view }: HttpContextContract) {
-        const menu = await Menu.query()
-            .select(
-                'menu.id',
-                'menu.parent_id',
-                'menu.name',
-                'menu.slug',
-            )
-            .where('menu.status', Menu.statusPublish)
-
-        let menuList: Menu[] = []
-        for (let parent of menu) {
-            if (parent.parentID !== Menu.isParent) {
-                continue
-            }
-
-            let menuChilden: Menu[] = []
-            for (const childen of menu) {
-                if (parent.id === childen.parentID) {
-                    menuChilden.push(childen)
-                }
-            }
-
-            parent.subMenu = menuChilden
-            menuList.push(parent)
-        }
-
+        
         const postFeatured = await Post.query()
             .select(
                 'post.id',
@@ -45,7 +20,6 @@ export default class HomeController {
             .limit(4)
 
         return view.render('frontend.home.index', {
-            menuList: menuList,
             postFeatured: postFeatured,
             title: 'Trang Chủ'
         })

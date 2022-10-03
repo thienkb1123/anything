@@ -59,11 +59,13 @@
                         </a>
                     </div>
                     <div class="featured-grid">
-                        @each(row in postFeatured)
-                        <div class="featured-item cs item-1">
-                            <a class="entry-inner" href="{{ route('frontend.post.show', {slug: row.slug}) }}" title="{{ row.title }}">
+                        @each((row, i) in postFeatured)
+                        <div class="featured-item cs item-{{ i + 1 }}">
+                            <a class="entry-inner" href="{{ route('frontend.post.show', {slug: row.slug}) }}"
+                                title="{{ row.title }}">
                                 <span class="entry-image-wrap before-mask is-image">
-                                    <span class="entry-image pbt-lazy" data-src="{{ row.$extras && row.$extras.mediaPath }}"
+                                    <span class="entry-image pbt-lazy"
+                                        data-src="{{ row.$extras && row.$extras.mediaPath }}"
                                         style="background-image:url({{ row.$extras && row.$extras.mediaPath }})">
                                     </span>
                                 </span>

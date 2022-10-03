@@ -599,6 +599,10 @@
     --radius: 2px;
     --widget-shadow: 0 0 5px rgba(0, 0, 0, 0.01);
     --avatar-shadow: 0px 1px 4px rgba(0, 0, 0, 0.05);
+    --video-ratio: calc(16 / 9);
+    --video-container-max-width: 640px;
+    --video-container-x-padding-sum: 2rem;
+    /* eg, padding: 0 1rem */
 }
 
 html.is-dark {
@@ -835,6 +839,16 @@ a img {
 
 abbr {
     text-decoration: none
+}
+
+blockquote {
+    position: relative;
+    background-color: var(--gray-bg);
+    color: var(--title-color);
+    font-style: normal;
+    padding: 20px;
+    margin: 0;
+    border-radius: var(--radius);
 }
 
 .separator a {
@@ -2411,4 +2425,54 @@ ul.author-links {
     padding: 20px;
     border-radius: var(--radius);
     box-shadow: var(--widget-shadow);
+}
+
+.paragraph {
+    margin-bottom: 8px;
+}
+
+.embed-youtube {
+    --container-width: 720px;
+    --ratio: calc(16 / 9);
+    /* 1.77 */
+    width: 100%;
+    height: calc(var(--container-width) / var(--ratio));
+}
+
+@media only screen and (min-width: 672px) {
+    .youtube-embed {
+        --video-container-width: var(--video-container-max-width);
+    }
+}
+
+.post-body ul {
+    padding: 0 0 0 20px;
+    margin: 10px 0;
+}
+
+.post-body li {
+    margin: 8px 0;
+    padding: 0;
+}
+
+.post-body ul li,
+.post-body ol ul li {
+    list-style: none;
+}
+
+.post-body ul li:before,
+.post-body ul li ul li ul li:before {
+    display: inline-block;
+    content: '\ef4a';
+    font-family: 'Material Icons Round';
+    font-size: 5px;
+    line-height: 1;
+    vertical-align: middle;
+    margin: 0 5px 0 0;
+}
+
+.post-body img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

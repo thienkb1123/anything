@@ -57,5 +57,7 @@ Route.group(() => {
 }).prefix('any-api/v1').as('api')
 
 // Front-end
-Route.get('/', 'Frontend/HomeController.index')
-Route.get('/:slug', 'Frontend/PostsController.show').where('slug', /^[a-z0-9_-]+$/).as('frontend.post.show')
+Route.group(() => {
+    Route.get('/', 'Frontend/HomeController.index')
+    Route.get('/:slug', 'Frontend/PostsController.show').where('slug', /^[a-z0-9_-]+$/).as('frontend.post.show')
+}).middleware('global')

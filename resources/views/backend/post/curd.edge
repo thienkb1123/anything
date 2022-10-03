@@ -178,7 +178,7 @@
 
 @section('jsPlugin')
 @!component('backend/common/editorjs', {
-    content: flashMessages.get('content') || post && post.content || ''
+    content: flashMessages.get('content') || post?.content || []
 })
 <script src="{{ asset('assets/backend/viho/js/dropzone/dropzone.js') }}"></script>
 @end
