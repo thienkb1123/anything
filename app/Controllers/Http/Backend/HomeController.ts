@@ -3,7 +3,9 @@ export default class HomeController {
 
     public async index({ view }: HttpContextContract) {
 
-        return view.render('backend.home.index')
+        return view.render('backend.home.index', {
+            title: "Any Dashboard"
+        })
     }
 
 }

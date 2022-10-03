@@ -13,12 +13,29 @@
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/image@latest"></script><!-- Image -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
+<script src="{{ asset('assets/backend/any/file-manager/connect.js') }}"></script><!-- File Manager -->
 
 <!-- Load Editor.js's Core -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
 
 <!-- Initialization -->
 <script>
+    let blocksData = [
+        {
+            type: "paragraph",
+            data: {
+                text: "Enter content here",
+            }
+        },
+    ]
+
+    let content = {{{ content }}}
+    if (content) {
+        blocksData = content
+    }
+
+    console.log(blocksData)
+
     const editor = new EditorJS({
         readOnly: false,
         holder: 'editorjs',
@@ -88,17 +105,18 @@
                         coub: true
                     }
                 }
-            }
+            },
+            fileManager: AnyFileManager,
         },
         data: {
-            blocks: [
-                {
-                    type: "paragraph",
-                    data: {
-                        text: "Enter content here",
-                    }
-                },
-            ]
+            blocks: blocksData
+        },
+        onChange: (api, event) => {
+            editor.save().then((outputData) => {
+                $('input[name=content]').val(JSON.stringify(outputData.blocks))
+            }).catch((error) => {
+                console.log('Saving failed: ', error)
+            });
         }
     });
 

@@ -201,12 +201,12 @@
     max-width: 100%;
 }
 
-.codex-editor__redactor {
-    /* padding-bottom: 0 !important; */
-}
-
 .ce-toolbar__actions {
     top: -2px;
+}
+
+.codex-editor__redactor {
+    padding-bottom: 0 !important;
 }
 
 .any-editor {

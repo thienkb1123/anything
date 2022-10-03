@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('title', 100)
       table.string('slug', 150)
       table.string('summary', 255)
-      table.text('content')
+      table.json('content')
       table.tinyint('status', 1)
       table.dateTime('created_at', { useTz: true })
       table.dateTime('updated_at', { useTz: true })

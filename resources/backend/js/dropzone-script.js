@@ -78,7 +78,7 @@ function onSetAvatar() {
  */
 $(document).ready(function () {
     $('#mediaBtn').on('click', function () {
-        $('#mediaModal').modal('toggle')
+        $('#mediaModal').modal('show')
 
 
         const mediaID = $('input[name="mediaID"]').val()

@@ -48,6 +48,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label">Content</label>
+                                <input type="hidden" name="content" />
                                 <div id="editorjs" class="any-editor">
                                 </div>
                             </div>
@@ -176,8 +177,9 @@
 @end
 
 @section('jsPlugin')
-{{--  @!component('backend/common/ckediter')  --}}
-@!component('backend/common/editorjs')
+@!component('backend/common/editorjs', {
+    content: flashMessages.get('content') || post && post.content || ''
+})
 <script src="{{ asset('assets/backend/viho/js/dropzone/dropzone.js') }}"></script>
 @end
 
