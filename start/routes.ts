@@ -18,6 +18,7 @@
 |
 */
 
+import { Application } from '@adonisjs/core/build/standalone'
 import Route from '@ioc:Adonis/Core/Route'
 
 // Back-end
@@ -58,6 +59,12 @@ Route.group(() => {
 
 // Front-end
 Route.group(() => {
+    Route.get('feeds/posts/default', (ctx) => {
+
+        
+
+        // ctx.response.json()
+    })
     Route.get('/', 'Frontend/HomeController.index')
     Route.get('/:slug', 'Frontend/PostsController.show').where('slug', /^[a-z0-9_-]+$/).as('frontend.post.show')
 }).middleware('global')
