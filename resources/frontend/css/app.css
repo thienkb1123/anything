@@ -822,7 +822,6 @@ a:visited {
     clear: both
 }
 
-.section,
 .widget,
 .widget ul {
     margin: 0;
@@ -939,13 +938,6 @@ ul li {
 .flex-col {
     display: flex;
     flex-direction: column;
-}
-
-.section,
-.widget,
-.widget ul {
-    margin: 0;
-    padding: 0;
 }
 
 .entry-image,

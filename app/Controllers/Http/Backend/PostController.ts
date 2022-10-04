@@ -55,7 +55,6 @@ export default class PostController {
 
             session.flash('alert', Alert.create('Create successfully', Alert.success))
         } catch (error) {
-            console.log(error)
             session.flash('alert', Alert.create("Create failure. Let's try", Alert.error))
         }
         return response.redirect().toRoute('backend.post.index')

@@ -1,0 +1,554 @@
+@layout('frontend/layout')
+@set('postFeaturedMain', postsFeatured.at(0))
+
+@section('content')
+<div class="flex-c" id="ticker-wrapper">
+    <div class="ticker container section" id="ticker">
+        <div class="widget PopularPosts">
+            <div class="widget-title">
+                <h3 class="title">Trending</h3>
+            </div>
+            <div class="widget-content">
+                <div class="ticker-items">
+                    <div class="ticker-item item-2 active">
+                        <h2 class="entry-title">
+                            <a href="#" title="#">
+                                How We Know Disinfectants
+                                Should Kill the Covid-19
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+                <div class="ticker-nav">
+                    <button class="tn-prev" aria-label="Previous"></button>
+                    <button class="tn-next" aria-label="Next"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(postsFeatured?.length)
+<div class="flex-c has-ticker" id="featured-wrapper">
+    <div class="featured container" id="featured" name="Featured Posts">
+        <div class="widget HTML is-visible type-feat1">
+            <div class="widget-content">`
+                <div class="featured-items">
+                    <div class="featured-item cs item-0">
+                        <a class="entry-inner" href="{{ route('frontend.post.show', {slug: postFeaturedMain?.slug}) }}"
+                            title="{{ postFeaturedMain?.title }}">
+                            <span class="entry-image-wrap before-mask is-image">
+                                <span class="entry-image pbt-lazy"
+                                    data-src="{{ postFeaturedMain?.$extras && postFeaturedMain.$extras?.mediaPath }}"
+                                    style="background-image:url({{ postFeaturedMain?.$extras && postFeaturedMain.$extras?.mediaPath }}">
+                                </span>
+                            </span>
+                            <div class="entry-header entry-info">
+                                <span class="entry-category">{{ postFeaturedMain?.$extras.tagsName }}</span>
+                                <h2 class="entry-title">{{ postFeaturedMain?.title }}</h2>
+                                <div class="entry-meta">
+                                    <span class="entry-time mi">
+                                        <time class="published" datetime="{{ postFeaturedMain?.createdAt }}">
+                                            {{ postFeaturedMain?.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}
+                                        </time>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="featured-grid">
+                        @each((row, i) in postsFeatured.slice(1))
+                        <div class="featured-item cs item-{{ i + 1 }}">
+                            <a class="entry-inner" href="{{ route('frontend.post.show', {slug: row.slug}) }}"
+                                title="{{ row.title }}">
+                                <span class="entry-image-wrap before-mask is-image">
+                                    <span class="entry-image pbt-lazy"
+                                        data-src="{{ row.$extras && row.$extras.mediaPath }}"
+                                        style="background-image:url({{ row.$extras && row.$extras.mediaPath }})">
+                                    </span>
+                                </span>
+                                <div class="entry-header entry-info">
+                                    <span class="entry-category">{{ row?.$extras.tagsName }}</span>
+                                    <h2 class="entry-title">
+                                        {{ row.title }}
+                                    </h2>
+                                    <div class="entry-meta">
+                                        <span class="entry-time mi">
+                                            <time class="published" datetime="{{ row.createdAt }}">
+                                                {{ row.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}
+                                            </time>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        @endeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@endif
+
+<div class="flex-c content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="content-section section" id="content-section-1" name="Content Section 1">
+                    <div class="main section" id="main" name="Main Posts">
+                        <div class="widget HTML is-visible type-grid2" id="HTML7">
+                            <div class="widget-title title-wrap">
+                                <h3 class="title">Reviews</h3>
+                                <a href="/search/label/Reviews" class="title-link">
+                                    View all
+                                </a>
+                            </div>
+                            <div class="widget-content">
+                                <div class="content-block grid2-items">
+                                    <div class="grid2-item item-0"><a
+                                            title="The Best Xbox 360 Co-Op Offline Split-Screen Games"
+                                            class="entry-image-wrap sz-3 is-image"
+                                            href="https://magspot-template.blogspot.com/2021/07/the-best-xbox-360-co-op-offline-split.html"><span
+                                                class="entry-image pbt-lazy"
+                                                data-src="https://1.bp.blogspot.com/-UO9L7X5Pjgw/YQW9KU32jgI/AAAAAAAAAVc/cqJa2nMh_hcKJrMDGIq8DnHyOkgVxkAGgCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt55.jpg"
+                                                style="background-image:url(https://1.bp.blogspot.com/-UO9L7X5Pjgw/YQW9KU32jgI/AAAAAAAAAVc/cqJa2nMh_hcKJrMDGIq8DnHyOkgVxkAGgCLcBGAsYHQ/w234-h149-p-k-no-nu/pbt55.jpg)"></span><span
+                                                class="entry-category">Consoles</span></a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title"><a
+                                                    href="https://magspot-template.blogspot.com/2021/07/the-best-xbox-360-co-op-offline-split.html"
+                                                    title="The Best Xbox 360 Co-Op Offline Split-Screen Games">The
+                                                    Best Xbox 360 Co-Op Offline Split-Screen Games</a></h2>
+                                            <div class="entry-meta"><span class="entry-time mi"><time class="published"
+                                                        datetime="2021-07-31T14:14:00.000-07:00">July 31,
+                                                        2021</time></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="grid2-item item-1"><a
+                                            title="Great Local Multiplayer Games to Play on PS5"
+                                            class="entry-image-wrap sz-3 is-image"
+                                            href="https://magspot-template.blogspot.com/2021/07/great-local-multiplayer-games-to-play.html"><span
+                                                class="entry-image pbt-lazy"
+                                                data-src="https://1.bp.blogspot.com/-9KzmHiYXoVQ/YQW84O-tb2I/AAAAAAAAAVU/1FoN02luonQDfo4szj8OGIkUGPPcRDW5QCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt54.jpg"
+                                                style="background-image:url(https://1.bp.blogspot.com/-9KzmHiYXoVQ/YQW84O-tb2I/AAAAAAAAAVU/1FoN02luonQDfo4szj8OGIkUGPPcRDW5QCLcBGAsYHQ/w234-h149-p-k-no-nu/pbt54.jpg)"></span><span
+                                                class="entry-category">Consoles</span></a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title"><a
+                                                    href="https://magspot-template.blogspot.com/2021/07/great-local-multiplayer-games-to-play.html"
+                                                    title="Great Local Multiplayer Games to Play on PS5">Great Local
+                                                    Multiplayer Games to Play on PS5</a></h2>
+                                            <div class="entry-meta"><span class="entry-time mi"><time class="published"
+                                                        datetime="2021-07-31T14:13:00.002-07:00">July 31,
+                                                        2021</time></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="grid2-item item-2"><a title="How to Equip Your Studio Like the Top Tech"
+                                            class="entry-image-wrap sz-3 is-image"
+                                            href="https://magspot-template.blogspot.com/2021/07/how-to-equip-your-studio-like-top-tech.html"><span
+                                                class="entry-image pbt-lazy"
+                                                data-src="https://1.bp.blogspot.com/-aiNzYVKE8zk/YQW8m17-ZuI/AAAAAAAAAVM/57AMB3zEAOoHXBt2seZ9Ap8-zoUKwTOQwCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt53.jpg"
+                                                style="background-image:url(https://1.bp.blogspot.com/-aiNzYVKE8zk/YQW8m17-ZuI/AAAAAAAAAVM/57AMB3zEAOoHXBt2seZ9Ap8-zoUKwTOQwCLcBGAsYHQ/w234-h149-p-k-no-nu/pbt53.jpg)"></span><span
+                                                class="entry-category">Deals</span></a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title"><a
+                                                    href="https://magspot-template.blogspot.com/2021/07/how-to-equip-your-studio-like-top-tech.html"
+                                                    title="How to Equip Your Studio Like the Top Tech">How to Equip
+                                                    Your Studio Like the Top Tech</a></h2>
+                                            <div class="entry-meta"><span class="entry-time mi"><time class="published"
+                                                        datetime="2021-07-31T14:12:00.000-07:00">July 31,
+                                                        2021</time></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="grid2-item item-3"><a title="The Best Wired and Wireless Gaming Headset"
+                                            class="entry-image-wrap sz-3 is-image"
+                                            href="https://magspot-template.blogspot.com/2021/07/the-best-wired-and-wireless-gaming.html"><span
+                                                class="entry-image pbt-lazy"
+                                                data-src="https://1.bp.blogspot.com/-vwm2d7S2g9w/YQW8L1o0ZdI/AAAAAAAAAVE/f_DJLtKA398ep3lFtAwY5mUYkb14AWx0gCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt52.jpg"
+                                                style="background-image:url(https://1.bp.blogspot.com/-vwm2d7S2g9w/YQW8L1o0ZdI/AAAAAAAAAVE/f_DJLtKA398ep3lFtAwY5mUYkb14AWx0gCLcBGAsYHQ/w234-h149-p-k-no-nu/pbt52.jpg)"></span><span
+                                                class="entry-category">Deals</span></a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title"><a
+                                                    href="https://magspot-template.blogspot.com/2021/07/the-best-wired-and-wireless-gaming.html"
+                                                    title="The Best Wired and Wireless Gaming Headset">The Best
+                                                    Wired and Wireless Gaming Headset</a></h2>
+                                            <div class="entry-meta"><span class="entry-time mi"><time class="published"
+                                                        datetime="2021-07-31T14:10:00.000-07:00">July 31,
+                                                        2021</time></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="grid2-item item-4"><a title="Lessons Learned Selling Cheap Electronics"
+                                            class="entry-image-wrap sz-3 is-image"
+                                            href="https://magspot-template.blogspot.com/2021/07/lessons-learned-selling-cheap.html"><span
+                                                class="entry-image pbt-lazy"
+                                                data-src="https://1.bp.blogspot.com/--6wRcJk2TZ8/YQW7fiOCUCI/AAAAAAAAAU0/CKh2JSRJdlIPcjU1ltRmNTH-Mq-uGHM1gCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt50.jpg"
+                                                style="background-image:url(https://1.bp.blogspot.com/--6wRcJk2TZ8/YQW7fiOCUCI/AAAAAAAAAU0/CKh2JSRJdlIPcjU1ltRmNTH-Mq-uGHM1gCLcBGAsYHQ/w234-h149-p-k-no-nu/pbt50.jpg)"></span><span
+                                                class="entry-category">Deals</span></a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title"><a
+                                                    href="https://magspot-template.blogspot.com/2021/07/lessons-learned-selling-cheap.html"
+                                                    title="Lessons Learned Selling Cheap Electronics">Lessons
+                                                    Learned Selling Cheap Electronics</a></h2>
+                                            <div class="entry-meta"><span class="entry-time mi"><time class="published"
+                                                        datetime="2021-07-31T14:07:00.000-07:00">July 31,
+                                                        2021</time></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="grid2-item item-5"><a title="13 PlayStation 5 Tips to Get the Most Out"
+                                            class="entry-image-wrap sz-3 is-image"
+                                            href="https://magspot-template.blogspot.com/2021/07/13-playstation-5-tips-to-get-most-out.html"><span
+                                                class="entry-image pbt-lazy"
+                                                data-src="https://1.bp.blogspot.com/--N4_SofdCII/YQW7EOnfU_I/AAAAAAAAAUs/ieMMHWZEqrEyGD4N3_1qIvbRfb48P792gCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt49.jpg"
+                                                style="background-image:url(https://1.bp.blogspot.com/--N4_SofdCII/YQW7EOnfU_I/AAAAAAAAAUs/ieMMHWZEqrEyGD4N3_1qIvbRfb48P792gCLcBGAsYHQ/w234-h149-p-k-no-nu/pbt49.jpg)"></span><span
+                                                class="entry-category">Consoles</span></a>
+                                        <div class="entry-header">
+                                            <h2 class="entry-title"><a
+                                                    href="https://magspot-template.blogspot.com/2021/07/13-playstation-5-tips-to-get-most-out.html"
+                                                    title="13 PlayStation 5 Tips to Get the Most Out">13 PlayStation
+                                                    5 Tips to Get the Most Out</a></h2>
+                                            <div class="entry-meta"><span class="entry-time mi"><time class="published"
+                                                        datetime="2021-07-31T14:05:00.002-07:00">July 31,
+                                                        2021</time></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="widget Blog index-blog flex-col" id="Blog1">
+                            <div class="title-wrap main-title">
+                                <h3 class="title">Latest Posts</h3><a class="title-link" href="/search">View all</a>
+                            </div>
+                            <div class="blog-posts index-post-wrap list1-items">
+                                <article class="index-post list1-item hentry post-0">
+                                    <a class="entry-image-wrap is-image" href="#" title="Title">
+                                        <img class="entry-image pbt-lazy"
+                                            src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w259-h165-p-k-no-nu/pbt66.jpg"
+                                            alt="" />
+                                        <span class="entry-category">Apple</span>
+                                    </a>
+                                    <div class="entry-header">
+                                        <h2 class="entry-title">
+                                            <a href="#" rel="bookmark" title="#">
+                                                11 of Best Laptops Evaluated Based on Budget
+                                            </a>
+                                        </h2>
+                                        <p class="entry-excerpt excerpt">
+                                            Lorem Ipsum is simply dummy text of the
+                                            printing and typesetting industry. Lorem Ipsum has been…
+                                        </p>
+                                        <div class="entry-meta">
+                                            <span class="entry-author mi">
+                                                <span class="by sp">by</span>
+                                                <span class="author-name">John Doe</span>
+                                            </span>
+                                            <span class="entry-time mi">
+                                                <span class="sp">-</span>
+                                                <time class="published" datetime="2021-08-02T06:33:00-07:00">
+                                                    August 02, 2021
+                                                </time>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="index-post list1-item hentry post-0">
+                                    <a class="entry-image-wrap is-image" href="#" title="Title">
+                                        <img class="entry-image pbt-lazy"
+                                            src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w259-h165-p-k-no-nu/pbt66.jpg"
+                                            alt="" />
+                                        <span class="entry-category">Apple</span>
+                                    </a>
+                                    <div class="entry-header">
+                                        <h2 class="entry-title">
+                                            <a href="#" rel="bookmark" title="#">
+                                                11 of Best Laptops Evaluated Based on Budget
+                                            </a>
+                                        </h2>
+                                        <p class="entry-excerpt excerpt">
+                                            Lorem Ipsum is simply dummy text of the
+                                            printing and typesetting industry. Lorem Ipsum has been…
+                                        </p>
+                                        <div class="entry-meta">
+                                            <span class="entry-author mi">
+                                                <span class="by sp">by</span>
+                                                <span class="author-name">John Doe</span>
+                                            </span>
+                                            <span class="entry-time mi">
+                                                <span class="sp">-</span>
+                                                <time class="published" datetime="2021-08-02T06:33:00-07:00">
+                                                    August 02, 2021
+                                                </time>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="index-post list1-item hentry post-0">
+                                    <a class="entry-image-wrap is-image" href="#" title="Title">
+                                        <img class="entry-image pbt-lazy"
+                                            src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w259-h165-p-k-no-nu/pbt66.jpg"
+                                            alt="" />
+                                        <span class="entry-category">Apple</span>
+                                    </a>
+                                    <div class="entry-header">
+                                        <h2 class="entry-title">
+                                            <a href="#" rel="bookmark" title="#">
+                                                11 of Best Laptops Evaluated Based on Budget
+                                            </a>
+                                        </h2>
+                                        <p class="entry-excerpt excerpt">
+                                            Lorem Ipsum is simply dummy text of the
+                                            printing and typesetting industry. Lorem Ipsum has been…
+                                        </p>
+                                        <div class="entry-meta">
+                                            <span class="entry-author mi">
+                                                <span class="by sp">by</span>
+                                                <span class="author-name">John Doe</span>
+                                            </span>
+                                            <span class="entry-time mi">
+                                                <span class="sp">-</span>
+                                                <time class="published" datetime="2021-08-02T06:33:00-07:00">
+                                                    August 02, 2021
+                                                </time>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <article class="index-post list1-item hentry post-0">
+                                    <a class="entry-image-wrap is-image" href="#" title="Title">
+                                        <img class="entry-image pbt-lazy"
+                                            src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w259-h165-p-k-no-nu/pbt66.jpg"
+                                            alt="" />
+                                        <span class="entry-category">Apple</span>
+                                    </a>
+                                    <div class="entry-header">
+                                        <h2 class="entry-title">
+                                            <a href="#" rel="bookmark" title="#">
+                                                11 of Best Laptops Evaluated Based on Budget
+                                            </a>
+                                        </h2>
+                                        <p class="entry-excerpt excerpt">
+                                            Lorem Ipsum is simply dummy text of the
+                                            printing and typesetting industry. Lorem Ipsum has been…
+                                        </p>
+                                        <div class="entry-meta">
+                                            <span class="entry-author mi">
+                                                <span class="by sp">by</span>
+                                                <span class="author-name">John Doe</span>
+                                            </span>
+                                            <span class="entry-time mi">
+                                                <span class="sp">-</span>
+                                                <time class="published" datetime="2021-08-02T06:33:00-07:00">
+                                                    August 02, 2021
+                                                </time>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </article>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="sidebar pbt-section section" id="sidebar" name="Sidebar">
+                    <div class="widget LinkList" data-version="2" id="LinkList1">
+                        <div class="widget LinkList" data-version="2" id="LinkList1">
+                            <div class="widget-title title-wrap">
+                                <h3 class="title">Follow Us</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="social-icons social sb-a">
+                                    <li class="facebook">
+                                        <a alt="facebook" class="fa-facebook btn" data-side="true"
+                                            href="https://www.facebook.com/probloggertemplates"
+                                            rel="noopener noreferrer" target="_blank" title="facebook">
+                                            <span class="text">Facebook</span>
+                                        </a>
+                                    </li>
+                                    <li class="twitter">
+                                        <a alt="twitter" class="fa-twitter btn" data-side="true"
+                                            href="https://twitter.com/probtemplates" rel="noopener noreferrer"
+                                            target="_blank" title="twitter">
+                                            <span class="text">Twitter</span>
+                                        </a>
+                                    </li>
+                                    <li class="youtube">
+                                        <a alt="youtube" class="fa-youtube btn" data-side="true"
+                                            href="https://www.youtube.com/probloggertemplates?sub_confirmation=1"
+                                            rel="noopener noreferrer" target="_blank" title="youtube">
+                                            <span class="text">YouTube</span>
+                                        </a>
+                                    </li>
+                                    <li class="instagram">
+                                        <a alt="instagram" class="fa-instagram btn" data-side="true"
+                                            href="https://instagram.com/probloggertemplates" rel="noopener noreferrer"
+                                            target="_blank" title="instagram">
+                                            <span class="text">Instagram</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget PopularPosts" data-version="2" id="PopularPosts2">
+                        <div class="widget-title title-wrap">
+                            <h3 class="title">Popular Posts</h3>
+                        </div>
+                        <div class="widget-content side-items">
+                            <div class="side-item cs item-0">
+                                <a class="entry-inner"
+                                    href="https://magspot-template.blogspot.com/2021/08/11-of-best-laptops-evaluated-based-on.html"
+                                    title="11 of Best Laptops Evaluated Based on Budget">
+                                    <span class="entry-image-wrap before-mask is-image"><span
+                                            class="entry-image pbt-lazy"
+                                            data-src="https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt66.jpg"
+                                            style="background-image:url(https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w308-h198-p-k-no-nu/pbt66.jpg)"></span>
+                                    </span>
+                                    <div class="entry-header entry-info">
+                                        <span class="entry-category">Apple</span>
+                                        <h2 class="entry-title">11 of Best Laptops Evaluated Based on Budget</h2>
+                                        <div class="entry-meta"><span class="entry-author mi"><span
+                                                    class="sp">by</span><span class="author-name">John
+                                                    Doe</span></span><span class="entry-time mi"><span
+                                                    class="sp">-</span><time class="published"
+                                                    datetime="2021-08-02T06:33:00-07:00">August 02,
+                                                    2021</time></span></div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="side-item item-1">
+                                <a class="entry-image-wrap sz-1 is-image"
+                                    href="https://magspot-template.blogspot.com/2021/08/apple-watch-series-5-is-best-one-yet-by.html"
+                                    title="Apple Watch Series 5 is the Best One Yet By Consumer"><span
+                                        class="entry-image pbt-lazy"
+                                        data-src="https://1.bp.blogspot.com/-7vg-bSX8xLI/YQfz0dY-yoI/AAAAAAAAAWs/t91KpNFtLSYrInDU5jWlbeotvsEyrrsuwCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt65.jpg"
+                                        style="background-image:url(https://1.bp.blogspot.com/-7vg-bSX8xLI/YQfz0dY-yoI/AAAAAAAAAWs/t91KpNFtLSYrInDU5jWlbeotvsEyrrsuwCLcBGAsYHQ/w108-h72-p-k-no-nu/pbt65.jpg)"></span>
+                                </a>
+                                <div class="entry-header">
+                                    <h2 class="entry-title"><a
+                                            href="https://magspot-template.blogspot.com/2021/08/apple-watch-series-5-is-best-one-yet-by.html"
+                                            title="Apple Watch Series 5 is the Best One Yet By Consumer">Apple Watch
+                                            Series 5 is the Best One Yet By Consumer</a></h2>
+                                    <div class="entry-meta"><time class="published"
+                                            datetime="2021-08-02T06:32:00-07:00">August 02,
+                                            2021</time></div>
+                                </div>
+                            </div>
+                            <div class="side-item item-2">
+                                <a class="entry-image-wrap sz-1 is-image"
+                                    href="https://magspot-template.blogspot.com/2021/07/how-we-know-disinfectants-should-kill.html"
+                                    title="How We Know Disinfectants Should Kill the Covid-19"><span
+                                        class="entry-image pbt-lazy"
+                                        data-src="https://1.bp.blogspot.com/-924Nb_-CUFk/YQWxvsD9YjI/AAAAAAAAATs/QxsGc6FOEE4wbNcATLB9to38uneI51YEACLcBGAsYHQ/w72-h72-p-k-no-nu/pbt41.jpg"
+                                        style="background-image:url(https://1.bp.blogspot.com/-924Nb_-CUFk/YQWxvsD9YjI/AAAAAAAAATs/QxsGc6FOEE4wbNcATLB9to38uneI51YEACLcBGAsYHQ/w108-h72-p-k-no-nu/pbt41.jpg)"></span>
+                                </a>
+                                <div class="entry-header">
+                                    <h2 class="entry-title"><a
+                                            href="https://magspot-template.blogspot.com/2021/07/how-we-know-disinfectants-should-kill.html"
+                                            title="How We Know Disinfectants Should Kill the Covid-19">How We Know
+                                            Disinfectants Should Kill the Covid-19</a></h2>
+                                    <div class="entry-meta"><time class="published"
+                                            datetime="2021-07-31T12:21:00-07:00">July 31,
+                                            2021</time></div>
+                                </div>
+                            </div>
+                            <div class="side-item item-3">
+                                <a class="entry-image-wrap sz-1 is-image"
+                                    href="https://magspot-template.blogspot.com/2021/07/how-to-get-covid-19-related-alerts-on.html"
+                                    title="How to Get COVID-19 Related Alerts on Your Phone"><span
+                                        class="entry-image pbt-lazy"
+                                        data-src="https://1.bp.blogspot.com/-Yksax9q66gI/YQWyCh_KTgI/AAAAAAAAAT0/elXkZ8l2KCw7KhwjJE-ofCPGK38bv7k_gCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt42.jpg"
+                                        style="background-image:url(https://1.bp.blogspot.com/-Yksax9q66gI/YQWyCh_KTgI/AAAAAAAAAT0/elXkZ8l2KCw7KhwjJE-ofCPGK38bv7k_gCLcBGAsYHQ/w108-h72-p-k-no-nu/pbt42.jpg)"></span>
+                                </a>
+                                <div class="entry-header">
+                                    <h2 class="entry-title"><a
+                                            href="https://magspot-template.blogspot.com/2021/07/how-to-get-covid-19-related-alerts-on.html"
+                                            title="How to Get COVID-19 Related Alerts on Your Phone">How to Get
+                                            COVID-19 Related Alerts on Your Phone</a></h2>
+                                    <div class="entry-meta"><time class="published"
+                                            datetime="2021-07-31T12:22:00-07:00">July 31,
+                                            2021</time></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget Label" data-version="2" id="Label1">
+                        <div class="widget-title title-wrap">
+                            <h3 class="title">Categories</h3>
+                        </div>
+                        <div class="widget-content list-label">
+                            <ul class="list-style">
+                                <li>
+                                    <a class="label-name has-count"
+                                        href="https://magspot-template.blogspot.com/search/label/Gadgets">Gadgets
+                                        <span class="label-count count-style">(6)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="label-name has-count"
+                                        href="https://magspot-template.blogspot.com/search/label/Healthy">Healthy
+                                        <span class="label-count count-style">(6)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="label-name has-count"
+                                        href="https://magspot-template.blogspot.com/search/label/Podcasts">Podcasts
+                                        <span class="label-count count-style">(6)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="label-name has-count"
+                                        href="https://magspot-template.blogspot.com/search/label/Reviews">Reviews
+                                        <span class="label-count count-style">(7)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="widget Label" data-version="2" id="Label2">
+                        <div class="widget-title title-wrap">
+                            <h3 class="title">Main Tags</h3>
+                        </div>
+                        <div class="widget-content cloud-label">
+                            <ul class="cloud-style">
+                                <li>
+                                    <a class="label-name btn"
+                                        href="https://magspot-template.blogspot.com/search/label/Cars">Cars</a>
+                                </li>
+                                <li>
+                                    <a class="label-name btn"
+                                        href="https://magspot-template.blogspot.com/search/label/Gadgets">Gadgets</a>
+                                </li>
+                                <li>
+                                    <a class="label-name btn"
+                                        href="https://magspot-template.blogspot.com/search/label/Games">Games</a>
+                                </li>
+                                <li>
+                                    <a class="label-name btn"
+                                        href="https://magspot-template.blogspot.com/search/label/Healthy">Healthy</a>
+                                </li>
+                                <li><a class="label-name btn"
+                                        href="https://magspot-template.blogspot.com/search/label/Podcasts">Podcasts</a>
+                                </li>
+                                <li>
+                                    <a class="label-name btn"
+                                        href="https://magspot-template.blogspot.com/search/label/Reviews">Reviews</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@end
