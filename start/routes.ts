@@ -18,7 +18,7 @@
 |
 */
 
-import { Application } from '@adonisjs/core/build/standalone'
+import Application from '@ioc:Adonis/Core/Application'
 import Route from '@ioc:Adonis/Core/Route'
 
 // Back-end
@@ -60,11 +60,54 @@ Route.group(() => {
 // Front-end
 Route.group(() => {
     Route.get('feeds/posts/default', (ctx) => {
-
-        
-
-        // ctx.response.json()
+        const resp = Application.publicPath('default.json')
+        ctx.response.json(require(resp))
     })
+    Route.get('feeds/posts/default/-/Healthy', (ctx) => {
+        const resp = Application.publicPath('Healthy.json')
+        ctx.response.json(require(resp))
+    })
+
+    Route.get('feeds/posts/default/-/Reviews', (ctx) => {
+        const resp = Application.publicPath('Reviews.json')
+        ctx.response.json(require(resp))
+    })
+
+    Route.get('feeds/posts/default/-/Gadgets', (ctx) => {
+        const resp = Application.publicPath('Gadgets.json')
+        ctx.response.json(require(resp))
+    })
+
+    Route.get('feeds/posts/default/-/Laptops', (ctx) => {
+        const resp = Application.publicPath('Laptops.json')
+        ctx.response.json(require(resp))
+    })
+
+    Route.get('feeds/posts/default/-/Travel', (ctx) => {
+        const resp = Application.publicPath('Travel.json')
+        ctx.response.json(require(resp))
+    })
+
+    Route.get('feeds/posts/default/-/Games', (ctx) => {
+        const resp = Application.publicPath('Games.json')
+        ctx.response.json(require(resp))
+    })
+
+    Route.get('feeds/posts/default/-/Consoles', (ctx) => {
+        const resp = Application.publicPath('Consoles.json')
+        ctx.response.json(require(resp))
+    })
+
+    Route.get('feeds/posts/default/-/Mobile', (ctx) => {
+        const resp = Application.publicPath('Mobile.json')
+        ctx.response.json(require(resp))
+    })
+
+    Route.get('feeds/posts/default/-/Cars', (ctx) => {
+        const resp = Application.publicPath('Cars.json')
+        ctx.response.json(require(resp))
+    })
+
     Route.get('/', 'Frontend/HomeController.index')
     Route.get('/:slug', 'Frontend/PostsController.show').where('slug', /^[a-z0-9_-]+$/).as('frontend.post.show')
 }).middleware('global')
