@@ -59,52 +59,49 @@ Route.group(() => {
 
 // Front-end
 Route.group(() => {
-    Route.get('feeds/posts/default', (ctx) => {
-        const resp = Application.publicPath('default.json')
-        ctx.response.json(require(resp))
-    })
+    Route.get('feeds/posts/default', 'Frontend/PostsController.list')
     Route.get('feeds/posts/default/-/Healthy', (ctx) => {
-        const resp = Application.publicPath('Healthy.json')
+        const resp = Application.tmpPath('Healthy.json')
         ctx.response.json(require(resp))
     })
 
     Route.get('feeds/posts/default/-/Reviews', (ctx) => {
-        const resp = Application.publicPath('Reviews.json')
+        const resp = Application.tmpPath('Reviews.json')
         ctx.response.json(require(resp))
     })
 
     Route.get('feeds/posts/default/-/Gadgets', (ctx) => {
-        const resp = Application.publicPath('Gadgets.json')
+        const resp = Application.tmpPath('Gadgets.json')
         ctx.response.json(require(resp))
     })
 
     Route.get('feeds/posts/default/-/Laptops', (ctx) => {
-        const resp = Application.publicPath('Laptops.json')
+        const resp = Application.tmpPath('Laptops.json')
         ctx.response.json(require(resp))
     })
 
     Route.get('feeds/posts/default/-/Travel', (ctx) => {
-        const resp = Application.publicPath('Travel.json')
+        const resp = Application.tmpPath('Travel.json')
         ctx.response.json(require(resp))
     })
 
     Route.get('feeds/posts/default/-/Games', (ctx) => {
-        const resp = Application.publicPath('Games.json')
+        const resp = Application.tmpPath('Games.json')
         ctx.response.json(require(resp))
     })
 
     Route.get('feeds/posts/default/-/Consoles', (ctx) => {
-        const resp = Application.publicPath('Consoles.json')
+        const resp = Application.tmpPath('Consoles.json')   
         ctx.response.json(require(resp))
     })
 
     Route.get('feeds/posts/default/-/Mobile', (ctx) => {
-        const resp = Application.publicPath('Mobile.json')
+        const resp = Application.tmpPath('Mobile.json')
         ctx.response.json(require(resp))
     })
 
     Route.get('feeds/posts/default/-/Cars', (ctx) => {
-        const resp = Application.publicPath('Cars.json')
+        const resp = Application.tmpPath('Cars.json')
         ctx.response.json(require(resp))
     })
 
