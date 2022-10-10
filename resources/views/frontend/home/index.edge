@@ -1,26 +1,293 @@
 @layout('frontend/layout')
-@set('postFeaturedMain', postsFeatured.at(0))
 
 @section('content')
-@each (widget in page?.layouts?.widgets)
-
-@if (widget.type == 'trending')
-@!component('frontend/components/trending')
-@endif
-
-@if (widget.type == 'featured')
-    @!component('frontend/components/featured', {
-        postFeaturedMain: postsFeatured.at(0),
-        postsFeatured: postsFeatured.slice(1)
-    })
-@endif
-
-@if (widget.type == 'content')
-@!component('frontend/components/content', {
-    contentWidgets: widget.contentWidgets,
-    leftWidgets: widget.leftWidgets
-})
-@endif
-
-@endeach
+<div class='flex-c has-feat' id='ticker-wrapper'>
+    <div class='ticker container row-x1 section' id='ticker' name='Ticker News'>
+        <div class='widget PopularPosts' data-version='2' id='PopularPosts3'>
+            <div class='widget-title'>
+                <h3 class='title'>Trending</h3>
+            </div>
+            <div class='widget-content'>
+                <div class='ticker-items'>
+                    <div class='ticker-item item-0'>
+                        <h2 class='entry-title'><a
+                                href='https://magspot-template.blogspot.com/2021/08/11-of-best-laptops-evaluated-based-on.html'
+                                title='11 of Best Laptops Evaluated Based on Budget'>11 of Best Laptops
+                                Evaluated Based on Budget</a></h2>
+                    </div>
+                    <div class='ticker-item item-1'>
+                        <h2 class='entry-title'><a
+                                href='https://magspot-template.blogspot.com/2021/07/how-we-know-disinfectants-should-kill.html'
+                                title='How We Know Disinfectants Should Kill the Covid-19'>How We Know
+                                Disinfectants Should Kill the Covid-19</a></h2>
+                    </div>
+                    <div class='ticker-item item-2'>
+                        <h2 class='entry-title'><a
+                                href='https://magspot-template.blogspot.com/2021/08/apple-watch-series-5-is-best-one-yet-by.html'
+                                title='Apple Watch Series 5 is the Best One Yet By Consumer'>Apple Watch Series
+                                5 is the Best One Yet By Consumer</a></h2>
+                    </div>
+                    <div class='ticker-item item-3'>
+                        <h2 class='entry-title'><a
+                                href='https://magspot-template.blogspot.com/2021/08/heres-what-people-think-of-ios-13-new.html'
+                                title='Here’s What People Think of iOS 13 New Dark Mode'>Here&#8217;s What
+                                People Think of iOS 13 New Dark Mode</a></h2>
+                    </div>
+                    <div class='ticker-item item-4'>
+                        <h2 class='entry-title'><a
+                                href='https://magspot-template.blogspot.com/2021/07/how-to-get-covid-19-related-alerts-on.html'
+                                title='How to Get COVID-19 Related Alerts on Your Phone'>How to Get COVID-19
+                                Related Alerts on Your Phone</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='flex-c has-ticker' id='featured-wrapper'>
+    <div class='featured container row-x1 section' id='featured' name='Featured Posts'>
+        <div class='widget HTML is-visible' data-version='2' id='HTML11'>
+            <div class='widget-content' data-shortcode='{getPosts} $label={recent} $style={1}'>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='flex-c' id='content-wrapper'>
+    <div class='container row-x1 flex-sb'>
+        <main class='has-margin' id='main-wrapper'>
+            <div class='content-section section' id='content-section-1' name='Content Section 1'>
+                <div class='widget HTML is-visible' data-version='2' id='HTML14'>
+                    <div class='widget-title title-wrap'>
+                        <h3 class='title'>World News</h3>
+                    </div>
+                    <div class='widget-content'
+                        data-shortcode='{getPosts} $results={5} $label={Healthy} $type={block1}'>
+                    </div>
+                </div>
+                <div class='widget HTML is-visible' data-version='2' id='HTML7'>
+                    <div class='widget-title title-wrap'>
+                        <h3 class='title'>Reviews</h3>
+                    </div>
+                    <div class='widget-content'
+                        data-shortcode='{getPosts} $results={6} $label={Reviews} $type={grid2}'>
+                    </div>
+                </div>
+                <div class='widget HTML is-visible' data-version='2' id='HTML8'>
+                    <div class='widget-title title-wrap'>
+                        <h3 class='title'>Gadgets</h3>
+                    </div>
+                    <div class='widget-content'
+                        data-shortcode='{getPosts} $results={4} $label={Gadgets} $type={col-left}'>
+                    </div>
+                </div>
+                <div class='widget HTML is-visible' data-version='2' id='HTML13'>
+                    <div class='widget-title title-wrap'>
+                        <h3 class='title'>Laptops</h3>
+                    </div>
+                    <div class='widget-content'
+                        data-shortcode='{getPosts} $results={4} $label={Laptops} $type={col-right}'>
+                    </div>
+                </div>
+            </div>
+            <div class='main section' id='main' name='Main Posts'>
+                <div class='widget Blog index-blog flex-col' data-version='2' id='Blog1'>
+                    <div class='title-wrap main-title'>
+                        <h3 class='title'>Latest Posts</h3><a class='title-link' href='/search'>View all</a>
+                    </div>
+                    <div class='blog-posts index-post-wrap list1-items'>
+                        <article class='index-post list1-item hentry post-0'>
+                            <a class='entry-image-wrap is-image'
+                                href='https://magspot-template.blogspot.com/2021/08/11-of-best-laptops-evaluated-based-on.html'
+                                title='11 of Best Laptops Evaluated Based on Budget'><span class='entry-image'
+                                    data-src='https://1.bp.blogspot.com/-uK5sQ5rOkRU/YQf0I-jK87I/AAAAAAAAAW0/INcqkESmgFYXh__ci2SPmMUHziYhGchtwCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt66.jpg'></span>
+                                <span class='entry-category'>Apple</span>
+                            </a>
+                            <div class='entry-header'>
+                                <h2 class='entry-title'><a
+                                        href='https://magspot-template.blogspot.com/2021/08/11-of-best-laptops-evaluated-based-on.html'
+                                        rel='bookmark' title='11 of Best Laptops Evaluated Based on Budget'>11
+                                        of Best Laptops Evaluated Based on Budget</a></h2>
+                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
+                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
+                                <div class='entry-meta'>
+                                    <span class='entry-author mi'><span class='by sp'>by</span><span
+                                            class='author-name'>John Doe</span></span>
+                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
+                                            datetime='2021-08-02T06:33:00-07:00'>August 02, 2021</time></span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class='index-post list1-item hentry post-1'>
+                            <a class='entry-image-wrap is-image'
+                                href='https://magspot-template.blogspot.com/2021/08/apple-watch-series-5-is-best-one-yet-by.html'
+                                title='Apple Watch Series 5 is the Best One Yet By Consumer'><span
+                                    class='entry-image'
+                                    data-src='https://1.bp.blogspot.com/-7vg-bSX8xLI/YQfz0dY-yoI/AAAAAAAAAWs/t91KpNFtLSYrInDU5jWlbeotvsEyrrsuwCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt65.jpg'></span>
+                                <span class='entry-category'>Laptops</span>
+                            </a>
+                            <div class='entry-header'>
+                                <h2 class='entry-title'><a
+                                        href='https://magspot-template.blogspot.com/2021/08/apple-watch-series-5-is-best-one-yet-by.html'
+                                        rel='bookmark'
+                                        title='Apple Watch Series 5 is the Best One Yet By Consumer'>Apple Watch
+                                        Series 5 is the Best One Yet By Consumer</a></h2>
+                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
+                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
+                                <div class='entry-meta'>
+                                    <span class='entry-author mi'><span class='by sp'>by</span><span
+                                            class='author-name'>John Doe</span></span>
+                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
+                                            datetime='2021-08-02T06:32:00-07:00'>August 02, 2021</time></span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class='index-post list1-item hentry post-2'>
+                            <a class='entry-image-wrap is-image'
+                                href='https://magspot-template.blogspot.com/2021/08/heres-what-people-think-of-ios-13-new.html'
+                                title='Here’s What People Think of iOS 13 New Dark Mode'><span
+                                    class='entry-image'
+                                    data-src='https://1.bp.blogspot.com/-gj2q6SmAQ8w/YQfyUcMT0sI/AAAAAAAAAWM/NPXqUCw77IEK7JCX930V-tdVQxwy-SOZACLcBGAsYHQ/w72-h72-p-k-no-nu/pbt61.jpg'></span>
+                                <span class='entry-category'>Laptops</span>
+                            </a>
+                            <div class='entry-header'>
+                                <h2 class='entry-title'><a
+                                        href='https://magspot-template.blogspot.com/2021/08/heres-what-people-think-of-ios-13-new.html'
+                                        rel='bookmark'
+                                        title='Here’s What People Think of iOS 13 New Dark Mode'>Here&#8217;s
+                                        What People Think of iOS 13 New Dark Mode</a></h2>
+                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
+                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
+                                <div class='entry-meta'>
+                                    <span class='entry-author mi'><span class='by sp'>by</span><span
+                                            class='author-name'>John Doe</span></span>
+                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
+                                            datetime='2021-08-02T06:28:00-07:00'>August 02, 2021</time></span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class='index-post list1-item hentry post-3'>
+                            <a class='entry-image-wrap is-image'
+                                href='https://magspot-template.blogspot.com/2021/08/18-practices-for-building-responsive.html'
+                                title='18 Practices for Building Responsive Web Applications'><span
+                                    class='entry-image'
+                                    data-src='https://1.bp.blogspot.com/-mMOheBhfqNw/YQfynJ__muI/AAAAAAAAAWU/aYmWy7V9Aocp1npTdAgOgBT8-3mZ0ZvowCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt62.jpg'></span>
+                                <span class='entry-category'>Apple</span>
+                            </a>
+                            <div class='entry-header'>
+                                <h2 class='entry-title'><a
+                                        href='https://magspot-template.blogspot.com/2021/08/18-practices-for-building-responsive.html'
+                                        rel='bookmark'
+                                        title='18 Practices for Building Responsive Web Applications'>18
+                                        Practices for Building Responsive Web Applications</a></h2>
+                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
+                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
+                                <div class='entry-meta'>
+                                    <span class='entry-author mi'><span class='by sp'>by</span><span
+                                            class='author-name'>John Doe</span></span>
+                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
+                                            datetime='2021-08-02T06:27:00-07:00'>August 02, 2021</time></span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class='index-post list1-item hentry post-4'>
+                            <a class='entry-image-wrap is-image'
+                                href='https://magspot-template.blogspot.com/2021/08/opera-browser-lets-you-apply-dark-mode.html'
+                                title='Opera Browser Lets You Apply Dark Mode to Web Page'><span
+                                    class='entry-image'
+                                    data-src='https://1.bp.blogspot.com/-i78PciO1oZ8/YQfy_fz9M8I/AAAAAAAAAWc/8wfb1kBKDtUXlGq01SjvkZqjPP-Ac3lzgCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt63.jpg'></span>
+                                <span class='entry-category'>Laptops</span>
+                            </a>
+                            <div class='entry-header'>
+                                <h2 class='entry-title'><a
+                                        href='https://magspot-template.blogspot.com/2021/08/opera-browser-lets-you-apply-dark-mode.html'
+                                        rel='bookmark'
+                                        title='Opera Browser Lets You Apply Dark Mode to Web Page'>Opera Browser
+                                        Lets You Apply Dark Mode to Web Page</a></h2>
+                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
+                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
+                                <div class='entry-meta'>
+                                    <span class='entry-author mi'><span class='by sp'>by</span><span
+                                            class='author-name'>John Doe</span></span>
+                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
+                                            datetime='2021-08-02T06:24:00-07:00'>August 02, 2021</time></span>
+                                </div>
+                            </div>
+                        </article>
+                        <article class='index-post list1-item hentry post-5'>
+                            <a class='entry-image-wrap is-image'
+                                href='https://magspot-template.blogspot.com/2021/08/apple-macbook-pro-is-best-one-yet-by.html'
+                                title='Apple Macbook Pro is the Best One Yet By Consumer'><span
+                                    class='entry-image'
+                                    data-src='https://1.bp.blogspot.com/-yi3m2kRI9TI/YQf39Eo-ZLI/AAAAAAAAAXM/_B-rd9nER_o7Df5-dsH4p7Phzl5NTeMcgCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt64.jpg'></span>
+                                <span class='entry-category'>Apple</span>
+                            </a>
+                            <div class='entry-header'>
+                                <h2 class='entry-title'><a
+                                        href='https://magspot-template.blogspot.com/2021/08/apple-macbook-pro-is-best-one-yet-by.html'
+                                        rel='bookmark'
+                                        title='Apple Macbook Pro is the Best One Yet By Consumer'>Apple Macbook
+                                        Pro is the Best One Yet By Consumer</a></h2>
+                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
+                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
+                                <div class='entry-meta'>
+                                    <span class='entry-author mi'><span class='by sp'>by</span><span
+                                            class='author-name'>John Doe</span></span>
+                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
+                                            datetime='2021-08-02T06:23:00-07:00'>August 02, 2021</time></span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class='blog-pager' id='blog-pager'>
+                        <a class='blog-pager-older-link load-more btn'
+                            data-load='https://magspot-template.blogspot.com/search?updated-max=2021-08-02T06:23:00-07:00&amp;max-results=6'
+                            href='#' id='magspot-load-more-link'>
+                            Load More
+                        </a>
+                        <span class='loading'>
+                            <div class='loader'></div>
+                        </span>
+                        <span class='no-more load-more btn'>No results found</span>
+                    </div>
+                </div>
+            </div>
+            <div class='content-section section' id='content-section-2' name='Content Section 2'>
+                <div class='widget HTML is-visible' data-version='2' id='HTML15'>
+                    <div class='widget-title title-wrap'>
+                        <h3 class='title'>Videos</h3>
+                    </div>
+                    <div class='widget-content'
+                        data-shortcode='{getPosts} $results={5} $label={Games} $type={video} $style={1}'>
+                    </div>
+                </div>
+                <div class='widget HTML is-visible' data-version='2' id='HTML21'>
+                    <div class='widget-title title-wrap'>
+                        <h3 class='title'>Consoles</h3>
+                    </div>
+                    <div class='widget-content'
+                        data-shortcode='{getPosts} $results={4} $label={Consoles} $type={grid1}'>
+                    </div>
+                </div>
+                <div class='widget HTML is-visible' data-version='2' id='HTML20'>
+                    <div class='widget-title title-wrap'>
+                        <h3 class='title'>Mobile</h3>
+                    </div>
+                    <div class='widget-content'
+                        data-shortcode='{getPosts} $results={4} $label={Mobile} $type={list1}'>
+                    </div>
+                </div>
+                <div class='widget HTML is-visible' data-version='2' id='HTML10'>
+                    <div class='widget-title title-wrap'>
+                        <h3 class='title'>Car News</h3>
+                    </div>
+                    <div class='widget-content'
+                        data-shortcode='{getPosts} $results={4} $label={Cars} $type={block2}'>
+                    </div>
+                </div>
+            </div>
+        </main>
+       
+        @!component('frontend/components/aside')
+    </div>
+</div>
 @end

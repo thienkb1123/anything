@@ -40,34 +40,4 @@ export default class Post extends BaseModel {
 
     public static statusDelete = -1
     public static statusPublish = 1
-
-    static async getFeatured() {
-        return await Post.query()
-            .select(
-                'post.id',
-                'post.title',
-                'post.slug',
-                'post.summary',
-                'post.created_at',
-                'media.path as mediaPath',
-                Database.raw(`
-                    (
-                        select
-                            tag.name
-                        from
-                            tag
-                        left join post_tag ON post_tag.post_id = post.id
-                        where
-                            post_tag.post_id = post.id
-                            and tag.status = 1
-                        limit
-                            1
-                    ) AS tagsName
-                `),
-            )
-            .leftJoin('post_media', 'post_media.post_id', '=', 'post.id')
-            .leftJoin('media', 'media.id', '=', 'post_media.media_id')
-            .where('post.status', Post.statusPublish)
-            .limit(4)
-    }
 }

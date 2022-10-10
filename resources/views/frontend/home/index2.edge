@@ -1,0 +1,26 @@
+@layout('frontend/layout')
+@set('postFeaturedMain', postsFeatured.at(0))
+
+@section('content')
+@each (widget in page?.layouts?.widgets)
+
+@if (widget.type == 'trending')
+@!component('frontend/components/trending')
+@endif
+
+@if (widget.type == 'featured')
+    @!component('frontend/components/featured', {
+        postFeaturedMain: postsFeatured.at(0),
+        postsFeatured: postsFeatured.slice(1)
+    })
+@endif
+
+@if (widget.type == 'content')
+@!component('frontend/components/content', {
+    contentWidgets: widget.contentWidgets,
+    leftWidgets: widget.leftWidgets
+})
+@endif
+
+@endeach
+@end

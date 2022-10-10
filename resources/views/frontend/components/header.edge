@@ -1,0 +1,93 @@
+<header id='header-wrapper'>
+    <nav class='topbar-wrap flex-c'>
+        <div class='container row-x1'>
+            <div class='topbar flex-sb section' id='topbar' name='Topbar'>
+                <div class='widget LinkList' data-version='2' id='LinkList201'>
+                    <ul class='link-list list-style'>
+                        <li><a href='/'>Home</a></li>
+                        <li><a href='#'>About Us</a></li>
+                        <li><a href='#'>Privacy Policy</a></li>
+                        <li><a href='#'>Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class='widget LinkList' data-version='2' id='LinkList202'>
+                    <ul class='social-icons social'>
+                        <li class='facebook'>
+                            <a alt='facebook' class='fa-facebook'
+                                href='#' rel='noopener noreferrer'
+                                target='_blank' title='facebook'></a>
+                            </li>
+                        <li class='youtube'>
+                            <a alt='youtube' class='fa-youtube'
+                                href='#'
+                                rel='noopener noreferrer' target='_blank' title='youtube'></a>
+                        </li>  
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class='main-header'>
+        <div class='header-inner'>
+            <div class='header-header flex-c'>
+                <div class='container row-x1'>
+                    <div class='header-items'>
+                        <div class='flex-left'>
+                            <a class='mobile-menu-toggle' href='#' role='button' title='Menu'></a>
+                            <div class='main-logo section' id='main-logo' name='Header Logo'>
+                                <div class='widget Image' data-version='2' id='Image50'>
+                                    <a class='logo-img' href='/' rel='home'>
+                                        <img alt='Magspot - Blogger Template'
+                                            data-dark-src='https://1.bp.blogspot.com/-EG9_OzrmI9Q/YTtnl8J2U0I/AAAAAAAAAfI/Vta2ee6-b4UAX7DocjFIJCFe8QVL-dxvQCLcBGAsYHQ/dark-logo.png'
+                                            data-src='https://1.bp.blogspot.com/-qk-KYK0bNHs/YTtnqLmlGcI/AAAAAAAAAfM/QHXtzMxhl7kLAGjfMOM8E73Th_TZsnOJgCLcBGAsYHQ/s320/logo.png'
+                                            height='80'
+                                            src='https://1.bp.blogspot.com/-qk-KYK0bNHs/YTtnqLmlGcI/AAAAAAAAAfM/QHXtzMxhl7kLAGjfMOM8E73Th_TZsnOJgCLcBGAsYHQ/s320/logo.png'
+                                            title='Magspot - Blogger Template' width='320'>
+                                        <h1 id='h1-off'>Magspot - Blogger Template</h1>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class='magspot-main-menu section' id='magspot-main-menu' name='Header Menu'>
+                                <div class='widget LinkList show-menu' data-version='2' id='LinkList200'>
+                                    @if (menuList.length)
+                                        <ul class='main-nav' id='main-nav'>
+                                            @each((menu, i) in menuList)
+                                                <li id='item-{{ i }}'>
+                                                    <a href='{{ route('frontend.category.index', {slug: menu.slug}) }}'>{{ menu.name }}</a>
+                                                </li>
+                                                @if (menu.subMenu && menu.subMenu.length)
+                                                    @each((subsMenu, j) in menu.subMenu)
+                                                        <li id='item-{{ j }}'>
+                                                            <a href='{{ route('frontend.category.index', {slug: subsMenu.slug}) }}'>_{{ subsMenu.name }}</a>
+                                                        </li>
+                                                    @endeach
+                                                @endif
+                                            @endeach
+                                        </ul>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class='flex-right'>
+                            <div class='toggle-wrap'>
+                                <a aria-label='Dark Mode' class='darkmode-toggle' href='#' role='button'></a>
+                                <a class='search-toggle show-search' href='#' role='button' title='Search'></a>
+                            </div>
+                        </div>
+                        <div id='main-search-wrap'>
+                            <div class='main-search'>
+                                <form action='https://magspot-template.blogspot.com/search' class='search-form'
+                                    target='_top'>
+                                    <input aria-label='Search' autocomplete='off' class='search-input' name='q'
+                                        placeholder='Search' type='search' value='' />
+                                    <button class='search-toggle search-close' type='reset' value=''></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

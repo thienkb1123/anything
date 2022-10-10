@@ -59,52 +59,15 @@ Route.group(() => {
 
 // Front-end
 Route.group(() => {
-    Route.get('feeds/posts/default', 'Frontend/PostsController.list')
-    Route.get('feeds/posts/default/-/Healthy', (ctx) => {
-        const resp = Application.tmpPath('Healthy.json')
-        ctx.response.json(require(resp))
-    })
+    Route.get('feeds/posts', 'Frontend/PostsController.feeds')
+    Route.get('/', 'Frontend/HomeController.index').as('frontend.home.index')
 
-    Route.get('feeds/posts/default/-/Reviews', (ctx) => {
-        const resp = Application.tmpPath('Reviews.json')
-        ctx.response.json(require(resp))
-    })
 
-    Route.get('feeds/posts/default/-/Gadgets', (ctx) => {
-        const resp = Application.tmpPath('Gadgets.json')
-        ctx.response.json(require(resp))
-    })
+    Route.get('/:slug?', 'Frontend/PostsController.show')
+        .where('slug', /^[^\s-_](?!.*?[-_]{2,})([a-z0-9-\\]{1,})[^\s]*[^-_\s].html$/)
+        .as('frontend.post.show')
 
-    Route.get('feeds/posts/default/-/Laptops', (ctx) => {
-        const resp = Application.tmpPath('Laptops.json')
-        ctx.response.json(require(resp))
-    })
-
-    Route.get('feeds/posts/default/-/Travel', (ctx) => {
-        const resp = Application.tmpPath('Travel.json')
-        ctx.response.json(require(resp))
-    })
-
-    Route.get('feeds/posts/default/-/Games', (ctx) => {
-        const resp = Application.tmpPath('Games.json')
-        ctx.response.json(require(resp))
-    })
-
-    Route.get('feeds/posts/default/-/Consoles', (ctx) => {
-        const resp = Application.tmpPath('Consoles.json')   
-        ctx.response.json(require(resp))
-    })
-
-    Route.get('feeds/posts/default/-/Mobile', (ctx) => {
-        const resp = Application.tmpPath('Mobile.json')
-        ctx.response.json(require(resp))
-    })
-
-    Route.get('feeds/posts/default/-/Cars', (ctx) => {
-        const resp = Application.tmpPath('Cars.json')
-        ctx.response.json(require(resp))
-    })
-
-    Route.get('/', 'Frontend/HomeController.index')
-    Route.get('/:slug', 'Frontend/PostsController.show').where('slug', /^[a-z0-9_-]+$/).as('frontend.post.show')
+    Route.get('/:slug/', 'Frontend/CategoriesController.index')
+        .where('slug', Route.matchers.slug())
+        .as('frontend.category.index')
 }).middleware('global')
