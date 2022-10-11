@@ -9,7 +9,7 @@ function getAttr(e, t, a) {
 }
 
 function darkModeLogo(e) {
-    $("[data-dark-src]").each(function() {
+    $("[data-dark-src]").each(function () {
         var t = $(this),
             a = t.data("dark-src"),
             s = t.data("src");
@@ -32,7 +32,7 @@ function getFeedUrl(e, t, a, s) {
             break;
         default:
             // " + a + "
-            s = "comments" != e ? "/feeds/posts?name="+ a +"&limit=" + t : "/feeds/comments/default?alt=json&max-results=" + t
+            s = "comments" != e ? "/feeds/posts?name=" + a + "&limit=" + t : "/feeds/comments/default?alt=json&max-results=" + t
     }
     return s
 }
@@ -94,6 +94,10 @@ function getPostImage(e, t, a, s) {
 // }
 
 function getPostImageType(e, t) {
+    if (!e) {
+        return "is-image"
+    }
+
     return e.match("i.ytimg.com") ? "is-video" : "is-image"
 }
 
@@ -102,7 +106,7 @@ function getPostTag(e, t, a, s, r, i) {
 }
 
 function getPostSummary(e, t, a, s, r, i) {
-    return e[t].content && "" != (s = $("<div/>").html(e[t].content.$t).text().trim()) ? '<span class="entry-excerpt excerpt">' + s.substr(0, a) + "â€¦</span>" : ""
+    return e[t].content && "" != (s = $("<div/>").html(e[t].content.$t).text().trim()) ? '<span class="entry-excerpt excerpt">' + s.substr(0, a) + "</span>" : ""
 }
 
 function getPostComments(e, t, a, s, r) {
@@ -200,7 +204,7 @@ function getRecentPostsData(e, t, a) {
         async: !1,
         dataType: "json",
         cache: !0,
-        success: function(e) {
+        success: function (e) {
             return e
         }
     }).responseJSON
@@ -212,7 +216,7 @@ function getPosts(e, t, a, s, r) {
         type: "GET",
         dataType: "json",
         cache: !0,
-        beforeSend: function(a) {
+        beforeSend: function (a) {
             switch (t) {
                 case "mega":
                     e.append('<div class="ul mega-items on-load">' + beforeLoader() + "</div>").addClass("loaded");
@@ -243,7 +247,7 @@ function getPosts(e, t, a, s, r) {
                     e.html(beforeLoader()).parent().addClass("type-" + t)
             }
         },
-        success: function(i) {
+        success: function (i) {
             var o = "";
             switch (t) {
                 case "mega":
@@ -324,7 +328,7 @@ function getPosts(e, t, a, s, r) {
                     e.find("span.entry-image").pbtLazy()
             }
         },
-        error: function() {
+        error: function () {
             switch (t) {
                 case "mega":
                     e.find(".mega-items").replaceWith('<div class="ul mega-items no-items">' + msgError() + "</div>");
@@ -371,7 +375,7 @@ function megaTabs(e, t) {
         var a = (t = t.split("/")).length,
             s = '<div class="ul mega-tabs">';
         for (let e = 0; e < a; e++) t[e] && (s += '<div class="mega-tab" data-tab="' + t[e] + '" data-url="/search/label/' + t[e] + '"></div>');
-        s += "</div>", e.addClass("megatabs").append(s), e.children("a").on("click", function(e) {
+        s += "</div>", e.addClass("megatabs").append(s), e.children("a").on("click", function (e) {
             e.preventDefault()
         });
         var r = e.find(".mega-tab");
@@ -379,15 +383,15 @@ function megaTabs(e, t) {
             var i;
 
             function o() {
-                e.find(".mega-tab.active").not(".loaded").each(function(e, t) {
+                e.find(".mega-tab.active").not(".loaded").each(function (e, t) {
                     t = (e = $(this)).data("tab"), getMega(e, "megatabs", 4, t)
                 });
                 var t = e.find(".mega-tab.loaded");
                 r.length == t.length && clearInterval(i)
             }
-            e.mouseenter(function() {
+            e.mouseenter(function () {
                 i = setInterval(o, 100)
-            }).mouseleave(function() {
+            }).mouseleave(function () {
                 clearInterval(i)
             }), e.find(".mega-tabs").pbtTabs({
                 onHover: !0,
@@ -400,7 +404,7 @@ function megaTabs(e, t) {
 }
 
 function addCustomColor(e, t, a) {
-    $("#page-skin-2").length || $("head").append('<style id="page-skin-2" type="text/css"></style>'), $("#page-skin-2").each(function() {
+    $("#page-skin-2").length || $("head").append('<style id="page-skin-2" type="text/css"></style>'), $("#page-skin-2").each(function () {
         var s = $(this),
             r = "#" + e,
             i = "";
@@ -427,7 +431,7 @@ function addCustomColor(e, t, a) {
 }
 
 function pbtFixedSidebar(e) {
-    $(e).each(function(e, t) {
+    $(e).each(function (e, t) {
         1 == pbt.fixedSidebar && (25, t = 1 == pbt.fixedMenu ? $(".header-inner").height() + 25 : 25, $(this).theiaStickySidebar({
             containerSelector: "#content-wrapper > .container",
             additionalMarginTop: t,
@@ -442,39 +446,39 @@ function disqusComments(e) {
 }
 
 function beautiAvatar(e) {
-    $(e).attr("src", function(e, t, a) {
+    $(e).attr("src", function (e, t, a) {
         return a = "//1.bp.blogspot.com/-QN2lgvtYZco/YN3mUSryAVI/AAAAAAAAADs/KrR-etCcvUMcPl06jopTs9pzq59IAXhMQCLcBGAsYHQ/s35/avatar.jpg", t = (t = (t = t.replace("//resources.blogblog.com/img/blank.gif", a)).replace("//lh3.googleusercontent.com/zFdxGE77vvD2w5xHy6jkVuElKv-U9_9qLkRYK8OnbDeJPtjSZ82UPq5w6hJ-SA=s35", a)).replace("/s35", "/s39")
     })
 }
-viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("#magspot-main-menu").pbtMenu(), $(".show-search").click(function(e) {
+viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("#magspot-main-menu").pbtMenu(), $(".show-search").click(function (e) {
     e.preventDefault(), $("body").addClass("search-active"), $("#main-search-wrap").fadeIn(170).find("input").focus()
-}), $(".search-close").click(function(e) {
+}), $(".search-close").click(function (e) {
     e.preventDefault(), $("body").removeClass("search-active"), $("#main-search-wrap").fadeOut(170).find("input").blur().val("")
-}), $("html").each(function() {
+}), $("html").each(function () {
     var e = $(this),
         t = localStorage.darkMode;
-    1 != pbt.darkMode && 0 != pbt.userDarkMode && ("true" == t && (e.addClass("is-dark"), darkModeLogo(t)), $(".darkmode-toggle").click(function(a) {
+    1 != pbt.darkMode && 0 != pbt.userDarkMode && ("true" == t && (e.addClass("is-dark"), darkModeLogo(t)), $(".darkmode-toggle").click(function (a) {
         a.preventDefault(), e.toggleClass("is-dark"), t = "true" != t ? "true" : "false", localStorage.darkMode = t, darkModeLogo(t)
     }))
-}), $(".dark-logo").each(function() {
+}), $(".dark-logo").each(function () {
     1 == pbt.darkMode && darkModeLogo("true")
-}), $("#ticker .PopularPosts .widget-content").pbtTicker(), $(".main-title a.title-link").each(function() {
+}), $("#ticker .PopularPosts .widget-content").pbtTicker(), $(".main-title a.title-link").each(function () {
     "" != viewAllText.trim() && $(this).html(viewAllText)
-}), $(".pbt-section .social-icons a").each(function(e) {
+}), $(".pbt-section .social-icons a").each(function (e) {
     var t = $(this),
         a = t.attr("href").split("#"),
         s = t.data("side");
     a[1] && 1 == s && "" != (e = a[1].trim()) && t.append('<span class="text">' + e + "</span>"), t.attr("href", a[0].trim())
-}), $(".MailChimp .widget-content").each(function(e, t) {
+}), $(".MailChimp .widget-content").each(function (e, t) {
     var a = $(this),
         s = a.data("shortcode");
     s && (e = getAttr(s, "title"), t = getAttr(s, "text"), 0 != e && a.find(".mailchimp-title").text(e), 0 != t && a.find(".mailchimp-text").text(t))
-}), $(".post-body a").each(function() {
+}), $(".post-body a").each(function () {
     var e = $(this),
         t = e.text(),
         a = t.toLowerCase(),
         s = getAttr(t, "text");
-    a.match("getbutton") && 0 != s && (e.replaceText(/([^{\}]+(?=}))/g, "<em>$1</em>"), e.find("em").replaceText("$", "%s"), e.each(function() {
+    a.match("getbutton") && 0 != s && (e.replaceText(/([^{\}]+(?=}))/g, "<em>$1</em>"), e.find("em").replaceText("$", "%s"), e.each(function () {
         var e = $(this),
             t = e.text(),
             a = getAttr(t, "text"),
@@ -485,42 +489,42 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
             n = e.parent().attr("style");
         e.addClass(0 != i ? "button btn x2" : "button btn").text(a.replace("%s", "$")), n && n.match("center") && e.addClass("is-c"), 0 != o ? (e.addClass(0 != s ? "x2 " + s : "x2"), e.append('<span class="btn-info">' + o.replace("%s", "$") + "</span>")) : 0 != s && e.addClass(s), 0 != r && e.addClass("color").attr("style", "background-color:" + r + ";")
     }))
-}), $(".post-body b").each(function() {
+}), $(".post-body b").each(function () {
     var e = $(this),
         t = e.text(),
         a = t.toLowerCase().trim();
-    a.match(/(?:\$ads\=\{1\})/g) && e.replaceWith('<div id="magspot-new-before-ad"/>'), a.match(/(?:\$ads\=\{2\})/g) && e.replaceWith('<div id="magspot-new-after-ad"/>'), a.match("{gettoc}") && (t = 0 != (t = getAttr(t, "title")) ? t : "Table of Contents", e.replaceWith('<div class="pbt-toc-wrap"><div class="pbt-toc-inner"><a href="#" class="pbt-toc-title" role="button" title="' + t + '"><span class="pbt-toc-title-text">' + t + '</span></a><ol id="pbt-toc"></ol></div></div>'), $(".pbt-toc-title").each(function() {
+    a.match(/(?:\$ads\=\{1\})/g) && e.replaceWith('<div id="magspot-new-before-ad"/>'), a.match(/(?:\$ads\=\{2\})/g) && e.replaceWith('<div id="magspot-new-after-ad"/>'), a.match("{gettoc}") && (t = 0 != (t = getAttr(t, "title")) ? t : "Table of Contents", e.replaceWith('<div class="pbt-toc-wrap"><div class="pbt-toc-inner"><a href="#" class="pbt-toc-title" role="button" title="' + t + '"><span class="pbt-toc-title-text">' + t + '</span></a><ol id="pbt-toc"></ol></div></div>'), $(".pbt-toc-title").each(function () {
         var e = $(this);
-        e.click(function(t) {
+        e.click(function (t) {
             t.preventDefault(), e.toggleClass("is-expanded"), $("#pbt-toc").slideToggle(170)
         })
     }), $("#pbt-toc").toc({
         content: "#post-body",
         headings: "h2,h3,h4"
-    }), $("#pbt-toc li a").each(function() {
+    }), $("#pbt-toc li a").each(function () {
         var e = $(this);
-        e.click(function(t) {
+        e.click(function (t) {
             return t.preventDefault(), $("html,body").animate({
                 scrollTop: $(e.attr("href")).offset().top - 20
             }, 500), !1
         })
     })), a.match("{contactform}") && (e.replaceWith('<div class="contact-form-widget"/>'), $("#post-body .contact-form-widget").append($("#ContactForm1 .contact-form-form"))), a.match("{leftsidebar}") && ($("body").addClass("is-left"), e.remove()), a.match("{rightsidebar}") && ($("body").addClass("is-right").removeClass("is-left"), e.remove()), a.match("{fullwidth}") && ($("body").addClass("no-sidebar"), e.remove())
-}), $("#magspot-new-before-ad").each(function() {
+}), $("#magspot-new-before-ad").each(function () {
     var e = $(this);
     e.length && $("#before-ad").appendTo(e)
-}), $("#magspot-new-after-ad").each(function() {
+}), $("#magspot-new-after-ad").each(function () {
     var e = $(this);
     e.length && $("#after-ad").appendTo(e)
-}), $("#magspot-main-before-ad .widget").each(function() {
+}), $("#magspot-main-before-ad .widget").each(function () {
     var e = $(this);
     e.length && e.appendTo($("#before-ad"))
-}), $("#magspot-main-after-ad .widget").each(function() {
+}), $("#magspot-main-after-ad .widget").each(function () {
     var e = $(this);
     e.length && e.appendTo($("#after-ad"))
-}), $("#magspot-post-footer-ads .widget").each(function() {
+}), $("#magspot-post-footer-ads .widget").each(function () {
     var e = $(this);
     e.length && e.appendTo($("#post-footer-ads"))
-}), $(".post-body blockquote").each(function() {
+}), $(".post-body blockquote").each(function () {
     var e = $(this),
         t = e.text().toLowerCase().trim(),
         a = e.html();
@@ -544,32 +548,32 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
         s = a.replace("{codeBox}", "");
         e.replaceWith('<pre class="code-box">' + s + "</pre>")
     }
-}), $(".share-links .pbt-window").click(function(e) {
+}), $(".share-links .pbt-window").click(function (e) {
     e.preventDefault();
     var t = $(this),
         a = t.data("url"),
         s = t.data("width"),
         r = t.data("height");
     window.open(a, "_blank", "scrollbars=yes,resizable=yes,toolbar=0,width=" + s + ",height=" + r + ",top=50,left=50").focus()
-}), $(".share-links .show-hid a").click(function(e) {
+}), $(".share-links .show-hid a").click(function (e) {
     e.preventDefault(), $(this).parent().parent().toggleClass("expanded")
-}), $(".about-author .author-text").each(function() {
+}), $(".about-author .author-text").each(function () {
     var e = $(this),
         t = e.find("a");
-    t.length && (t.each(function() {
+    t.length && (t.each(function () {
         var e = $(this),
             t = e.text().trim(),
             a = e.attr("href");
         e.replaceWith('<li class="' + t + '"><a class="fa-' + t + '" href="' + a + '" title="' + t + '" rel="noopener noreferrer" target="_blank"/></li>')
     }), e.parent().append('<ul class="author-links social sc-a"></ul>'), e.find("li").appendTo(e.parent().find(".author-links")))
-}), $(".main-nav li.mega-menu").each(function(e, t, a, s) {
+}), $(".main-nav li.mega-menu").each(function (e, t, a, s) {
     var r = $(this),
         i = r.find("a").data("shortcode"),
         o = r.attr("id");
-    i && (e = getAttr(i, "label"), t = 0 != (t = getAttr(i, "type")) ? t : "mega", 0 != (s = getAttr(i, "color")) && addCustomColor(o, t, s), "tabs" == t ? megaTabs(r, e) : (0 != e && (a = "recent" == e ? "/search" : "/search/label/" + e, r.children("a").attr("href", a)), r.mouseenter(function() {
+    i && (e = getAttr(i, "label"), t = 0 != (t = getAttr(i, "type")) ? t : "mega", 0 != (s = getAttr(i, "color")) && addCustomColor(o, t, s), "tabs" == t ? megaTabs(r, e) : (0 != e && (a = "recent" == e ? "/search" : "/search/label/" + e, r.children("a").attr("href", a)), r.mouseenter(function () {
         r.hasClass("loaded") || getMega(r, t, 5, e)
     })))
-}), $("#ticker .HTML .widget-content").each(function(e, t, a) {
+}), $("#ticker .HTML .widget-content").each(function (e, t, a) {
     var s = $(this),
         r = $(window),
         i = s.data("shortcode"),
@@ -577,7 +581,7 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
     i && (e = getAttr(i, "results"), t = getAttr(i, "label"), 0 != (a = getAttr(i, "color")) && addCustomColor(o, "ticker", a), r.on("load resize scroll", function a() {
         r.scrollTop() + r.height() >= s.offset().top && (r.off("load resize scroll", a), getTicker(s, "ticker", e, t))
     }).trigger("scroll"))
-}), $("#featured .HTML .widget-content").each(function(e, t, a, s) {
+}), $("#featured .HTML .widget-content").each(function (e, t, a, s) {
     var r = $(this),
         i = $(window),
         o = r.data("shortcode"),
@@ -585,7 +589,7 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
     o && (t = getAttr(o, "label"), a = getAttr(o, "style"), e = "feat2" == (a = 0 != a ? "feat" + a : "feat1") || "feat4" == a ? 5 : "feat3" == a || "feat5" == a ? 3 : 4, 0 != (s = getAttr(o, "color")) && addCustomColor(n, a, s), i.on("load resize scroll", function s() {
         i.scrollTop() + i.height() >= r.offset().top && (i.off("load resize scroll", s), getFeatured(r, a, e, t))
     }).trigger("scroll"))
-}), $(".content-section .HTML .widget-content").each(function(e, t, a, s, r, i) {
+}), $(".content-section .HTML .widget-content").each(function (e, t, a, s, r, i) {
     var o = $(this),
         n = $(window),
         c = o.data("shortcode"),
@@ -593,7 +597,7 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
     c && (e = getAttr(c, "results"), t = getAttr(c, "label"), a = getAttr(c, "type"), getAttr(c, "col"), r = 0 != (r = getAttr(c, "style")) ? r : "1", "col-left" != a && "col-right" != a || (o.parent().addClass("column-style").attr("data-align", "col-left" == a ? "left" : "right"), a = "column"), "video" == a && "1" == r && o.parent().addClass("video-style"), 0 != (i = getAttr(c, "color")) && addCustomColor(l, a, i), n.on("load resize scroll", function s() {
         n.scrollTop() + n.height() >= o.offset().top && (n.off("load resize scroll", s), getBlock(o, a, e, t))
     }).trigger("scroll"))
-}), $(".pbt-section .HTML .widget-content").each(function(e, t, a, s, r, i) {
+}), $(".pbt-section .HTML .widget-content").each(function (e, t, a, s, r, i) {
     var o = $(this),
         n = $(window),
         c = o.data("shortcode"),
@@ -602,13 +606,13 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
     c && (e = c.toLowerCase(), t = getAttr(c, "results"), a = getAttr(c, "label"), s = getAttr(c, "type"), r = 0 != (r = getAttr(c, "style")) ? r : "1", s = "posts" != (s = 0 != s ? s : "posts") ? s : "side" + r, l && "footer" == l && (s = "side1" != s ? s : "side2"), 0 != (i = getAttr(c, "color")) && addCustomColor(d, s, i), n.on("load resize scroll", function r() {
         n.scrollTop() + n.height() >= o.offset().top && (n.off("load resize scroll", r), getWidget(o, s, t, a, e))
     }).trigger("scroll"))
-}), $("#magspot-related-posts .HTML").each(function(e, t, a) {
+}), $("#magspot-related-posts .HTML").each(function (e, t, a) {
     var s = $(this).data("shortcode");
     if (s) {
         function r() {
             return e = getAttr(s, "title"), t = getAttr(s, "results"), a = getAttr(s, "style"), [e, t, a]
         }
-        $("#related-wrap").each(function(e, t, a, i, o, n) {
+        $("#related-wrap").each(function (e, t, a, i, o, n) {
             var c = $(this),
                 l = c.find(".related-tag"),
                 d = $(window),
@@ -620,7 +624,7 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
             }).trigger("scroll")
         })
     }
-}), $(".magspot-blog-post-comments").each(function() {
+}), $(".magspot-blog-post-comments").each(function () {
     var e = $(this),
         t = e.data("shortcode"),
         a = getAttr(t, "type"),
@@ -645,22 +649,22 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
     var c = e.find(".comments .comment-reply"),
         l = e.find(".comments #top-continue"),
         d = e.find(".show-cf");
-    c.click(function(t) {
+    c.click(function (t) {
         t.preventDefault(), e.addClass("cf-on"), l.show(), d.remove()
-    }), l.click(function(e) {
+    }), l.click(function (e) {
         e.preventDefault(), l.hide()
-    }), d.on("click", function() {
+    }), d.on("click", function () {
         e.addClass("cf-on"), d.remove(), pbtFixedSidebar("#main-wrapper, #sidebar-wrapper")
     })
-}), $(function() {
-    $(".entry-image-wrap .entry-image,.author-avatar-wrap .author-avatar").pbtLazy(), $(".mobile-logo").each(function() {
+}), $(function () {
+    $(".entry-image-wrap .entry-image,.author-avatar-wrap .author-avatar").pbtLazy(), $(".mobile-logo").each(function () {
         var e = $(this),
             t = $(".main-logo a").clone();
         t.find("h1").remove(), t.appendTo(e)
-    }), $("#mobile-menu").each(function() {
+    }), $("#mobile-menu").each(function () {
         var e = $(this),
             t = $(".main-nav").clone();
-        t.attr("class", "mobile-nav").attr("id", "mobile-nav"), t.find(".mega-menu > .ul").remove(), t.find(".has-sub > a").after('<button class="submenu-toggle" aria-label="expand"/>'), t.find(".mega-menu").not(".megatabs").removeAttr("class").children(".submenu-toggle").remove(), t.find(".mega-menu > a").each(function(e, t, a) {
+        t.attr("class", "mobile-nav").attr("id", "mobile-nav"), t.find(".mega-menu > .ul").remove(), t.find(".has-sub > a").after('<button class="submenu-toggle" aria-label="expand"/>'), t.find(".mega-menu").not(".megatabs").removeAttr("class").children(".submenu-toggle").remove(), t.find(".mega-menu > a").each(function (e, t, a) {
             var s = $(this),
                 r = s.data("shortcode");
             if (r)
@@ -671,17 +675,17 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
                         for (let e = 0; e < i; e++) t[e] && (o += '<li><a href="/search/label/' + t[e] + '">' + t[e] + "</a></li>");
                         o += "</ul>", s.parent().append(o)
                     }
-                    s.parent().attr("class", "has-sub"), s.on("click", function(e) {
+                    s.parent().attr("class", "has-sub"), s.on("click", function (e) {
                         e.preventDefault()
                     })
                 } else 0 != t && (a = "recent" == t ? "/search" : "/search/label/" + t, s.attr("href", a))
-        }), t.appendTo(e), $(".mobile-menu-toggle, .hide-mobile-menu, .overlay").click(function(e) {
+        }), t.appendTo(e), $(".mobile-menu-toggle, .hide-mobile-menu, .overlay").click(function (e) {
             e.preventDefault(), $("body").toggleClass("nav-active")
-        }), $(".mobile-menu .submenu-toggle").click(function() {
+        }), $(".mobile-menu .submenu-toggle").click(function () {
             var e = $(this);
             e.parent().hasClass("expanded") ? e.parent().removeClass("expanded").children(".sub-menu").slideToggle(170) : e.parent().addClass("expanded").children(".sub-menu").slideToggle(170)
         })
-    }), $(".mm-footer").each(function() {
+    }), $(".mm-footer").each(function () {
         var e = $(this),
             t = $("#topbar .LinkList"),
             a = $("#magspot-about-section .LinkList"),
@@ -689,62 +693,62 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
             r = $("#footer-menu .LinkList"),
             i = t.length ? t.find("ul.social").clone() : !!a.length && a.find("ul.social").clone();
         0 != i && (i.removeClass("sb-h"), e.append(i)), $m = s.length ? s.find("ul.link-list").clone() : !!r.length && r.find("ul.link-list").clone(), 0 != $m && e.append($m)
-    }), $(".header-inner").each(function() {
+    }), $(".header-inner").each(function () {
         var e = $(this);
         if (1 == pbt.fixedMenu && e.length > 0) {
             var t = $(document).scrollTop(),
                 a = e.offset().top,
                 s = e.height(),
                 r = a + s + s;
-            $(window).scroll(function(s) {
-                (s = $(document).scrollTop()) > r ? e.addClass("is-fixed") : (s < a || s <= 1) && e.removeClass("is-fixed"), s < t ? setTimeout(function() {
+            $(window).scroll(function (s) {
+                (s = $(document).scrollTop()) > r ? e.addClass("is-fixed") : (s < a || s <= 1) && e.removeClass("is-fixed"), s < t ? setTimeout(function () {
                     e.addClass("show")
                 }, 170) : e.removeClass("show"), t = s
             })
         }
-    }), pbtFixedSidebar("#main-wrapper, #sidebar-wrapper"), $("#post-body iframe").each(function() {
+    }), pbtFixedSidebar("#main-wrapper, #sidebar-wrapper"), $("#post-body iframe").each(function () {
         var e = $(this);
         e.attr("src").match("www.youtube.com") && e.wrap('<div class="youtube-video"/>')
-    }), $("p.comment-content").each(function() {
+    }), $("p.comment-content").each(function () {
         var e = $(this);
         e.replaceText(/(https:\/\/\S+(\.png|\.jpeg|\.jpg|\.gif))/g, '<img src="$1"/>'), e.replaceText(/(?:https:\/\/)?(?:www\.)?(?:youtube\.com)\/(?:watch\?v=)?(.+)/g, '<div class="youtube-video"><iframe id="youtube" width="100%" height="358" src="https://www.youtube.com/embed/$1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>')
-    }), $("#magspot-load-more-link").each(function() {
+    }), $("#magspot-load-more-link").each(function () {
         var e = $(this),
             t = e.data("load");
-        t && e.show(), e.click(function(a) {
+        t && e.show(), e.click(function (a) {
             a.preventDefault(), e.hide(), $.ajax({
                 url: t,
-                success: function(a) {
+                success: function (a) {
                     var s = $(a).find(".blog-posts");
                     s.find(".index-post").addClass("fadeInUp"), $(".blog-posts").append(s.html()), (t = $(a).find("#magspot-load-more-link").data("load")) ? e.show() : (e.hide(), $("#blog-pager .no-more").addClass("show"))
                 },
-                beforeSend: function() {
+                beforeSend: function () {
                     $("#blog-pager .loading").show()
                 },
-                complete: function() {
+                complete: function () {
                     $("#blog-pager .loading").hide(), $(".index-post .entry-image-wrap .entry-image").not(".pbt-lazy").pbtLazy(), pbtFixedSidebar("#main-wrapper, #sidebar-wrapper")
                 }
             })
         })
-    }), $("#magspot-cookie-consent").each(function() {
+    }), $("#magspot-cookie-consent").each(function () {
         var e = $(this),
             t = e.find(".widget.Text").data("shortcode"),
             a = e.find(".consent-button");
-        e.length > 0 && (t && (ok = getAttr(t, "ok"), days = getAttr(t, "days"), 0 != ok && a.text(ok), days = 0 != days ? Number(days) : 7), "1" !== $.cookie("magspot_cookie_consent") && (e.css("display", "block"), $(window).on("load", function() {
+        e.length > 0 && (t && (ok = getAttr(t, "ok"), days = getAttr(t, "days"), 0 != ok && a.text(ok), days = 0 != days ? Number(days) : 7), "1" !== $.cookie("magspot_cookie_consent") && (e.css("display", "block"), $(window).on("load", function () {
             e.addClass("is-visible")
-        })), a.off("click").click(function(t) {
+        })), a.off("click").click(function (t) {
             t.preventDefault(), t.stopPropagation(), $.cookie("magspot_cookie_consent", "1", {
                 expires: days,
                 path: "/"
-            }), e.removeClass("is-visible"), setTimeout(function() {
+            }), e.removeClass("is-visible"), setTimeout(function () {
                 e.css("display", "none")
             }, 500)
         }), cookieChoices = {})
-    }), $("#back-top").each(function() {
+    }), $("#back-top").each(function () {
         var e = $(this);
-        $(window).on("scroll", function() {
+        $(window).on("scroll", function () {
             $(this).scrollTop() >= 100 ? e.addClass("show") : e.removeClass("show"), e.offset().top >= $("#footer-wrapper").offset().top - 34 ? e.addClass("on-footer") : e.removeClass("on-footer")
-        }), e.click(function(e) {
+        }), e.click(function (e) {
             e.preventDefault(), $("html, body").animate({
                 scrollTop: 0
             }, 500)

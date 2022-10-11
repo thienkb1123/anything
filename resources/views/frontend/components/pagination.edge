@@ -1,0 +1,21 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item {{ meta.current_page ==  meta.first_page ? 'disabled' : '' }}">
+            <a class="page-link" href="{{ request.url() }}?page={{ meta.first_page }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        @each(anchor in pagination)
+            <li class="page-item {{ anchor.isActive ? 'active' : '' }}">
+                <a class="page-link" href="{{ request.url() }}?page={{ anchor.page }}">{{ anchor.page }}</a>
+            </li>
+        @endeach
+        <li class="page-item">
+            <a class="page-link" href="{{ request.url() }}?page={{ meta.last_page }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>

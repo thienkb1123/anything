@@ -84,6 +84,10 @@ export default class PostsController {
                     type: "text",
                     $t: post.title
                 },
+                content: {
+                    type: "text",
+                    $t: post.summary
+                },
                 link: [
                     {
                         rel: "alternate",

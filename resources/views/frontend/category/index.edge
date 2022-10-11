@@ -9,156 +9,37 @@
                     <div class='queryMessage '>
                         <span class='query-info query-label query-success'>Gadgets</span>
                     </div>
+                    @if(postList.length)
                     <div class='blog-posts index-post-wrap list1-items'>
-                        <article class='index-post list1-item hentry post-0'>
-                            <a class='entry-image-wrap is-image'
-                                href='https://magspot-template.blogspot.com/2021/07/6-wealth-building-alternatives-without.html'
-                                title='6 Wealth Building Alternatives Without Buying Stocks'><span class='entry-image'
-                                    data-src='https://1.bp.blogspot.com/-l24HnW_pNYI/YQW_oPRPRII/AAAAAAAAAV8/ARybwVd-ztQayLrDYR0tISGoD0Qu9gK6ACLcBGAsYHQ/w72-h72-p-k-no-nu/pbt59.jpg'></span>
-                                <span class='entry-category'>Gadgets</span>
-                            </a>
-                            <div class='entry-header'>
-                                <h2 class='entry-title'><a
-                                        href='https://magspot-template.blogspot.com/2021/07/6-wealth-building-alternatives-without.html'
-                                        rel='bookmark' title='6 Wealth Building Alternatives Without Buying Stocks'>6
-                                        Wealth
-                                        Building Alternatives Without Buying Stocks</a></h2>
-                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
-                                <div class='entry-meta'>
-                                    <span class='entry-author mi'><span class='by sp'>by</span><span
-                                            class='author-name'>John Doe</span></span>
-                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
-                                            datetime='2021-07-31T14:27:00-07:00'>July 31, 2021</time></span>
+                        @each(row in postList)
+                            <article class='index-post list1-item hentry post-0'>
+                                <a class='entry-image-wrap is-image' href='{{ route('frontend.post.show', {slug: `${row.slug}.html`}) }}' title='{{ row.title }}'>
+                                    <span class='entry-image' data-src='{{ row?.$extras?.mediaPath }}'></span>
+                                    <span class='entry-category'>{{ row?.$extras?.tagsName }}</span>
+                                </a>
+                                <div class='entry-header'>
+                                    <h2 class='entry-title'>
+                                        <a href='{{ route('frontend.post.show', {slug: `${row.slug}.html`}) }}'rel='bookmark' title='{{ row.title }}'>
+                                            {{ row.title }}
+                                        </a>
+                                    </h2>
+                                    <p class='entry-excerpt excerpt'>{{ row.summary }}</p>
+                                    <div class='entry-meta'>
+                                        <span class='entry-time mi'>
+                                            <time class='published'  datetime='{{ row.createdAt }}'>{{ row.createdAt.toFormat('HH:mm:ss - dd/MM/yyyy') }}</time>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                        <article class='index-post list1-item hentry post-1'>
-                            <a class='entry-image-wrap is-image'
-                                href='https://magspot-template.blogspot.com/2021/07/start-digital-marketing-website-for.html'
-                                title='Start a Digital Marketing Website for your Service'><span class='entry-image'
-                                    data-src='https://1.bp.blogspot.com/-MnkXs5CBt2E/YQXAAdxIDbI/AAAAAAAAAWE/IMbDeyFfkAYYavQeQYP249jHGVDUKMYswCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt60.jpg'></span>
-                                <span class='entry-category'>Gadgets</span>
-                            </a>
-                            <div class='entry-header'>
-                                <h2 class='entry-title'><a
-                                        href='https://magspot-template.blogspot.com/2021/07/start-digital-marketing-website-for.html'
-                                        rel='bookmark' title='Start a Digital Marketing Website for your Service'>Start
-                                        a
-                                        Digital Marketing Website for your Service</a></h2>
-                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
-                                <div class='entry-meta'>
-                                    <span class='entry-author mi'><span class='by sp'>by</span><span
-                                            class='author-name'>John Doe</span></span>
-                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
-                                            datetime='2021-07-31T14:26:00-07:00'>July 31, 2021</time></span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class='index-post list1-item hentry post-2'>
-                            <a class='entry-image-wrap is-image'
-                                href='https://magspot-template.blogspot.com/2021/07/part-time-trading-on-forex-as.html'
-                                title='Part-time Trading on Forex as an Alternative Income'><span class='entry-image'
-                                    data-src='https://1.bp.blogspot.com/-C1dl9MMN6bk/YQW_PmYl_wI/AAAAAAAAAV0/gocYxb2fcyQsVudYS4JU4Jif1FgN_9XngCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt58.jpg'></span>
-                                <span class='entry-category'>Gadgets</span>
-                            </a>
-                            <div class='entry-header'>
-                                <h2 class='entry-title'><a
-                                        href='https://magspot-template.blogspot.com/2021/07/part-time-trading-on-forex-as.html'
-                                        rel='bookmark'
-                                        title='Part-time Trading on Forex as an Alternative Income'>Part-time
-                                        Trading on Forex as an Alternative Income</a></h2>
-                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
-                                <div class='entry-meta'>
-                                    <span class='entry-author mi'><span class='by sp'>by</span><span
-                                            class='author-name'>John Doe</span></span>
-                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
-                                            datetime='2021-07-31T14:23:00-07:00'>July 31, 2021</time></span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class='index-post list1-item hentry post-3'>
-                            <a class='entry-image-wrap is-image'
-                                href='https://magspot-template.blogspot.com/2021/07/catch-best-iphone-x-deals-plus-your.html'
-                                title='Catch the Best iPhone X Deals Plus Your Favorite gadgets'><span
-                                    class='entry-image'
-                                    data-src='https://1.bp.blogspot.com/-eGbJYGFJ9Gs/YQW-x2KIbYI/AAAAAAAAAVs/Mmcz2XHwF7A4COAlSBL3fnPLDY-KvtLVQCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt57.jpg'></span>
-                                <span class='entry-category'>Apple</span>
-                            </a>
-                            <div class='entry-header'>
-                                <h2 class='entry-title'><a
-                                        href='https://magspot-template.blogspot.com/2021/07/catch-best-iphone-x-deals-plus-your.html'
-                                        rel='bookmark'
-                                        title='Catch the Best iPhone X Deals Plus Your Favorite gadgets'>Catch
-                                        the Best iPhone X Deals Plus Your Favorite gadgets</a></h2>
-                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
-                                <div class='entry-meta'>
-                                    <span class='entry-author mi'><span class='by sp'>by</span><span
-                                            class='author-name'>John Doe</span></span>
-                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
-                                            datetime='2021-07-31T14:21:00-07:00'>July 31, 2021</time></span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class='index-post list1-item hentry post-4'>
-                            <a class='entry-image-wrap is-image'
-                                href='https://magspot-template.blogspot.com/2021/07/best-entry-level-cameras-for-beginners.html'
-                                title='Best Entry Level Cameras for The Beginners'><span class='entry-image'
-                                    data-src='https://1.bp.blogspot.com/-NlSFo2BoaN0/YQW-cefoW3I/AAAAAAAAAVk/vp7xUv9-mBM2baz3XY5VM10bS6QWgkA_QCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt56.jpg'></span>
-                                <span class='entry-category'>Deals</span>
-                            </a>
-                            <div class='entry-header'>
-                                <h2 class='entry-title'><a
-                                        href='https://magspot-template.blogspot.com/2021/07/best-entry-level-cameras-for-beginners.html'
-                                        rel='bookmark' title='Best Entry Level Cameras for The Beginners'>Best
-                                        Entry Level Cameras for The Beginners</a></h2>
-                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
-                                <div class='entry-meta'>
-                                    <span class='entry-author mi'><span class='by sp'>by</span><span
-                                            class='author-name'>John Doe</span></span>
-                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
-                                            datetime='2021-07-31T14:20:00-07:00'>July 31, 2021</time></span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class='index-post list1-item hentry post-5'>
-                            <a class='entry-image-wrap is-image'
-                                href='https://magspot-template.blogspot.com/2021/07/the-better-look-at-apples-iphone-12-pro.html'
-                                title='The better look at Apple’s iPhone 12 Pro Max'><span class='entry-image'
-                                    data-src='https://1.bp.blogspot.com/-6y8V6-IzgH0/YQW73KCpVHI/AAAAAAAAAU8/jNFXji-Y2SMvboWYXHPSRDv5znDm2WcmQCLcBGAsYHQ/w72-h72-p-k-no-nu/pbt51.jpg'></span>
-                                <span class='entry-category'>Gadgets</span>
-                            </a>
-                            <div class='entry-header'>
-                                <h2 class='entry-title'><a
-                                        href='https://magspot-template.blogspot.com/2021/07/the-better-look-at-apples-iphone-12-pro.html'
-                                        rel='bookmark' title='The better look at Apple’s iPhone 12 Pro Max'>The
-                                        better look at Apple&#8217;s iPhone 12 Pro Max</a></h2>
-                                <p class='entry-excerpt excerpt'>Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem Ipsum has been&#8230;</p>
-                                <div class='entry-meta'>
-                                    <span class='entry-author mi'><span class='by sp'>by</span><span
-                                            class='author-name'>John Doe</span></span>
-                                    <span class='entry-time mi'><span class='sp'>-</span><time class='published'
-                                            datetime='2021-07-31T14:15:00-07:00'>July 31, 2021</time></span>
-                                </div>
-                            </div>
-                        </article>
+                            </article>
+                        @end
                     </div>
                     <div class='blog-pager' id='blog-pager'>
-                        <a class='blog-pager-older-link load-more btn'
-                            data-load='http://localhost:3333/feeds/posts/default/-/Travel?alt=json&max-results=4'
-                            href='#' id='magspot-load-more-link'>
-                            Load More
-                        </a>
-                        <span class='loading'>
-                            <div class='loader'></div>
-                        </span>
-                        <span class='no-more load-more btn'>No results found</span>
+                        @!component('frontend/components/pagination', {
+                            pagination: postList.getUrlsForRange(postList.firstPage, postList.lastPage),
+                            meta: postList.getMeta()
+                        })
                     </div>
+                    @endif
                 </div>
             </div>
         </main>
