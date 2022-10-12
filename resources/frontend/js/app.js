@@ -32,7 +32,7 @@ function getFeedUrl(e, t, a, s) {
             break;
         default:
             // " + a + "
-            s = "comments" != e ? "/feeds/posts?name=" + a + "&limit=" + t : "/feeds/comments/default?alt=json&max-results=" + t
+            s = "comments" != e ? "/feeds/posts?tagsName=" + a + "&limit=" + t : "/feeds/comments/default?alt=json&max-results=" + t
     }
     return s
 }
@@ -211,6 +211,7 @@ function getRecentPostsData(e, t, a) {
 }
 
 function getPosts(e, t, a, s, r) {
+    console.log("getPosts", t ,a, s ,r)
     s = 0 != s ? s : "unlabeled", $.ajax({
         url: getFeedUrl(t, a, s),
         type: "GET",
@@ -610,7 +611,7 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
     var s = $(this).data("shortcode");
     if (s) {
         function r() {
-            return e = getAttr(s, "title"), t = getAttr(s, "results"), a = getAttr(s, "style"), [e, t, a]
+            return e = getAttr(s, "title"), t = getAttr(s, "results"), a = getAttr(s, "style"), c = getAttr(s, "label"), [e, t, a, c]
         }
         $("#related-wrap").each(function (e, t, a, i, o, n) {
             var c = $(this),
@@ -619,8 +620,17 @@ viewAllText = "undefined" != typeof viewAllText ? viewAllText : pbt.viewAll, $("
                 m = c.find(".related-content"),
                 g = r(),
                 p = c.attr("id");
-            e = 0 != g[1] ? Number(g[1]) + 1 : 4, t = l.data("label"), i = 0 != g[2] ? g[2] : "1", a = "related" + i, o = l.data("id"), 0 != (n = getAttr(s, "color")) && addCustomColor(p, a, n), 0 != g[0] && c.find(".related-title .title > span").text(g[0]), d.on("load resize scroll", function s() {
-                d.scrollTop() + d.height() >= m.offset().top && (d.off("load resize scroll", s), getRelated(m, a, e, t, o))
+
+            e = 0 != g[1] ? Number(g[1]) + 1 : 4, t = l.data("label"), 
+            i = 0 != g[2] ? g[2] : "1",
+            a = "related" + i,
+            t = 0 != g[3] ? g[3] : "Related",
+            o = l.data("id"), 
+            0 != (n = getAttr(s, "color")) && addCustomColor(p, a, n), 
+            0 != g[0] && c.find(".related-title .title > span").text(g[0]), d.on("load resize scroll", 
+            function s() {                
+                d.scrollTop() + d.height() >= m.offset().top && (d.off("load resize scroll", s), 
+                getRelated(m, a, e, t, o))
             }).trigger("scroll")
         })
     }

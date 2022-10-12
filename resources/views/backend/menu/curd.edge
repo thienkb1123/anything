@@ -43,6 +43,13 @@
                                     </div>
 
                                     <div class="mb-3 row">
+                                        <label class="col-sm-3 col-form-label">Odr</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" name="odr" type="number" value="{{ flashMessages.get('odr') || menu && menu.odr || 0 }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
                                         <label class="col-sm-3 col-form-label">Parent</label>
                                         <div class="col-sm-9">
                                             <select class="any-select2-basic col-sm-12" name="parentID">

@@ -12,6 +12,7 @@ export default class GlobalsController {
                 'menu.slug',
             )
             .where('menu.status', Menu.statusPublish)
+            .orderBy('menu.odr', 'asc')
             
         let menuList: Menu[] = []
         for (let parent of menu) {

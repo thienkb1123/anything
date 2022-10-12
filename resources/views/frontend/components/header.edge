@@ -4,10 +4,10 @@
             <div class='topbar flex-sb section' id='topbar' name='Topbar'>
                 <div class='widget LinkList' data-version='2' id='LinkList201'>
                     <ul class='link-list list-style'>
-                        <li><a href='/'>Home</a></li>
-                        <li><a href='#'>About Us</a></li>
-                        <li><a href='#'>Privacy Policy</a></li>
-                        <li><a href='#'>Contact Us</a></li>
+                        <li><a href='/'>Trang Chủ</a></li>
+                        <li><a href='#'>Về Chúng Tôi</a></li>
+                        {{--  <li><a href='#'>Privacy Policy</a></li>  --}}
+                        <li><a href='#'>Liên hệ</a></li>
                     </ul>
                 </div>
                 <div class='widget LinkList' data-version='2' id='LinkList202'>
@@ -54,7 +54,7 @@
                                         <ul class='main-nav' id='main-nav'>
                                             @each((menu, i) in menuList)
                                                 <li id='item-{{ i }}'>
-                                                    <a href='{{ route('frontend.category.index', {slug: menu.slug}) }}'>{{ menu.name }}</a>
+                                                    <a href='{{ menu.slug == '/' ? menu.slug : route('frontend.category.index', {slug: menu.slug}) }}'>{{ menu.name }}</a>
                                                 </li>
                                                 @if (menu.subMenu && menu.subMenu.length)
                                                     @each((subsMenu, j) in menu.subMenu)

@@ -6677,6 +6677,14 @@ ins.adsbygoogle-noablate[data-anchor-shown="true"] {
 }
 
 .page-item.active .page-link {
+    background-color: var(--button-bg);
+    color: var(--button-color);
+}
+.page-item .page-link:hover {
     background-color: var(--button-hover-bg);
     color: var(--button-hover-color);
+}
+
+.any-center{
+    justify-content: center;
 }

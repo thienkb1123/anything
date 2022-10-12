@@ -2,6 +2,8 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Route from '@ioc:Adonis/Core/Route'
 import Post from 'App/Models/Post'
+import Tag from 'App/Models/Tag'
+import { format } from 'mysql2'
 
 export default class PostsController {
     async show({ request, view }: HttpContextContract) {
@@ -13,10 +15,12 @@ export default class PostsController {
                 'post.title',
                 'post.content',
                 'post.created_at',
-                'media.path as mediaPath',
+                Database.raw(`group_concat(tag.name) as tagsName`)
             )
             .leftJoin('post_media', 'post_media.post_id', '=', 'post.id')
             .leftJoin('media', 'media.id', '=', 'post_media.media_id')
+            .leftJoin('post_tag', 'post_tag.post_id', '=', 'post.id')
+            .leftJoin('tag', 'tag.id', '=', 'post_tag.tag_id')
             .where('post.slug', slug)
             .where('post.status', Post.statusPublish)
             .firstOrFail()
@@ -28,9 +32,9 @@ export default class PostsController {
     }
 
     async feeds({ request, response }: HttpContextContract) {
-        const name = request.input('name', '')
+        const tagsName = request.input('tagsName', '')
         const limit = request.input('limit', 4) as number
-        const posts = await Post.query()
+        const query = Post.query()
             .select(
                 'post.id',
                 'post.title',
@@ -38,26 +42,17 @@ export default class PostsController {
                 'post.summary',
                 'post.created_at',
                 'media.path as mediaPath',
-                Database.raw(`
-                (
-                    select
-                        tag.name
-                    from
-                        tag
-                    left join post_tag ON post_tag.post_id = post.id
-                    where
-                        post_tag.post_id = post.id
-                        and tag.status = 1
-                    limit
-                        1
-                ) AS tagsName
-            `),
+                Database.raw(`group_concat(tag.name) as tagsName`)
             )
             .leftJoin('post_media', 'post_media.post_id', '=', 'post.id')
             .leftJoin('media', 'media.id', '=', 'post_media.media_id')
+            .leftJoin('post_tag', 'post_tag.post_id', '=', 'post.id')
+            .leftJoin('tag', 'tag.id', '=', 'post_tag.tag_id')
             .where('post.status', Post.statusPublish)
-            .limit(limit)
-
+        if (tagsName) {
+            query.whereIn('tag.name', tagsName.split(','))
+        }
+        const posts = await query.groupBy('post.id').limit(limit)
         return response.json({
             version: "1.0.0",
             encoding: "UTF-8",
@@ -70,16 +65,21 @@ export default class PostsController {
     newResponse(posts: Post[]): any {
         let entrys: any = []
         for (const post of posts) {
+            console.log(post)
+            let categories: any = []
+            if (post?.$extras?.tagsName) {
+                for (const tag of post?.$extras?.tagsName.split(',')) {
+                    categories.push({
+                        term: tag
+                    })
+                }
+            }
             entrys.push({
                 id: post.id,
                 published: {
                     $t: post.createdAt
                 },
-                category: [
-                    {
-                        term: post?.$extras?.tagsName
-                    }
-                ],
+                category: categories,
                 title: {
                     type: "text",
                     $t: post.title

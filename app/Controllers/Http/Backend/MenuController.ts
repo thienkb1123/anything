@@ -13,7 +13,7 @@ export default class MenuController {
         const limit = 10
         const page = request.input('page', 1)
         const menuList = await Menu.query()
-            .select('menu.id', 'menu.name', 'menuParent.name as parent', 'menu.slug', 'menu.status', 'menu.created_at')
+            .select('menu.id', 'menu.name', 'menuParent.name as parent', 'menu.slug', 'menu.odr', 'menu.status', 'menu.created_at')
             .leftJoin('menu as menuParent', 'menuParent.id', '=', 'menu.parent_id')
             .where('menu.status', '<>', Menu.statusDelete)
             .where('menu.author', auth.user?.id)
@@ -48,6 +48,7 @@ export default class MenuController {
                 'menu.id',
                 'menu.parent_id',
                 'menu.name',
+                'menu.odr',
                 'menu.slug',
                 'menu.status',
                 Database.raw('GROUP_CONCAT(menu_category.category_id) as categoriesID')
@@ -77,6 +78,7 @@ export default class MenuController {
                 parentID: Number(request.input('parentID')),
                 name: payload.name,
                 slug: request.input('slug'),
+                odr: Number(request.input('odr')),
                 status: Number(request.input('status')),
             })
 
@@ -106,7 +108,8 @@ export default class MenuController {
                     parentID: Number(request.input('parentID')),
                     name: payload.name,
                     slug: request.input('slug'),
-                    status: Number(request.input('status') as number),
+                    odr: Number(request.input('odr')),
+                    status: Number(request.input('status')),
                 })
 
             const categories = request.input('categories') || []

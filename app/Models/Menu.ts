@@ -26,6 +26,9 @@ export default class Menu extends BaseModel {
     public slug: string
 
     @column()
+    public odr: number
+
+    @column()
     public status: number
 
     @column.dateTime({ autoCreate: true })

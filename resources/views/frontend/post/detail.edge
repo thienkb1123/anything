@@ -16,7 +16,7 @@
                                         <a class='label' href=''>{{ post.title }}</a>
                                     </nav>
                                     <h1 class='entry-title'>
-                                        {{ post.title }}    
+                                        {{ post.title }}
                                     </h1>
                                     <div class='entry-meta'>
                                         <div class='align-left'>
@@ -33,6 +33,14 @@
                                     <div class='post-body entry-content' id='post-body'>
                                     </div>
                                 </div>
+                                @if(post?.$extras.tagsName)
+                                <div class="entry-labels">
+                                    <span class="labels-label btn">Tags</span>
+                                    @each(tag in post?.$extras.tagsName.split(','))
+                                        <a class="label-link btn" href="#" rel="tag">{{ tag }}</a>
+                                    @endeach
+                                </div>
+                                @endif
                             </div>
                             <footer class='post-footer flex-col'>
                                 <div class='post-widget' id='related-wrap'>
@@ -48,18 +56,18 @@
                                 </div>
                             </footer>
                         </article>
-                       
                     </div>
                 </div>
             </div>
-           
+
             <div class='section' id='magspot-related-posts' name='Related Posts'>
-                <div class='widget HTML' data-shortcode='$title={Bài Viết Liên Quan} $label={Healthy} $results={3} $style={1}'
-                    data-version='2' id='HTML51'>
+                <div class='widget HTML'
+                    data-shortcode='$title={Bài Viết Liên Quan} $label={ {{post?.$extras.tagsName}} } $results={3} $style={1}' data-version='2'
+                    id='HTML51'>
                 </div>
             </div>
         </main>
-        
+
         @!component('frontend/components/aside')
     </div>
 </div>
@@ -72,7 +80,6 @@
 <script>
     const parser = new edjsParser();
     const content = parser.parse({{{ post.content }}});
-    console.log({{{ post.content }}})
     document.getElementById("post-body").innerHTML = content
 </script>
 
